@@ -663,6 +663,21 @@
             gap: 12px;
         }
 
+        /* Make entire card clickable */
+        .project-card {
+            cursor: pointer;
+        }
+
+        .project-card .project-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
         .project-link svg {
             width: 16px;
             height: 16px;
@@ -1169,7 +1184,7 @@
                             <span>CSS</span>
                             <span>JavaScript</span>
                         </div>
-                        <a href="./wire-nuts/" class="project-link">
+                        <a href="./wire-nuts/index.html" class="project-link">
                             Try It Live
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
                         </a>
