@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andres Pineda | Software Engineer</title>
+    <meta name="description" content="Software Engineer and Environmental Resources Engineering graduate. Building bridges between code and the physical world.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #111111;
+            --text-primary: #f0f0f0;
+            --text-secondary: #888888;
+            --text-muted: #555555;
+            --accent-cyan: #00f0ff;
+            --accent-amber: #ff6b35;
+            --accent-purple: #a855f7;
+            --grid-color: rgba(0, 240, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* Blueprint Grid Background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(rgba(0, 240, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.015) 1px, transparent 1px);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+        }
+
+        /* Noise Texture Overlay */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Main Container */
+        main {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text {
+            position: relative;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-cyan);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards 0.2s;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--accent-cyan);
+        }
+
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards 0.4s;
+        }
+
+        .hero-title .highlight {
+            color: var(--accent-amber);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 10%;
+            left: -5%;
+            width: 110%;
+            height: 30%;
+            background: rgba(255, 107, 53, 0.15);
+            z-index: -1;
+            transform: skewX(-5deg);
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin-bottom: 48px;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards 0.6s;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards 0.8s;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 240, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 0.5s;
+        }
+
+        .hero-graphic {
+            width: 400px;
+            height: 400px;
+            position: relative;
+        }
+
+        .orbit {
+            position: absolute;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        .orbit:nth-child(1) {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .orbit:nth-child(2) {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            animation-duration: 15s;
+            animation-direction: reverse;
+        }
+
+        .orbit:nth-child(3) {
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+            animation-duration: 10s;
+        }
+
+        .orbit-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent-cyan);
+        }
+
+        .orbit:nth-child(1) .orbit-dot {
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .orbit:nth-child(2) .orbit-dot {
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent-amber);
+            box-shadow: 0 0 20px var(--accent-amber);
+        }
+
+        .orbit:nth-child(3) .orbit-dot {
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-purple);
+            box-shadow: 0 0 20px var(--accent-purple);
+        }
+
+        .center-element {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .center-element::before {
+            content: '< />';
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            animation: bounce 2s ease infinite;
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--text-muted), transparent);
+        }
+
+        /* About Section */
+        #about {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-cyan);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-cyan);
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-size: 1rem;
+        }
+
+        .about-text p:first-of-type {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 48px;
+        }
+
+        .stat-card {
+            padding: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-amber));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 8px;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            margin-top: 60px;
+        }
+
+        .skills-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-tag {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* Projects Section */
+        #projects {
+            background: var(--bg-primary);
+        }
+
+        .projects-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+        }
+
+        .featured-projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.05) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-8px);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card.featured {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .project-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            margin-bottom: 16px;
+            letter-spacing: 0.1em;
+        }
+
+        .project-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .project-card:hover .project-title {
+            color: var(--accent-cyan);
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .project-tech span {
+            font-size: 0.7rem;
+            padding: 6px 12px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--accent-cyan);
+            gap: 12px;
+        }
+
+        .project-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* All Projects Grid */
+        .all-projects-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .all-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .mini-project {
+            padding: 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .mini-project:hover {
+            border-color: var(--accent-amber);
+            transform: translateY(-4px);
+        }
+
+        .mini-project-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .mini-project:hover .mini-project-title {
+            color: var(--accent-amber);
+        }
+
+        .mini-project-lang {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .mini-project-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .contact-text .section-title {
+            margin-bottom: 24px;
+        }
+
+        .contact-text p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent-cyan);
+            transform: translateX(8px);
+        }
+
+        .contact-link svg {
+            width: 24px;
+            height: 24px;
+            color: var(--accent-cyan);
+        }
+
+        .contact-link-text {
+            flex-grow: 1;
+        }
+
+        .contact-link-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        .contact-link-value {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Big CTA */
+        .big-cta {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .big-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .big-cta-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .big-cta p {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer-text span {
+            color: var(--accent-cyan);
+        }
+
+        /* Animations */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .hero-graphic {
+                width: 300px;
+                height: 300px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .featured-projects {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card.featured {
+                grid-column: span 1;
+                grid-template-columns: 1fr;
+            }
+
+            .all-projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+
+            nav {
+                padding: 16px 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .all-projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Custom Selection */
+        ::selection {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-cyan);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="grid-bg"></div>
+    <div class="noise"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">AP<span>_</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="https://github.com/humbamp123" target="_blank">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="hero-tag">Software Engineer</div>
+                        <h1 class="hero-title">
+                            Andres<br>
+                            <span class="highlight">Pineda</span>
+                        </h1>
+                        <p class="hero-desc">
+                            Building bridges between code and the physical world. Software Engineer with a unique foundation in Environmental Resources Engineering.
+                        </p>
+                        <div class="hero-cta">
+                            <a href="#projects" class="btn btn-primary">
+                                View Projects
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            </a>
+                            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="hero-graphic">
+                            <div class="orbit"><div class="orbit-dot"></div></div>
+                            <div class="orbit"><div class="orbit-dot"></div></div>
+                            <div class="orbit"><div class="orbit-dot"></div></div>
+                            <div class="center-element"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">Scroll</div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-left fade-in">
+                        <div class="section-label">About</div>
+                        <h2 class="section-title">Engineer by nature,<br>developer by choice.</h2>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">22+</div>
+                                <div class="stat-label">Public Repos</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">8+</div>
+                                <div class="stat-label">Years Coding</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">6+</div>
+                                <div class="stat-label">Languages</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">42</div>
+                                <div class="stat-label">School Alumni</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-right fade-in">
+                        <div class="about-text">
+                            <p>I'm a Software Engineer with an unconventional path&mdash;bridging the gap between Environmental Resources Engineering and modern software development.</p>
+                            <p>My background in civil engineering gave me a unique perspective on problem-solving: understanding complex systems, optimizing for constraints, and building things that last. Now I apply that same rigor to crafting software solutions.</p>
+                            <p>Currently working at Qlik/Stitch Data, I specialize in building robust data systems and full-stack applications. I'm a graduate of 42 School, where I honed my skills in C programming and algorithmic thinking.</p>
+                        </div>
+                        <div class="skills-section">
+                            <h3 class="skills-title">Technologies & Tools</h3>
+                            <div class="skills-grid">
+                                <span class="skill-tag">TypeScript</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">C / C++</span>
+                                <span class="skill-tag">Clojure</span>
+                                <span class="skill-tag">Ruby</span>
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Angular</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">Kafka</span>
+                                <span class="skill-tag">PostgreSQL</span>
+                                <span class="skill-tag">Git</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="container">
+                <div class="projects-header fade-in">
+                    <div>
+                        <div class="section-label">Work</div>
+                        <h2 class="section-title">Featured Projects</h2>
+                    </div>
+                </div>
+
+                <div class="featured-projects">
+                    <div class="project-card featured fade-in">
+                        <div class="project-info">
+                            <div class="project-number">01</div>
+                            <h3 class="project-title">Game Rental</h3>
+                            <p class="project-desc">Giant Bomb 'Rentals' is a web application to search and 'rent' games. Built with modern web technologies featuring a clean UI and responsive design.</p>
+                            <div class="project-tech">
+                                <span>TypeScript</span>
+                                <span>React</span>
+                                <span>API Integration</span>
+                            </div>
+                            <a href="https://github.com/humbamp123/game-rental" target="_blank" class="project-link">
+                                View Project
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                            </a>
+                        </div>
+                        <div class="project-visual"></div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-number">02</div>
+                        <h3 class="project-title">ft_filler</h3>
+                        <p class="project-desc">Algorithmic game player for 42 School's Filler game. Implements strategic piece placement using optimization algorithms.</p>
+                        <div class="project-tech">
+                            <span>C</span>
+                            <span>Algorithms</span>
+                        </div>
+                        <a href="https://github.com/humbamp123/ft_filler" target="_blank" class="project-link">
+                            View Project
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </a>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-number">03</div>
+                        <h3 class="project-title">Resemble AI</h3>
+                        <p class="project-desc">TypeScript project exploring AI and voice synthesis technologies. Modern architecture with clean code practices.</p>
+                        <div class="project-tech">
+                            <span>TypeScript</span>
+                            <span>AI/ML</span>
+                        </div>
+                        <a href="https://github.com/humbamp123/resemble-ai" target="_blank" class="project-link">
+                            View Project
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </a>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-number">04</div>
+                        <h3 class="project-title">C++ Retro Game</h3>
+                        <p class="project-desc">Retro-style game built in C++. Demonstrates game loop architecture, rendering, and input handling.</p>
+                        <div class="project-tech">
+                            <span>C++</span>
+                            <span>Game Dev</span>
+                        </div>
+                        <a href="https://github.com/humbamp123/cpp_retro_game" target="_blank" class="project-link">
+                            View Project
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </a>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-number">05</div>
+                        <h3 class="project-title">Wire Nut Calculator</h3>
+                        <p class="project-desc">Interactive tool for electricians to find the right wire connector size. Select wire gauges and quantities to get recommendations from major brands like Ideal, 3M, and Gardner Bender.</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <a href="./wire-nuts/" class="project-link">
+                            Try It Live
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <h3 class="all-projects-title fade-in">More Projects</h3>
+                <div class="all-projects-grid">
+                    <a href="https://github.com/humbamp123/devfest2018" target="_blank" class="mini-project fade-in">
+                        <div class="mini-project-title">DevFest 2018</div>
+                        <div class="mini-project-lang">JavaScript</div>
+                    </a>
+                    <a href="https://github.com/humbamp123/kowl" target="_blank" class="mini-project fade-in">
+                        <div class="mini-project-title">Kowl</div>
+                        <div class="mini-project-lang">Dockerfile</div>
+                    </a>
+                    <a href="https://github.com/humbamp123/lumbergh" target="_blank" class="mini-project fade-in">
+                        <div class="mini-project-title">Lumbergh</div>
+                        <div class="mini-project-lang">Clojure</div>
+                    </a>
+                    <a href="https://github.com/humbamp123/42_piscine" target="_blank" class="mini-project fade-in">
+                        <div class="mini-project-title">42 Piscine</div>
+                        <div class="mini-project-lang">C</div>
+                    </a>
+                    <a href="https://github.com/humbamp123/ft_fdf" target="_blank" class="mini-project fade-in">
+                        <div class="mini-project-title">ft_fdf</div>
+                        <div class="mini-project-lang">C</div>
+                    </a>
+                    <a href="https://github.com/humbamp123/Get_Next_Line" target="_blank" class="mini-project fade-in">
+                        <div class="mini-project-title">Get Next Line</div>
+                        <div class="mini-project-lang">C</div>
+                    </a>
+                    <a href="https://github.com/humbamp123/splitplease-clover" target="_blank" class="mini-project fade-in">
+                        <div class="mini-project-title">SplitPlease Clover</div>
+                        <div class="mini-project-lang">JavaScript</div>
+                    </a>
+                    <a href="https://github.com/humbamp123/Hercules_Challenges" target="_blank" class="mini-project fade-in">
+                        <div class="mini-project-title">Hercules Challenges</div>
+                        <div class="mini-project-lang">Multiple</div>
+                    </a>
+                    <a href="https://github.com/humbamp123/interview-cake-clj" target="_blank" class="mini-project fade-in">
+                        <div class="mini-project-title">Interview Cake CLJ</div>
+                        <div class="mini-project-lang">Clojure</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-text fade-in">
+                        <div class="section-label">Contact</div>
+                        <h2 class="section-title">Let's build something together.</h2>
+                        <p>Whether you have a project in mind, want to collaborate, or just want to say hello&mdash;I'd love to hear from you.</p>
+                        <div class="contact-links">
+                            <a href="https://github.com/humbamp123" target="_blank" class="contact-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                <div class="contact-link-text">
+                                    <div class="contact-link-label">GitHub</div>
+                                    <div class="contact-link-value">@humbamp123</div>
+                                </div>
+                            </a>
+                            <a href="https://linkedin.com/in/andrespineda" target="_blank" class="contact-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                <div class="contact-link-text">
+                                    <div class="contact-link-label">LinkedIn</div>
+                                    <div class="contact-link-value">Connect with me</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="big-cta fade-in">
+                        <h3 class="big-cta-title">Ready to start?</h3>
+                        <p>Check out my work on GitHub or connect on LinkedIn.</p>
+                        <a href="https://github.com/humbamp123" target="_blank" class="btn btn-primary">
+                            View GitHub Profile
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">Designed & Built by <span>Andres Pineda</span> &copy; 2025</p>
+    </footer>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect on hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-graphic');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.2}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
