@@ -1,0 +1,32 @@
+/* ===========================================
+   CSS Custom Properties (Variables)
+   Default: Redwood Forest Theme
+   =========================================== */
+
+:root {
+    /* Redwood Forest Palette */
+    --forest-deep: #0d1f14;
+    --forest-dark: #152a1c;
+    --forest-mid: #1e3d29;
+    --bark-brown: #3d2914;
+    --bark-light: #5c412a;
+    --fern-green: #4a7c59;
+    --moss-green: #6b8f71;
+    --sage: #9caf88;
+    --fog: #c8d5c0;
+    --mist: #e8efe4;
+    --cream: #f5f7f3;
+    --sunlight: #d4a84b;
+    --sunset-orange: #c45d3a;
+
+    /* Semantic Variables */
+    --bg-primary: var(--forest-deep);
+    --bg-secondary: var(--forest-dark);
+    --bg-card: rgba(30, 61, 41, 0.4);
+    --text-primary: var(--cream);
+    --text-secondary: var(--sage);
+    --text-muted: var(--moss-green);
+    --accent-primary: var(--fern-green);
+    --accent-warm: var(--sunlight);
+    --border-color: rgba(156, 175, 136, 0.15);
+}

@@ -1,0 +1,64 @@
+/* ===========================================
+   Base Styles
+   Reset, Typography, Global Defaults
+   =========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* Main Container */
+main {
+    position: relative;
+    z-index: 10;
+}
+
+/* Section Styling */
+section {
+    padding: 140px 0;
+    position: relative;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 48px;
+}
+
+/* Custom Selection */
+::selection {
+    background: var(--fern-green);
+    color: var(--forest-deep);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--forest-mid);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--fern-green);
+}

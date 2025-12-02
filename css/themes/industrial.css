@@ -1,0 +1,233 @@
+/* ===========================================
+   Industrial Theme
+   Cyber/tech aesthetic with grid backgrounds
+   =========================================== */
+
+/* Industrial Color Palette Override */
+[data-theme="industrial"] {
+    --bg-primary: #050505;
+    --bg-secondary: #0a0a0a;
+    --bg-card: rgba(17, 17, 17, 0.9);
+    --text-primary: #f0f0f0;
+    --text-secondary: #888888;
+    --text-muted: #555555;
+    --accent-primary: #00f0ff;
+    --accent-warm: #ff6b35;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --forest-deep: #050505;
+    --forest-dark: #0a0a0a;
+    --forest-mid: #111111;
+    --fern-green: #00f0ff;
+    --moss-green: #00f0ff;
+    --sage: #888888;
+    --cream: #f0f0f0;
+    --sunlight: #ff6b35;
+}
+
+/* Industrial Typography */
+[data-theme="industrial"] body {
+    font-family: 'IBM Plex Mono', monospace;
+    cursor: crosshair;
+}
+
+[data-theme="industrial"] .hero-title,
+[data-theme="industrial"] .section-title,
+[data-theme="industrial"] .project-title,
+[data-theme="industrial"] .stat-number,
+[data-theme="industrial"] .skills-title,
+[data-theme="industrial"] .all-projects-title,
+[data-theme="industrial"] .mini-project-title,
+[data-theme="industrial"] .big-cta-title,
+[data-theme="industrial"] .logo {
+    font-family: 'Syne', sans-serif;
+}
+
+/* Hide Forest backgrounds in Industrial */
+[data-theme="industrial"] .forest-bg,
+[data-theme="industrial"] .rings-overlay,
+[data-theme="industrial"] .fog,
+[data-theme="industrial"] .particles,
+[data-theme="industrial"] .tree-illustration {
+    display: none;
+}
+
+/* Show Industrial backgrounds */
+[data-theme="industrial"] .grid-bg,
+[data-theme="industrial"] .noise,
+[data-theme="industrial"] .hero-graphic-industrial {
+    display: block;
+}
+
+/* Industrial Grid Background */
+.grid-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(0, 240, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.015) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+}
+
+/* Industrial Noise Texture */
+.noise {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Industrial Hero Graphic - Orbital Animation */
+.hero-graphic-industrial {
+    display: none;
+    width: 400px;
+    height: 400px;
+    position: relative;
+}
+
+.orbit {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    animation: rotate 20s linear infinite;
+}
+
+.orbit:nth-child(1) {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.orbit:nth-child(2) {
+    width: 70%;
+    height: 70%;
+    top: 15%;
+    left: 15%;
+    animation-duration: 15s;
+    animation-direction: reverse;
+}
+
+.orbit:nth-child(3) {
+    width: 40%;
+    height: 40%;
+    top: 30%;
+    left: 30%;
+    animation-duration: 10s;
+}
+
+.orbit-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #00f0ff;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #00f0ff;
+}
+
+.orbit:nth-child(1) .orbit-dot {
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.orbit:nth-child(2) .orbit-dot {
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ff6b35;
+    box-shadow: 0 0 20px #ff6b35;
+}
+
+.orbit:nth-child(3) .orbit-dot {
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #a855f7;
+    box-shadow: 0 0 20px #a855f7;
+}
+
+.center-element {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #00f0ff;
+}
+
+/* Industrial specific adjustments */
+[data-theme="industrial"] .hero-location {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+[data-theme="industrial"] .hero-location::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--accent-primary);
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+[data-theme="industrial"] .hero-location svg {
+    display: none;
+}
+
+[data-theme="industrial"] .skill-tag {
+    border-radius: 0;
+}
+
+[data-theme="industrial"] .project-card,
+[data-theme="industrial"] .stat-card,
+[data-theme="industrial"] .mini-project,
+[data-theme="industrial"] .contact-link,
+[data-theme="industrial"] .big-cta {
+    border-radius: 0;
+}
+
+[data-theme="industrial"] .btn {
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+[data-theme="industrial"] .project-tech span {
+    border-radius: 0;
+    background: rgba(0, 240, 255, 0.1);
+    color: #00f0ff;
+}
+
+/* Industrial theme toggle icon */
+[data-theme="industrial"] .theme-toggle .icon-forest,
+[data-theme="industrial"] .theme-toggle .icon-fantasy {
+    opacity: 0;
+    transform: rotate(180deg);
+}
+
+[data-theme="industrial"] .theme-toggle .icon-industrial {
+    opacity: 1;
+    transform: rotate(0deg);
+}

@@ -1,0 +1,120 @@
+/* ===========================================
+   Responsive Design
+   Media queries for different screen sizes
+   =========================================== */
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .hero-visual {
+        order: -1;
+    }
+
+    .tree-illustration {
+        width: 250px;
+        height: 380px;
+    }
+
+    .tree-trunk {
+        width: 60px;
+        height: 280px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .featured-projects {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card.featured {
+        grid-column: span 1;
+        grid-template-columns: 1fr;
+    }
+
+    .all-projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    /* Fantasy castle responsive */
+    .castle-illustration {
+        width: 260px;
+        height: 400px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 24px;
+    }
+
+    nav {
+        padding: 20px 24px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    section {
+        padding: 100px 0;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .all-projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Theme toggle mobile */
+    .theme-toggle {
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .theme-toggle svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Industrial hero mobile */
+    .hero-graphic-industrial {
+        width: 280px;
+        height: 280px;
+    }
+
+    /* Fantasy castle mobile */
+    .castle-illustration {
+        width: 200px;
+        height: 320px;
+    }
+}
