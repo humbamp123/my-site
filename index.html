@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andres Pineda | Software Engineer</title>
+    <title>Wire Nut Calculator | Professional Electrical Tool</title>
     <meta name="description"
-        content="Software Engineer and Environmental Resources Engineering graduate from Humboldt State. Building sustainable solutions through code.">
+        content="Free wire nut calculator for electricians. Find the perfect wire connector size instantly. Supports all major brands including Ideal, 3M, and more. NEC compliant recommendations.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/themes/forest.css">
     <link rel="stylesheet" href="css/themes/industrial.css">
     <link rel="stylesheet" href="css/themes/fantasy.css">
+    <link rel="stylesheet" href="css/themes/electric.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
@@ -50,6 +51,17 @@
     <div class="castle-bg"></div>
     <div class="stonework-overlay"></div>
 
+    <!-- Background Effects - Electric Theme -->
+    <div class="electric-bg"></div>
+    <div class="voltage-grid"></div>
+    <div class="electric-nodes">
+        <div class="electric-node"></div>
+        <div class="electric-node"></div>
+        <div class="electric-node"></div>
+        <div class="electric-node"></div>
+        <div class="electric-node"></div>
+    </div>
+
     <!-- Theme Toggle Button -->
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <!-- Tree icon for Redwoods theme -->
@@ -66,21 +78,25 @@
             <path
                 d="M4 2v6H2v14h20V8h-2V2H4zm2 2h2v2H6V4zm4 0h4v2h-4V4zm6 0h2v2h-2V4zM4 20v-10h16v10H4zm7-8h2v6h-2v-6z" />
         </svg>
+        <!-- Lightning bolt icon for Electric theme -->
+        <svg class="icon-electric" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
+        </svg>
     </button>
 
     <!-- Navigation -->
     <nav>
         <a href="#" class="logo">
             <svg class="logo-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L8 6v2l-4 4v10h16V12l-4-4V6l-4-4zm0 3l2 2v2.5l3 3V18H7v-5.5l3-3V7l2-2z" />
+                <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
             </svg>
-            Andres Pineda
+            Wire Nut Calculator
         </a>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="https://github.com/humbamp123" target="_blank">GitHub</a></li>
+            <li><a href="#projects">How It Works</a></li>
+            <li><a href="#contact">Open Source</a></li>
+            <li><a href="./wire-nuts/index.html">Launch Calculator</a></li>
         </ul>
     </nav>
 
@@ -98,16 +114,17 @@
                             San Francisco Bay Area
                         </div>
                         <h1 class="hero-title">
-                            <span class="name">Andres Pineda</span>
-                            <span class="role">Software Engineer</span>
+                            <span class="name">Wire Nut Calculator</span>
+                            <span class="role">Precision Tools for Electricians</span>
                         </h1>
                         <p class="hero-desc">
-                            Rooted in <strong>Environmental Resources Engineering</strong> from Humboldt State, now
-                            building sustainable software solutions. Where the redwoods meet the code.
+                            An interactive calculator designed to help <strong>electricians and electrical engineers</strong>
+                            find the perfect wire connector size. Select your wire gauges and quantities to get instant
+                            recommendations from all major brands.
                         </p>
                         <div class="hero-cta">
-                            <a href="#projects" class="btn btn-primary">
-                                Explore Work
+                            <a href="./wire-nuts/index.html" class="btn btn-primary">
+                                Try Calculator Now
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round">
@@ -115,7 +132,7 @@
                                     <path d="m12 5 7 7-7 7" />
                                 </svg>
                             </a>
-                            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                            <a href="#about" class="btn btn-secondary">Learn More</a>
                         </div>
                     </div>
                     <div class="hero-visual">
@@ -166,6 +183,24 @@
                                 <div class="castle-battlement"></div>
                             </div>
                         </div>
+                        <!-- Electric Theme Hero - Wire Nut -->
+                        <div class="wire-nut-hero">
+                            <div class="voltage-ring"></div>
+                            <div class="voltage-ring"></div>
+                            <div class="wire-connector">
+                                <div class="connector-ridges">
+                                    <div class="ridge"></div>
+                                    <div class="ridge"></div>
+                                    <div class="ridge"></div>
+                                    <div class="ridge"></div>
+                                    <div class="ridge"></div>
+                                </div>
+                                <div class="wire"></div>
+                                <div class="wire"></div>
+                                <div class="wire"></div>
+                                <div class="wire"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -185,53 +220,47 @@
                 <div class="about-grid">
                     <div class="about-left fade-in">
                         <div class="section-label">About</div>
-                        <h2 class="section-title">Rooted in engineering,<br>growing through code.</h2>
+                        <h2 class="section-title">The right connection,<br>every time.</h2>
                         <div class="stats-grid">
                             <div class="stat-card">
-                                <div class="stat-number">22+</div>
-                                <div class="stat-label">Public Repos</div>
+                                <div class="stat-number">5+</div>
+                                <div class="stat-label">Major Brands</div>
                             </div>
                             <div class="stat-card">
-                                <div class="stat-number">8+</div>
-                                <div class="stat-label">Years Coding</div>
+                                <div class="stat-number">100+</div>
+                                <div class="stat-label">Wire Combinations</div>
                             </div>
                             <div class="stat-card">
-                                <div class="stat-number">6+</div>
-                                <div class="stat-label">Languages</div>
+                                <div class="stat-number">Instant</div>
+                                <div class="stat-label">Results</div>
                             </div>
                             <div class="stat-card">
-                                <div class="stat-number">Cal Poly</div>
-                                <div class="stat-label">Humboldt Alumni</div>
+                                <div class="stat-number">Free</div>
+                                <div class="stat-label">Always</div>
                             </div>
                         </div>
                     </div>
                     <div class="about-right fade-in">
                         <div class="about-text">
-                            <p>I'm a Software Engineer with an unconventional path&mdash;bridging <span
-                                    class="about-highlight">Environmental Resources Engineering</span> with modern
-                                software development.</p>
-                            <p>My time at Humboldt State, surrounded by ancient redwoods and wild rivers, taught me to
-                                think in systems. Whether it's water flow dynamics or data pipelines, the principles
-                                remain: understand the whole, optimize for sustainability, build for resilience.</p>
-                            <p>Currently at Qlik/Stitch Data, I specialize in building robust data systems and
-                                full-stack applications. I'm also a graduate of 42 School, where I sharpened my skills
-                                in C programming and algorithmic thinking.</p>
+                            <p>The <span class="about-highlight">Wire Nut Calculator</span> was built to solve a common
+                                problem on job sites&mdash;quickly determining the correct wire connector size for any
+                                combination of wires.</p>
+                            <p>Whether you're working with residential 14/2 Romex or industrial-grade conductors, this
+                                tool provides instant recommendations from trusted brands including Ideal Wing-Nut,
+                                3M Scotchlok, and more.</p>
+                            <p>No more guessing, no more checking multiple spec sheets. Just select your wire gauges,
+                                enter quantities, and get accurate recommendations in seconds. Built by electricians,
+                                for electricians.</p>
                         </div>
                         <div class="skills-section">
-                            <h3 class="skills-title">Technologies & Tools</h3>
+                            <h3 class="skills-title">Supported Brands</h3>
                             <div class="skills-grid">
-                                <span class="skill-tag">TypeScript</span>
-                                <span class="skill-tag">JavaScript</span>
-                                <span class="skill-tag">C / C++</span>
-                                <span class="skill-tag">Clojure</span>
-                                <span class="skill-tag">Ruby</span>
-                                <span class="skill-tag">React</span>
-                                <span class="skill-tag">Angular</span>
-                                <span class="skill-tag">Node.js</span>
-                                <span class="skill-tag">Docker</span>
-                                <span class="skill-tag">Kafka</span>
-                                <span class="skill-tag">PostgreSQL</span>
-                                <span class="skill-tag">Git</span>
+                                <span class="skill-tag">Ideal Wing-Nut</span>
+                                <span class="skill-tag">3M Scotchlok</span>
+                                <span class="skill-tag">King Innovation</span>
+                                <span class="skill-tag">GB Gardner Bender</span>
+                                <span class="skill-tag">Wago Connectors</span>
+                                <span class="skill-tag">Custom Specs</span>
                             </div>
                         </div>
                     </div>
@@ -244,25 +273,71 @@
             <div class="container">
                 <div class="projects-header fade-in">
                     <div>
-                        <div class="section-label">Work</div>
-                        <h2 class="section-title">Featured Projects</h2>
+                        <div class="section-label">Features</div>
+                        <h2 class="section-title">How It Works</h2>
                     </div>
                 </div>
 
                 <div class="featured-projects">
                     <div class="project-card featured fade-in">
                         <div class="project-info">
-                            <div class="project-number">Project 01</div>
-                            <h3 class="project-title">Wire Nut Calculator</h3>
-                            <p class="project-desc">Interactive tool for electricians to find the right wire connector size.
-                                Select wire gauges and quantities to get recommendations from major brands.</p>
+                            <div class="project-number">Step 01</div>
+                            <h3 class="project-title">Select Wire Gauges</h3>
+                            <p class="project-desc">Choose from standard AWG wire sizes (14, 12, 10, 8, 6, 4, 2, 1, 1/0, 2/0).
+                                The calculator supports all common residential and commercial wire gauges.</p>
                             <div class="project-tech">
-                                <span>HTML</span>
-                                <span>CSS</span>
-                                <span>JavaScript</span>
+                                <span>AWG 14-2/0</span>
+                                <span>Solid & Stranded</span>
+                                <span>All Voltages</span>
                             </div>
                             <a href="./wire-nuts/index.html" class="project-link">
-                                Try It Live
+                                Try It Now
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M7 17L17 7" />
+                                    <path d="M7 7h10v10" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="project-visual"></div>
+                    </div>
+                    <div class="project-card featured fade-in">
+                        <div class="project-info">
+                            <div class="project-number">Step 02</div>
+                            <h3 class="project-title">Enter Quantities</h3>
+                            <p class="project-desc">Specify how many of each wire gauge you're connecting. Mix and match
+                                different gauges to find the perfect connector for your specific application.</p>
+                            <div class="project-tech">
+                                <span>Multiple Gauges</span>
+                                <span>Any Combination</span>
+                                <span>Instant Calc</span>
+                            </div>
+                            <a href="./wire-nuts/index.html" class="project-link">
+                                Try It Now
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M7 17L17 7" />
+                                    <path d="M7 7h10v10" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="project-visual"></div>
+                    </div>
+                    <div class="project-card featured fade-in">
+                        <div class="project-info">
+                            <div class="project-number">Step 03</div>
+                            <h3 class="project-title">Get Recommendations</h3>
+                            <p class="project-desc">Receive instant recommendations from all major brands. Color-coded
+                                results show you exactly which wire nut to use, ensuring safe and code-compliant connections.</p>
+                            <div class="project-tech">
+                                <span>5+ Brands</span>
+                                <span>Color Coded</span>
+                                <span>NEC Compliant</span>
+                            </div>
+                            <a href="./wire-nuts/index.html" class="project-link">
+                                Try It Now
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round">
@@ -282,38 +357,38 @@
             <div class="container">
                 <div class="contact-content">
                     <div class="contact-text fade-in">
-                        <div class="section-label">Contact</div>
-                        <h2 class="section-title">Let's grow something together.</h2>
-                        <p>Whether you have a project in mind, want to collaborate, or just want to talk about the
-                            intersection of environment and technology&mdash;I'd love to hear from you.</p>
+                        <div class="section-label">Open Source</div>
+                        <h2 class="section-title">Built by electricians,<br>for electricians.</h2>
+                        <p>This tool is completely free and open source. Found a bug? Have a feature request? Want to
+                            contribute wire connector data for a brand we don't support yet? We'd love to hear from you.</p>
                         <div class="contact-links">
+                            <a href="https://github.com/humbamp123/wire-nuts" target="_blank" class="contact-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                                <div class="contact-link-text">
+                                    <div class="contact-link-label">GitHub Repository</div>
+                                    <div class="contact-link-value">View Source Code</div>
+                                </div>
+                            </a>
                             <a href="https://github.com/humbamp123" target="_blank" class="contact-link">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path
                                         d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                                 </svg>
                                 <div class="contact-link-text">
-                                    <div class="contact-link-label">GitHub</div>
+                                    <div class="contact-link-label">Developer</div>
                                     <div class="contact-link-value">@humbamp123</div>
-                                </div>
-                            </a>
-                            <a href="https://www.linkedin.com/in/andres-p/" target="_blank" class="contact-link">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path
-                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                </svg>
-                                <div class="contact-link-text">
-                                    <div class="contact-link-label">LinkedIn</div>
-                                    <div class="contact-link-value">Connect with me</div>
                                 </div>
                             </a>
                         </div>
                     </div>
                     <div class="big-cta fade-in">
-                        <h3 class="big-cta-title">Ready to start?</h3>
-                        <p>Check out my work on GitHub or connect on LinkedIn.</p>
-                        <a href="https://github.com/humbamp123" target="_blank" class="btn btn-primary">
-                            View GitHub Profile
+                        <h3 class="big-cta-title">Ready to calculate?</h3>
+                        <p>Start finding the perfect wire connector for your next job.</p>
+                        <a href="./wire-nuts/index.html" class="btn btn-primary">
+                            Launch Calculator
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -329,8 +404,8 @@
 
     <!-- Footer -->
     <footer>
-        <p class="footer-text">Designed & Built by <span>Andres Pineda</span></p>
-        <p class="footer-location">San Francisco Bay Area</p>
+        <p class="footer-text">Wire Nut Calculator &copy; 2024 | Open Source Project by <span>Andres Pineda</span></p>
+        <p class="footer-location">Free Tool for Electricians Worldwide</p>
     </footer>
 
     <!-- JavaScript -->

@@ -1,0 +1,447 @@
+/* ===========================================
+   Electric Theme - Wire Nut Focused
+   Inspired by electrical work, circuits, and copper wiring
+   =========================================== */
+
+[data-theme="electric"] {
+    /* Color Palette */
+    --primary-color: #00d9ff;          /* Electric blue */
+    --secondary-color: #ff6b35;        /* Copper orange */
+    --accent-color: #ffd700;           /* Gold/brass */
+    --text-primary: #e8f4f8;           /* Light blue-white */
+    --text-secondary: #a8d5e2;         /* Muted blue */
+    --bg-primary: #0a1929;             /* Deep navy/black */
+    --bg-secondary: #132f4c;           /* Dark steel blue */
+    --bg-tertiary: #1a3a52;            /* Medium steel blue */
+    --border-color: #00d9ff40;         /* Electric blue transparent */
+    --glow-color: #00d9ff;             /* Electric glow */
+
+    /* Typography */
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Nunito Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+}
+
+/* Electric Background Effects */
+[data-theme="electric"] .electric-bg {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    background: linear-gradient(135deg, #0a1929 0%, #1a2332 50%, #0a1929 100%);
+}
+
+/* Voltage Grid Pattern */
+[data-theme="electric"] .voltage-grid {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-image:
+        linear-gradient(rgba(0, 217, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 217, 255, 0.1) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+}
+
+/* Electric Sparks/Nodes */
+[data-theme="electric"] .electric-nodes {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+[data-theme="electric"] .electric-node {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--glow-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--glow-color),
+                0 0 20px var(--glow-color),
+                0 0 30px var(--glow-color);
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+[data-theme="electric"] .electric-node:nth-child(1) {
+    top: 20%;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+[data-theme="electric"] .electric-node:nth-child(2) {
+    top: 60%;
+    left: 80%;
+    animation-delay: 1s;
+}
+
+[data-theme="electric"] .electric-node:nth-child(3) {
+    top: 40%;
+    left: 50%;
+    animation-delay: 2s;
+}
+
+[data-theme="electric"] .electric-node:nth-child(4) {
+    top: 75%;
+    left: 30%;
+    animation-delay: 1.5s;
+}
+
+[data-theme="electric"] .electric-node:nth-child(5) {
+    top: 30%;
+    left: 70%;
+    animation-delay: 0.5s;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+/* Navigation Styling */
+[data-theme="electric"] nav {
+    background: rgba(10, 25, 41, 0.85);
+    border-bottom: 2px solid var(--border-color);
+    backdrop-filter: blur(10px);
+}
+
+[data-theme="electric"] .logo {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+[data-theme="electric"] .nav-links a {
+    color: var(--text-secondary);
+}
+
+[data-theme="electric"] .nav-links a:hover {
+    color: var(--primary-color);
+    text-shadow: 0 0 8px rgba(0, 217, 255, 0.3);
+}
+
+/* Hero Section */
+[data-theme="electric"] #hero {
+    background: transparent;
+}
+
+[data-theme="electric"] .hero-title .name {
+    color: var(--primary-color);
+    text-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+}
+
+[data-theme="electric"] .hero-title .role {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-theme="electric"] .hero-desc strong {
+    color: var(--secondary-color);
+    text-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+}
+
+/* Wire Nut Hero Visual */
+[data-theme="electric"] .wire-nut-hero {
+    display: block;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+[data-theme="electric"] .wire-connector {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 180px;
+    background: linear-gradient(135deg, #ff6b35 0%, #ff8555 100%);
+    border-radius: 20px 20px 60px 60px;
+    box-shadow:
+        0 10px 40px rgba(255, 107, 53, 0.4),
+        inset 0 -5px 20px rgba(0, 0, 0, 0.3);
+    animation: float-rotate 6s ease-in-out infinite;
+}
+
+[data-theme="electric"] .connector-ridges {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    height: 80px;
+}
+
+[data-theme="electric"] .ridge {
+    width: 100%;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.2);
+    margin: 8px 0;
+}
+
+[data-theme="electric"] .wire {
+    position: absolute;
+    width: 6px;
+    height: 100px;
+    bottom: -100px;
+    border-radius: 3px;
+    opacity: 0.8;
+}
+
+[data-theme="electric"] .wire:nth-child(1) {
+    left: 20%;
+    background: #000;
+    transform: rotate(-15deg);
+}
+
+[data-theme="electric"] .wire:nth-child(2) {
+    left: 40%;
+    background: #fff;
+    transform: rotate(-5deg);
+}
+
+[data-theme="electric"] .wire:nth-child(3) {
+    left: 60%;
+    background: #ff0000;
+    transform: rotate(5deg);
+}
+
+[data-theme="electric"] .wire:nth-child(4) {
+    left: 80%;
+    background: #00d9ff;
+    transform: rotate(15deg);
+}
+
+[data-theme="electric"] .voltage-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--glow-color);
+    border-radius: 50%;
+    animation: voltage-pulse 2s ease-in-out infinite;
+}
+
+[data-theme="electric"] .voltage-ring:nth-child(1) {
+    width: 250px;
+    height: 250px;
+    animation-delay: 0s;
+}
+
+[data-theme="electric"] .voltage-ring:nth-child(2) {
+    width: 300px;
+    height: 300px;
+    animation-delay: 0.5s;
+}
+
+@keyframes float-rotate {
+    0%, 100% {
+        transform: translate(-50%, -50%) rotate(0deg) translateY(0);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotate(5deg) translateY(-10px);
+    }
+}
+
+@keyframes voltage-pulse {
+    0%, 100% {
+        opacity: 0.2;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Buttons */
+[data-theme="electric"] .btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--bg-primary);
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+}
+
+[data-theme="electric"] .btn-primary:hover {
+    box-shadow:
+        0 6px 30px rgba(0, 217, 255, 0.5),
+        0 0 20px rgba(0, 217, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+[data-theme="electric"] .btn-secondary {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+[data-theme="electric"] .btn-secondary:hover {
+    background: var(--primary-color);
+    color: var(--bg-primary);
+    box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+}
+
+/* Project Cards */
+[data-theme="electric"] .project-card {
+    background: rgba(19, 47, 76, 0.6);
+    border: 2px solid var(--border-color);
+    backdrop-filter: blur(10px);
+}
+
+[data-theme="electric"] .project-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 40px rgba(0, 217, 255, 0.2);
+}
+
+[data-theme="electric"] .project-number {
+    color: var(--secondary-color);
+    text-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+}
+
+[data-theme="electric"] .project-title {
+    color: var(--primary-color);
+}
+
+[data-theme="electric"] .project-tech span {
+    background: rgba(0, 217, 255, 0.1);
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="electric"] .project-link {
+    color: var(--primary-color);
+}
+
+[data-theme="electric"] .project-link:hover {
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+/* Stats Grid */
+[data-theme="electric"] .stat-card {
+    background: rgba(19, 47, 76, 0.4);
+    border: 2px solid var(--border-color);
+}
+
+[data-theme="electric"] .stat-number {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Skills */
+[data-theme="electric"] .skill-tag {
+    background: rgba(0, 217, 255, 0.1);
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="electric"] .skill-tag:hover {
+    background: var(--primary-color);
+    color: var(--bg-primary);
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+}
+
+/* Contact Links */
+[data-theme="electric"] .contact-link {
+    background: rgba(19, 47, 76, 0.4);
+    border: 2px solid var(--border-color);
+}
+
+[data-theme="electric"] .contact-link:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 30px rgba(0, 217, 255, 0.2);
+}
+
+[data-theme="electric"] .contact-link svg {
+    fill: var(--primary-color);
+}
+
+/* Footer */
+[data-theme="electric"] footer {
+    background: rgba(10, 25, 41, 0.8);
+    border-top: 2px solid var(--border-color);
+}
+
+[data-theme="electric"] .footer-text span {
+    color: var(--primary-color);
+}
+
+/* Theme Toggle Icon for Electric */
+[data-theme="electric"] .theme-toggle .icon-forest,
+[data-theme="electric"] .theme-toggle .icon-industrial,
+[data-theme="electric"] .theme-toggle .icon-fantasy {
+    display: none;
+}
+
+[data-theme="electric"] .theme-toggle .icon-electric {
+    display: block;
+    fill: var(--primary-color);
+}
+
+body:not([data-theme]) .icon-electric,
+body[data-theme="forest"] .icon-electric,
+body[data-theme="industrial"] .icon-electric,
+body[data-theme="fantasy"] .icon-electric {
+    display: none;
+}
+
+/* Hide other theme elements */
+[data-theme="electric"] .forest-bg,
+[data-theme="electric"] .rings-overlay,
+[data-theme="electric"] .fog,
+[data-theme="electric"] .particles,
+[data-theme="electric"] .grid-bg,
+[data-theme="electric"] .noise,
+[data-theme="electric"] .castle-bg,
+[data-theme="electric"] .stonework-overlay {
+    display: none;
+}
+
+[data-theme="electric"] .tree-illustration,
+[data-theme="electric"] .hero-graphic-industrial,
+[data-theme="electric"] .castle-illustration {
+    display: none;
+}
+
+/* Show electric theme elements only */
+body:not([data-theme]) .electric-bg,
+body:not([data-theme]) .voltage-grid,
+body:not([data-theme]) .electric-nodes,
+body:not([data-theme]) .wire-nut-hero,
+body[data-theme="forest"] .electric-bg,
+body[data-theme="forest"] .voltage-grid,
+body[data-theme="forest"] .electric-nodes,
+body[data-theme="forest"] .wire-nut-hero,
+body[data-theme="industrial"] .electric-bg,
+body[data-theme="industrial"] .voltage-grid,
+body[data-theme="industrial"] .electric-nodes,
+body[data-theme="industrial"] .wire-nut-hero,
+body[data-theme="fantasy"] .electric-bg,
+body[data-theme="fantasy"] .voltage-grid,
+body[data-theme="fantasy"] .electric-nodes,
+body[data-theme="fantasy"] .wire-nut-hero {
+    display: none;
+}
+
+[data-theme="electric"] .wire-nut-hero {
+    display: block;
+}

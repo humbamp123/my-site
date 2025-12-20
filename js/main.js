@@ -54,34 +54,31 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Theme Toggle Functionality - 3-Way Cycle
+// Theme Toggle Functionality - 4-Way Cycle
 const themeToggle = document.getElementById('themeToggle');
 const html = document.documentElement;
-const themes = ['forest', 'industrial', 'fantasy'];
+const themes = ['electric', 'forest', 'industrial', 'fantasy'];
 
-// Check for saved theme preference or default to 'forest'
-const savedTheme = localStorage.getItem('theme') || 'forest';
-if (savedTheme !== 'forest') {
+// Check for saved theme preference or default to 'electric' for wire nut theme
+const savedTheme = localStorage.getItem('theme') || 'electric';
+if (savedTheme !== 'electric') {
     html.setAttribute('data-theme', savedTheme);
+} else {
+    html.setAttribute('data-theme', 'electric');
 }
 
 // Get current theme
 function getCurrentTheme() {
-    return html.getAttribute('data-theme') || 'forest';
+    return html.getAttribute('data-theme') || 'electric';
 }
 
-// Toggle theme on button click - cycles: forest -> industrial -> fantasy -> forest
+// Toggle theme on button click - cycles: electric -> forest -> industrial -> fantasy -> electric
 themeToggle.addEventListener('click', () => {
     const currentTheme = getCurrentTheme();
     const currentIndex = themes.indexOf(currentTheme);
     const nextIndex = (currentIndex + 1) % themes.length;
     const nextTheme = themes[nextIndex];
 
-    if (nextTheme === 'forest') {
-        html.removeAttribute('data-theme');
-    } else {
-        html.setAttribute('data-theme', nextTheme);
-    }
-
+    html.setAttribute('data-theme', nextTheme);
     localStorage.setItem('theme', nextTheme);
 });
