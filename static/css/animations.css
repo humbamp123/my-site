@@ -1,0 +1,98 @@
+/* ===========================================
+   Animations
+   Keyframes and transitions
+   =========================================== */
+
+/* Float animation for particles */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0.3;
+    }
+    25% {
+        transform: translateY(-30px) translateX(10px) scale(1.2);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-15px) translateX(-15px) scale(0.8);
+        opacity: 0.4;
+    }
+    75% {
+        transform: translateY(-40px) translateX(5px) scale(1.1);
+        opacity: 0.5;
+    }
+}
+
+/* Fog drift animation */
+@keyframes fogDrift {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0%); }
+}
+
+/* Branch sway animation */
+@keyframes sway {
+    0%, 100% { transform: rotate(-1deg); }
+    50% { transform: rotate(1deg); }
+}
+
+/* Scroll indicator bounce */
+@keyframes gentleBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* Hero fade slide up */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Simple fade in */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Industrial orbital rotation */
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Fantasy torch flicker */
+@keyframes torchFlicker {
+    0%, 100% { opacity: 0.85; transform: translateX(-50%) scale(1); }
+    25% { opacity: 1; transform: translateX(-50%) scale(1.02); }
+    50% { opacity: 0.9; transform: translateX(-50%) scale(0.98); }
+    75% { opacity: 0.95; transform: translateX(-50%) scale(1.01); }
+}
+
+/* Fantasy flag wave */
+@keyframes flagWave {
+    0%, 100% { transform: skewY(0deg) scaleX(1); }
+    33% { transform: skewY(2deg) scaleX(0.97); }
+    66% { transform: skewY(-1deg) scaleX(1.02); }
+}
+
+/* Smooth transitions for theme switching */
+body,
+.forest-bg,
+.grid-bg,
+.castle-bg,
+nav,
+.stat-card,
+.project-card,
+.mini-project,
+.contact-link,
+.big-cta,
+.skill-tag,
+.btn,
+footer {
+    transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+}

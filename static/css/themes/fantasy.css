@@ -1,0 +1,243 @@
+/* ===========================================
+   Fantasy (Medieval/Castle) Theme
+   Torchlit castle aesthetic with gold accents
+   =========================================== */
+
+/* Fantasy Color Palette Override */
+[data-theme="fantasy"] {
+    --bg-primary: #1a1510;
+    --bg-secondary: #241e17;
+    --bg-card: rgba(45, 36, 28, 0.85);
+    --text-primary: #f4e8d4;
+    --text-secondary: #c4b59d;
+    --text-muted: #8b7e6a;
+    --accent-primary: #c9a227;
+    --accent-warm: #b44a1c;
+    --border-color: rgba(201, 162, 39, 0.2);
+    --forest-deep: #1a1510;
+    --forest-dark: #241e17;
+    --forest-mid: #2d241c;
+    --fern-green: #c9a227;
+    --moss-green: #d4af37;
+    --sage: #c4b59d;
+    --cream: #f4e8d4;
+    --sunlight: #e85d04;
+}
+
+/* Fantasy Typography */
+[data-theme="fantasy"] body {
+    font-family: 'Crimson Text', serif;
+}
+
+[data-theme="fantasy"] .hero-title,
+[data-theme="fantasy"] .section-title,
+[data-theme="fantasy"] .project-title,
+[data-theme="fantasy"] .stat-number,
+[data-theme="fantasy"] .skills-title,
+[data-theme="fantasy"] .all-projects-title,
+[data-theme="fantasy"] .mini-project-title,
+[data-theme="fantasy"] .big-cta-title,
+[data-theme="fantasy"] .logo {
+    font-family: 'Cinzel', serif;
+}
+
+/* Hide other theme backgrounds in Fantasy */
+[data-theme="fantasy"] .forest-bg,
+[data-theme="fantasy"] .rings-overlay,
+[data-theme="fantasy"] .fog,
+[data-theme="fantasy"] .tree-illustration,
+[data-theme="fantasy"] .grid-bg,
+[data-theme="fantasy"] .noise,
+[data-theme="fantasy"] .hero-graphic-industrial {
+    display: none;
+}
+
+/* Show Fantasy backgrounds */
+[data-theme="fantasy"] .castle-bg,
+[data-theme="fantasy"] .stonework-overlay,
+[data-theme="fantasy"] .castle-illustration {
+    display: block;
+}
+
+/* Show particles with ember styling in Fantasy */
+[data-theme="fantasy"] .particles {
+    display: block;
+}
+
+[data-theme="fantasy"] .particle {
+    background: rgba(201, 162, 39, 0.4);
+    box-shadow: 0 0 6px rgba(201, 162, 39, 0.3);
+}
+
+/* Castle Background */
+.castle-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse at 30% 20%, rgba(201, 162, 39, 0.08) 0%, transparent 40%),
+        radial-gradient(ellipse at 70% 80%, rgba(180, 74, 28, 0.06) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 50%, rgba(26, 21, 16, 0.95) 0%, #1a1510 100%);
+}
+
+/* Stonework Overlay */
+.stonework-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg width='120' height='80' viewBox='0 0 120 80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='60' height='40' fill='none' stroke='%23c9a227' stroke-width='0.5'/%3E%3Crect x='60' y='0' width='60' height='40' fill='none' stroke='%23c9a227' stroke-width='0.5'/%3E%3Crect x='30' y='40' width='60' height='40' fill='none' stroke='%23c9a227' stroke-width='0.5'/%3E%3Crect x='90' y='40' width='30' height='40' fill='none' stroke='%23c9a227' stroke-width='0.5'/%3E%3Crect x='0' y='40' width='30' height='40' fill='none' stroke='%23c9a227' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 120px 80px;
+}
+
+/* Castle Hero Illustration */
+.castle-illustration {
+    display: none;
+    position: relative;
+    width: 320px;
+    height: 480px;
+}
+
+.castle-tower-main {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 300px;
+    background: linear-gradient(90deg,
+        #2d241c 0%,
+        #3d352b 25%,
+        #4a4540 50%,
+        #3d352b 75%,
+        #2d241c 100%);
+}
+
+.castle-tower-left,
+.castle-tower-right {
+    position: absolute;
+    bottom: 30px;
+    width: 60px;
+    height: 200px;
+    background: linear-gradient(90deg,
+        #241e17 0%,
+        #2d241c 50%,
+        #241e17 100%);
+}
+
+.castle-tower-left {
+    left: calc(50% - 110px);
+}
+
+.castle-tower-right {
+    right: calc(50% - 110px);
+}
+
+.castle-battlement {
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    right: -10px;
+    height: 25px;
+    background: repeating-linear-gradient(90deg,
+        #3d352b 0px, #3d352b 15px,
+        transparent 15px, transparent 22px);
+}
+
+.castle-window {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 50px;
+    background: radial-gradient(ellipse at center bottom,
+        rgba(201, 162, 39, 0.7) 0%,
+        rgba(180, 74, 28, 0.4) 40%,
+        transparent 70%);
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 0 25px rgba(201, 162, 39, 0.5);
+    animation: torchFlicker 2.5s ease-in-out infinite;
+}
+
+.castle-flag {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.flag-pole {
+    width: 4px;
+    height: 40px;
+    background: #5a4f42;
+    margin: 0 auto;
+}
+
+.flag-banner {
+    width: 45px;
+    height: 30px;
+    background: linear-gradient(135deg, #8b1e3f 0%, #6b1530 100%);
+    position: absolute;
+    top: 0;
+    left: 4px;
+    clip-path: polygon(0% 0%, 100% 15%, 100% 85%, 0% 100%);
+    animation: flagWave 3s ease-in-out infinite;
+}
+
+/* Fantasy UI Adjustments */
+[data-theme="fantasy"] .skill-tag {
+    border-radius: 2px;
+    border: 1px solid rgba(201, 162, 39, 0.25);
+}
+
+[data-theme="fantasy"] .project-card,
+[data-theme="fantasy"] .stat-card,
+[data-theme="fantasy"] .mini-project,
+[data-theme="fantasy"] .contact-link,
+[data-theme="fantasy"] .big-cta {
+    border-radius: 2px;
+}
+
+[data-theme="fantasy"] .btn {
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+[data-theme="fantasy"] .project-tech span {
+    border-radius: 2px;
+    background: rgba(201, 162, 39, 0.1);
+    color: #c9a227;
+    border: 1px solid rgba(201, 162, 39, 0.2);
+}
+
+[data-theme="fantasy"] .stat-card::before {
+    background: linear-gradient(180deg, #c9a227 0%, #8b1e3f 100%);
+}
+
+[data-theme="fantasy"] nav {
+    background: rgba(26, 21, 16, 0.9);
+}
+
+/* Fantasy theme toggle icon */
+[data-theme="fantasy"] .theme-toggle .icon-forest,
+[data-theme="fantasy"] .theme-toggle .icon-industrial {
+    opacity: 0;
+    transform: rotate(180deg);
+}
+
+[data-theme="fantasy"] .theme-toggle .icon-fantasy {
+    opacity: 1;
+    transform: rotate(0deg);
+}

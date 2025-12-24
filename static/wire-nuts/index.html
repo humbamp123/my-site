@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wire Nut Size Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="back-link">&larr; Back to Portfolio</a>
+            <div class="header-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+            </div>
+            <div class="header-text">
+                <h1>Wire Nut Calculator</h1>
+                <p class="subtitle">Electrical Connection Size Reference System</p>
+            </div>
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span>Online</span>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="error-message" id="errorMessage"></div>
+
+            <div class="section-label">Wire Configuration</div>
+
+            <div class="wire-inputs" id="wireInputs">
+                <div class="wire-entry" data-index="0">
+                    <div class="input-group">
+                        <label>Wire Gauge</label>
+                        <select class="wire-gauge">
+                            <option value="">Select AWG...</option>
+                            <option value="18">18 AWG</option>
+                            <option value="16">16 AWG</option>
+                            <option value="14">14 AWG</option>
+                            <option value="12">12 AWG</option>
+                            <option value="10">10 AWG</option>
+                            <option value="8">8 AWG</option>
+                            <option value="6">6 AWG</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Quantity</label>
+                        <input type="number" class="wire-count" min="1" max="20" value="2" placeholder="Count">
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button class="add-wire-btn">
+                    <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    Add Wire Gauge
+                </button>
+                <button class="calculate-btn">Analyze Connection</button>
+            </div>
+
+            <div class="results" id="results"></div>
+        </div>
+
+        <footer>
+            <div class="footer-brand">Wire Nut Size Calculator v1.0</div>
+            <div class="footer-disclaimer">This tool is for reference only and does not constitute professional electrical advice</div>
+            <div class="footer-indicators">
+                <div class="indicator">
+                    <span class="indicator-light"></span>
+                    <span>System Ready</span>
+                </div>
+                <div class="indicator">
+                    <span class="indicator-light amber"></span>
+                    <span>Database Loaded</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
