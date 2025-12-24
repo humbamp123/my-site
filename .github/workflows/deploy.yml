@@ -1,4 +1,4 @@
-name: Minify and Deploy to GitHub Pages
+name: Build and Deploy SvelteKit to GitHub Pages
 
 on:
   push:
@@ -29,47 +29,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install minification tools
-        run: |
-          npm install -g html-minifier-terser clean-css-cli terser
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Create dist directory
-        run: mkdir -p dist
-
-      - name: Copy all files to dist
-        run: |
-          # Copy everything except node_modules and .git
-          rsync -av --exclude='node_modules' --exclude='.git' --exclude='.github' --exclude='dist' . dist/
-
-      - name: Minify HTML files
-        run: |
-          find dist -name "*.html" -type f | while read file; do
-            echo "Minifying: $file"
-            html-minifier-terser \
-              --collapse-whitespace \
-              --remove-comments \
-              --remove-redundant-attributes \
-              --remove-script-type-attributes \
-              --remove-style-link-type-attributes \
-              --minify-css true \
-              --minify-js true \
-              --output "$file" \
-              "$file"
-          done
-
-      - name: Minify CSS files
-        run: |
-          find dist -name "*.css" -type f | while read file; do
-            echo "Minifying: $file"
-            cleancss -o "$file" "$file"
-          done
-
-      - name: Minify JS files
-        run: |
-          find dist -name "*.js" -type f | while read file; do
-            echo "Minifying: $file"
-            terser "$file" --compress --mangle --output "$file"
-          done
+      - name: Build SvelteKit app
+        run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -77,7 +41,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'dist'
+          path: 'build'
 
   deploy:
     environment:

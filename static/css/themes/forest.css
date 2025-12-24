@@ -1,0 +1,188 @@
+/* ===========================================
+   Forest (Redwoods) Theme
+   Default theme - background elements & tree illustration
+   =========================================== */
+
+/* Animated Forest Background */
+.forest-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse at 20% 0%, rgba(74, 124, 89, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(61, 41, 20, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(13, 31, 20, 0.9) 0%, var(--forest-deep) 100%);
+}
+
+/* Floating Particles (forest dust/pollen) */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(212, 168, 75, 0.3);
+    border-radius: 50%;
+    animation: float 15s ease-in-out infinite;
+}
+
+.particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 18s; }
+.particle:nth-child(2) { left: 25%; top: 60%; animation-delay: 2s; animation-duration: 22s; }
+.particle:nth-child(3) { left: 45%; top: 30%; animation-delay: 4s; animation-duration: 16s; }
+.particle:nth-child(4) { left: 65%; top: 70%; animation-delay: 1s; animation-duration: 20s; }
+.particle:nth-child(5) { left: 85%; top: 40%; animation-delay: 3s; animation-duration: 19s; }
+.particle:nth-child(6) { left: 15%; top: 80%; animation-delay: 5s; animation-duration: 21s; }
+.particle:nth-child(7) { left: 75%; top: 15%; animation-delay: 2.5s; animation-duration: 17s; }
+.particle:nth-child(8) { left: 55%; top: 85%; animation-delay: 4.5s; animation-duration: 23s; }
+
+/* Fog Overlay */
+.fog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    background:
+        linear-gradient(90deg,
+            transparent 0%,
+            rgba(200, 213, 192, 0.03) 25%,
+            transparent 50%,
+            rgba(200, 213, 192, 0.05) 75%,
+            transparent 100%);
+    animation: fogDrift 30s linear infinite;
+}
+
+/* Tree Ring Pattern Overlay */
+.rings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='200' cy='200' r='40' fill='none' stroke='%239caf88' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='70' fill='none' stroke='%239caf88' stroke-width='0.5'/%3E%3Ccircle cx='200' cy='200' r='100' fill='none' stroke='%239caf88' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='130' fill='none' stroke='%239caf88' stroke-width='0.5'/%3E%3Ccircle cx='200' cy='200' r='160' fill='none' stroke='%239caf88' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='190' fill='none' stroke='%239caf88' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 600px 600px;
+    background-position: center;
+}
+
+/* Tree Illustration */
+.tree-illustration {
+    position: relative;
+    width: 320px;
+    height: 480px;
+}
+
+.tree-trunk {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 350px;
+    background: linear-gradient(90deg,
+        var(--bark-brown) 0%,
+        var(--bark-light) 30%,
+        var(--bark-brown) 70%,
+        #2d1f10 100%);
+    border-radius: 8px 8px 20px 20px;
+    box-shadow:
+        inset -15px 0 30px rgba(0, 0, 0, 0.3),
+        inset 10px 0 20px rgba(92, 65, 42, 0.3);
+}
+
+.tree-trunk::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    right: 10px;
+    bottom: 40px;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 15px,
+        rgba(0, 0, 0, 0.1) 15px,
+        rgba(0, 0, 0, 0.1) 17px
+    );
+}
+
+.canopy {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.branch {
+    position: absolute;
+    background: var(--forest-mid);
+    border-radius: 50%;
+    animation: sway 4s ease-in-out infinite;
+}
+
+.branch:nth-child(1) {
+    width: 200px;
+    height: 100px;
+    top: 80px;
+    left: -100px;
+    background: radial-gradient(ellipse at 50% 100%, var(--fern-green) 0%, var(--forest-mid) 70%);
+    animation-delay: 0s;
+}
+
+.branch:nth-child(2) {
+    width: 180px;
+    height: 90px;
+    top: 40px;
+    left: -90px;
+    background: radial-gradient(ellipse at 50% 100%, var(--moss-green) 0%, var(--fern-green) 70%);
+    animation-delay: 0.5s;
+}
+
+.branch:nth-child(3) {
+    width: 150px;
+    height: 80px;
+    top: 0;
+    left: -75px;
+    background: radial-gradient(ellipse at 50% 100%, var(--sage) 0%, var(--moss-green) 70%);
+    animation-delay: 1s;
+}
+
+.tree-rings {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+}
+
+.ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(156, 175, 136, 0.3);
+    border-radius: 50%;
+}
+
+.ring:nth-child(1) { width: 15px; height: 15px; }
+.ring:nth-child(2) { width: 28px; height: 28px; }
+.ring:nth-child(3) { width: 42px; height: 42px; }
+.ring:nth-child(4) { width: 56px; height: 56px; }
