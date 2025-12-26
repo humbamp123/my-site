@@ -1,6 +1,3 @@
 [submodule "wire-nuts"]
 	path = wire-nuts
 	url = https://github.com/humbamp123/wire-nuts.git
-[submodule "Vectractor"]
-	path = Vectractor
-	url = https://github.com/humbamp123/Vectractor.git

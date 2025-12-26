@@ -19,7 +19,7 @@ const config = {
 		prerender: {
 			handleHttpError: ({ path, referrer, message }) => {
 				// Ignore errors for submodules and other static files
-				if (path.startsWith('/wire-nuts/') || path.startsWith('/Vectractor/') || path.endsWith('.png') || path.endsWith('.ico')) {
+				if (path.startsWith('/wire-nuts/') || path.endsWith('.png') || path.endsWith('.ico')) {
 					return;
 				}
 				throw new Error(message);
