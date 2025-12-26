@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { base } from '$app/paths';
 
 	// Theme management
 	let currentTheme = 'forest';
@@ -39,14 +40,14 @@
 	<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Nunito+Sans:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="/css/themes/variables.css">
-	<link rel="stylesheet" href="/css/base.css">
-	<link rel="stylesheet" href="/css/components.css">
-	<link rel="stylesheet" href="/css/themes/forest.css">
-	<link rel="stylesheet" href="/css/themes/industrial.css">
-	<link rel="stylesheet" href="/css/themes/fantasy.css">
-	<link rel="stylesheet" href="/css/animations.css">
-	<link rel="stylesheet" href="/css/responsive.css">
+	<link rel="stylesheet" href="{base}/css/themes/variables.css">
+	<link rel="stylesheet" href="{base}/css/base.css">
+	<link rel="stylesheet" href="{base}/css/components.css">
+	<link rel="stylesheet" href="{base}/css/themes/forest.css">
+	<link rel="stylesheet" href="{base}/css/themes/industrial.css">
+	<link rel="stylesheet" href="{base}/css/themes/fantasy.css">
+	<link rel="stylesheet" href="{base}/css/animations.css">
+	<link rel="stylesheet" href="{base}/css/responsive.css">
 </svelte:head>
 
 <!-- Background Effects - Redwoods Theme -->
