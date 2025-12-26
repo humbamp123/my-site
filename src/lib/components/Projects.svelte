@@ -53,27 +53,6 @@
 				</div>
 				<div class="project-visual"></div>
 			</div>
-
-			<div class="project-card featured fade-in" class:visible>
-				<div class="project-info">
-					<div class="project-number">Project 02</div>
-					<h3 class="project-title">Vectractor</h3>
-					<p class="project-desc">A static web application for downloading Instagram videos, reels, and IGTV content with a modern, gradient-based interface. Features client-side processing for privacy protection.</p>
-					<div class="project-tech">
-						<span>HTML5</span>
-						<span>CSS3</span>
-						<span>JavaScript</span>
-					</div>
-					<a href="{base}/Vectractor/index.html" class="project-link">
-						Try It Live
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M7 17L17 7" />
-							<path d="M7 7h10v10" />
-						</svg>
-					</a>
-				</div>
-				<div class="project-visual"></div>
-			</div>
 		</div>
 	</div>
 </section>
