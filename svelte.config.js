@@ -2,7 +2,7 @@ import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
-// Force rebuild to ensure Vectractor appears on main page
+// Force rebuild to restore CSS styling
 const config = {
 	preprocess: vitePreprocess(),
 	kit: {
@@ -14,7 +14,7 @@ const config = {
 			strict: true
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '' : ''
+			base: process.env.NODE_ENV === 'production' ? '/my-site' : ''
 		},
 		prerender: {
 			handleHttpError: ({ path, referrer, message }) => {

@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { base } from '$app/paths';
 
 	let visible = false;
 
@@ -42,7 +43,7 @@
 						<span>CSS</span>
 						<span>JavaScript</span>
 					</div>
-					<a href="/wire-nuts/index.html" class="project-link">
+					<a href="{base}/wire-nuts/index.html" class="project-link">
 						Try It Live
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M7 17L17 7" />
@@ -63,7 +64,7 @@
 						<span>CSS3</span>
 						<span>JavaScript</span>
 					</div>
-					<a href="/Vectractor/index.html" class="project-link">
+					<a href="{base}/Vectractor/index.html" class="project-link">
 						Try It Live
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M7 17L17 7" />
