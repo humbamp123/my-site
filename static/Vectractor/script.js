@@ -71,9 +71,11 @@ class InstagramDownloader {
 
         // Try multiple methods to fetch Instagram data
         const methods = [
+            () => this.fetchWithOEmbedAPI(url),
             () => this.fetchWithEmbedAPI(shortcode),
             () => this.fetchWithDirectURL(url),
-            () => this.fetchWithCORSProxy(url)
+            () => this.fetchWithCORSProxy(url, 'https://corsproxy.io/?'),
+            () => this.fetchWithCORSProxy(url, 'https://api.codetabs.com/v1/proxy?quest=')
         ];
 
         let lastError;
@@ -88,6 +90,33 @@ class InstagramDownloader {
         }
 
         throw lastError || new Error('Failed to fetch video data');
+    }
+
+    async fetchWithOEmbedAPI(url) {
+        try {
+            // Instagram's official oEmbed API
+            const oembedUrl = `https://graph.facebook.com/v12.0/instagram_oembed?url=${encodeURIComponent(url)}&access_token=`;
+
+            // Try without access token first (public endpoint)
+            const response = await fetch(`https://api.instagram.com/oembed/?url=${encodeURIComponent(url)}`);
+
+            if (!response.ok) {
+                throw new Error('oEmbed API returned error');
+            }
+
+            const data = await response.json();
+
+            // oEmbed returns thumbnail, but we need to extract video from the HTML
+            if (data.thumbnail_url) {
+                // The oEmbed gives us the post info, now fetch the embed page
+                const shortcode = this.extractShortcode(url);
+                return await this.fetchWithEmbedAPI(shortcode);
+            }
+
+            throw new Error('No video data in oEmbed response');
+        } catch (error) {
+            throw new Error('oEmbed API method failed');
+        }
     }
 
     async fetchWithEmbedAPI(shortcode) {
@@ -148,11 +177,20 @@ class InstagramDownloader {
         }
     }
 
-    async fetchWithCORSProxy(url) {
+    async fetchWithCORSProxy(url, proxyBaseUrl) {
         try {
             // Use a CORS proxy as fallback
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-            const response = await fetch(proxyUrl);
+            const proxyUrl = `${proxyBaseUrl}${encodeURIComponent(url)}`;
+            const response = await fetch(proxyUrl, {
+                headers: {
+                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Proxy returned ${response.status}`);
+            }
+
             const html = await response.text();
 
             // Try to extract video URL from the proxied content
@@ -166,7 +204,9 @@ class InstagramDownloader {
             const patterns = [
                 /"playback_url":"([^"]+)"/,
                 /"src":"([^"]+\.mp4[^"]*)"/,
-                /videoUrl":"([^"]+)"/
+                /videoUrl":"([^"]+)"/,
+                /"video_versions":\[{"url":"([^"]+)"/,
+                /"contentUrl":"([^"]+\.mp4[^"]*)"/
             ];
 
             for (const pattern of patterns) {
@@ -181,7 +221,7 @@ class InstagramDownloader {
 
             throw new Error('No video found with CORS proxy');
         } catch (error) {
-            throw new Error('CORS proxy method failed');
+            throw new Error(`CORS proxy method failed: ${error.message}`);
         }
     }
 
