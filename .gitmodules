@@ -1,6 +1,6 @@
-[submodule "wire-nuts"]
-	path = wire-nuts
-	url = https://github.com/humbamp123/wire-nuts.git
-[submodule "calorie-counter"]
-	path = calorie-counter
+[submodule "static/calorie-counter"]
+	path = static/calorie-counter
 	url = https://github.com/humbamp123/calorie-counter.git
+[submodule "static/wire-nuts"]
+	path = static/wire-nuts
+	url = https://github.com/humbamp123/wire-nuts.git
