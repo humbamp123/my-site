@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Counter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .items-list {
+            margin-bottom: 20px;
+        }
+
+        .item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .item:hover {
+            transform: translateX(5px);
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 700;
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .item-info {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .item-calories {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+            margin: 0 20px;
+        }
+
+        .remove-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .remove-btn:hover {
+            background: #e84118;
+        }
+
+        .total-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .total-label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .total-calories {
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .item-calories {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍎 Calorie Counter</h1>
+
+        <div class="input-section">
+            <div class="form-group">
+                <label for="itemName">Food Item Name</label>
+                <input type="text" id="itemName" placeholder="e.g., Chicken Breast, Rice, Apple">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="caloriesPerWeight">Calories per Weight</label>
+                    <input type="number" id="caloriesPerWeight" placeholder="e.g., 165" step="0.1" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="weightUnit">Weight Unit</label>
+                    <select id="weightUnit">
+                        <option value="100g">per 100g</option>
+                        <option value="g">per gram</option>
+                        <option value="oz">per ounce</option>
+                        <option value="lb">per pound</option>
+                        <option value="serving">per serving</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="consumedWeight">Consumed Weight/Amount</label>
+                    <input type="number" id="consumedWeight" placeholder="e.g., 150" step="0.1" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="consumedUnit">Unit</label>
+                    <select id="consumedUnit">
+                        <option value="g">grams</option>
+                        <option value="oz">ounces</option>
+                        <option value="lb">pounds</option>
+                        <option value="serving">servings</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="addItem()">Add Item</button>
+        </div>
+
+        <div class="items-list" id="itemsList">
+            <div class="empty-state">No items added yet. Add your first food item above!</div>
+        </div>
+
+        <div class="total-section">
+            <div class="total-label">Total Calories</div>
+            <div class="total-calories" id="totalCalories">0</div>
+        </div>
+    </div>
+
+    <script>
+        let items = [];
+
+        function calculateCalories(caloriesPerWeight, weightUnit, consumedWeight, consumedUnit) {
+            // Convert everything to a common base for calculation
+            let baseCalories = caloriesPerWeight;
+            let baseWeight = consumedWeight;
+
+            // Normalize calories to per gram
+            switch(weightUnit) {
+                case '100g':
+                    baseCalories = caloriesPerWeight / 100;
+                    break;
+                case 'g':
+                    baseCalories = caloriesPerWeight;
+                    break;
+                case 'oz':
+                    baseCalories = caloriesPerWeight / 28.3495;
+                    break;
+                case 'lb':
+                    baseCalories = caloriesPerWeight / 453.592;
+                    break;
+                case 'serving':
+                    // For serving, we'll calculate directly
+                    if (consumedUnit === 'serving') {
+                        return caloriesPerWeight * consumedWeight;
+                    }
+                    baseCalories = caloriesPerWeight;
+                    break;
+            }
+
+            // Convert consumed weight to grams
+            switch(consumedUnit) {
+                case 'g':
+                    baseWeight = consumedWeight;
+                    break;
+                case 'oz':
+                    baseWeight = consumedWeight * 28.3495;
+                    break;
+                case 'lb':
+                    baseWeight = consumedWeight * 453.592;
+                    break;
+                case 'serving':
+                    if (weightUnit === 'serving') {
+                        return caloriesPerWeight * consumedWeight;
+                    }
+                    baseWeight = consumedWeight;
+                    break;
+            }
+
+            return baseCalories * baseWeight;
+        }
+
+        function addItem() {
+            const itemName = document.getElementById('itemName').value.trim();
+            const caloriesPerWeight = parseFloat(document.getElementById('caloriesPerWeight').value);
+            const weightUnit = document.getElementById('weightUnit').value;
+            const consumedWeight = parseFloat(document.getElementById('consumedWeight').value);
+            const consumedUnit = document.getElementById('consumedUnit').value;
+
+            // Validation
+            if (!itemName) {
+                alert('Please enter a food item name');
+                return;
+            }
+            if (isNaN(caloriesPerWeight) || caloriesPerWeight < 0) {
+                alert('Please enter valid calories per weight');
+                return;
+            }
+            if (isNaN(consumedWeight) || consumedWeight <= 0) {
+                alert('Please enter valid consumed weight');
+                return;
+            }
+
+            const calories = calculateCalories(caloriesPerWeight, weightUnit, consumedWeight, consumedUnit);
+
+            const item = {
+                id: Date.now(),
+                name: itemName,
+                caloriesPerWeight: caloriesPerWeight,
+                weightUnit: weightUnit,
+                consumedWeight: consumedWeight,
+                consumedUnit: consumedUnit,
+                totalCalories: calories
+            };
+
+            items.push(item);
+            renderItems();
+            clearForm();
+        }
+
+        function removeItem(id) {
+            items = items.filter(item => item.id !== id);
+            renderItems();
+        }
+
+        function renderItems() {
+            const itemsList = document.getElementById('itemsList');
+
+            if (items.length === 0) {
+                itemsList.innerHTML = '<div class="empty-state">No items added yet. Add your first food item above!</div>';
+                updateTotal();
+                return;
+            }
+
+            itemsList.innerHTML = items.map(item => `
+                <div class="item">
+                    <div class="item-details">
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-info">
+                            ${item.caloriesPerWeight} cal/${item.weightUnit} × ${item.consumedWeight} ${item.consumedUnit}
+                        </div>
+                    </div>
+                    <div class="item-calories">${Math.round(item.totalCalories)} cal</div>
+                    <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
+                </div>
+            `).join('');
+
+            updateTotal();
+        }
+
+        function updateTotal() {
+            const total = items.reduce((sum, item) => sum + item.totalCalories, 0);
+            document.getElementById('totalCalories').textContent = Math.round(total);
+        }
+
+        function clearForm() {
+            document.getElementById('itemName').value = '';
+            document.getElementById('caloriesPerWeight').value = '';
+            document.getElementById('consumedWeight').value = '';
+        }
+
+        // Allow Enter key to add item
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                addItem();
+            }
+        });
+    </script>
+</body>
+</html>
