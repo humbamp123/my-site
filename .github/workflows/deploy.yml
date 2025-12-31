@@ -34,7 +34,7 @@ jobs:
         run: npm ci
 
       - name: Build SvelteKit app
-        run: npm run build
+        run: NODE_ENV=production npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
