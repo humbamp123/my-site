@@ -56,7 +56,7 @@
 			</div>
 			<div class="hero-visual">
 				<!-- Redwoods Theme Hero -->
-				<div class="tree-illustration" style="transform: translateY({browser && scrolled < window.innerHeight ? scrolled * 0.15 : 0}px)">
+				<div class="tree-illustration" style:transform="translateY({browser && scrolled < window.innerHeight ? scrolled * 0.15 : 0}px)">
 					<div class="canopy">
 						<div class="branch"></div>
 						<div class="branch"></div>
@@ -71,7 +71,7 @@
 					</div>
 				</div>
 				<!-- Industrial Theme Hero -->
-				<div class="hero-graphic-industrial" style="transform: translateY({browser && scrolled < window.innerHeight ? scrolled * 0.2 : 0}px)">
+				<div class="hero-graphic-industrial" style:transform="translateY({browser && scrolled < window.innerHeight ? scrolled * 0.2 : 0}px)">
 					<div class="orbit">
 						<div class="orbit-dot"></div>
 					</div>
@@ -86,7 +86,7 @@
 					</div>
 				</div>
 				<!-- Fantasy Theme Hero -->
-				<div class="castle-illustration" style="transform: translateY({browser && scrolled < window.innerHeight ? scrolled * 0.12 : 0}px)">
+				<div class="castle-illustration" style:transform="translateY({browser && scrolled < window.innerHeight ? scrolled * 0.12 : 0}px)">
 					<div class="castle-tower-left">
 						<div class="castle-battlement"></div>
 					</div>
