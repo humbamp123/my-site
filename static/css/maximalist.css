@@ -730,7 +730,7 @@ nav .container {
     flex-wrap: wrap;
 }
 
-/* Desert Sun Visual */
+/* Abstract Dunes Visual */
 .hero-visual {
     display: flex;
     align-items: center;
@@ -738,101 +738,114 @@ nav .container {
     position: relative;
 }
 
-.desert-sun {
+.abstract-dunes {
     position: relative;
     width: 350px;
     height: 350px;
+    overflow: visible;
 }
 
-/* Concentric arches */
-.sun-arch {
+/* Base dune styling */
+.dune {
     position: absolute;
-    left: 50%;
     bottom: 0;
+    left: 50%;
     transform: translateX(-50%);
-    border: 4px solid;
-    border-bottom: none;
-    border-radius: 50% 50% 0 0;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
 }
 
-.sun-arch:nth-child(1) {
+/* Back dune - terracotta, widest */
+.dune-back {
     width: 340px;
-    height: 170px;
-    border-color: var(--terracotta);
-    background: linear-gradient(180deg, rgba(199, 93, 58, 0.1) 0%, transparent 100%);
+    height: 120px;
+    background: linear-gradient(
+        180deg,
+        var(--terracotta) 0%,
+        rgba(199, 93, 58, 0.8) 100%
+    );
+    z-index: 1;
+    animation: duneWave 8s ease-in-out infinite;
+    animation-delay: 0s;
 }
 
-.sun-arch:nth-child(2) {
+/* Middle dune - ochre */
+.dune-mid {
     width: 280px;
-    height: 140px;
-    border-color: var(--ochre);
-    background: linear-gradient(180deg, rgba(233, 180, 76, 0.15) 0%, transparent 100%);
+    height: 160px;
+    background: linear-gradient(
+        180deg,
+        var(--ochre) 0%,
+        rgba(233, 180, 76, 0.85) 100%
+    );
+    z-index: 2;
+    bottom: 20px;
+    animation: duneWave 8s ease-in-out infinite;
+    animation-delay: -2s;
 }
 
-.sun-arch:nth-child(3) {
-    width: 220px;
-    height: 110px;
-    border-color: var(--burnt-sienna);
-    background: linear-gradient(180deg, rgba(224, 122, 95, 0.2) 0%, transparent 100%);
-}
-
-.sun-arch:nth-child(4) {
-    width: 160px;
-    height: 80px;
-    border-color: var(--sage);
-    background: linear-gradient(180deg, rgba(135, 168, 120, 0.15) 0%, transparent 100%);
-}
-
-.sun-arch:nth-child(5) {
-    width: 100px;
-    height: 50px;
-    border-color: var(--terracotta);
-    background: var(--terracotta);
-}
-
-/* Sun circle */
-.sun-circle {
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--ochre) 0%, var(--terracotta) 100%);
-    border-radius: 50%;
-    box-shadow:
-        0 0 0 8px var(--cream),
-        0 0 0 12px var(--ochre),
-        0 0 40px rgba(233, 180, 76, 0.4);
-}
-
-/* Decorative rays */
-.sun-rays {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+/* Front dune - sand/cream, tallest */
+.dune-front {
     width: 200px;
-    height: 100px;
+    height: 200px;
+    background: linear-gradient(
+        180deg,
+        var(--sand) 0%,
+        var(--cream) 60%,
+        rgba(232, 220, 196, 0.9) 100%
+    );
+    z-index: 3;
+    bottom: 40px;
+    animation: duneWave 8s ease-in-out infinite;
+    animation-delay: -4s;
 }
 
-.ray {
+/* Decorative sun element */
+.dune-sun {
     position: absolute;
-    width: 4px;
-    height: 30px;
-    background: var(--ochre);
-    bottom: 0;
+    top: 20px;
     left: 50%;
-    transform-origin: bottom center;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(
+        135deg,
+        var(--ochre) 0%,
+        var(--terracotta) 100%
+    );
+    border-radius: 50%;
+    z-index: 0;
+    box-shadow:
+        0 0 0 6px var(--cream),
+        0 0 0 10px rgba(233, 180, 76, 0.3),
+        0 0 30px rgba(233, 180, 76, 0.4);
 }
 
-.ray:nth-child(1) { transform: translateX(-50%) rotate(-60deg); }
-.ray:nth-child(2) { transform: translateX(-50%) rotate(-40deg); }
-.ray:nth-child(3) { transform: translateX(-50%) rotate(-20deg); }
-.ray:nth-child(4) { transform: translateX(-50%) rotate(0deg); }
-.ray:nth-child(5) { transform: translateX(-50%) rotate(20deg); }
-.ray:nth-child(6) { transform: translateX(-50%) rotate(40deg); }
-.ray:nth-child(7) { transform: translateX(-50%) rotate(60deg); }
+/* Subtle wave animation */
+@keyframes duneWave {
+    0%, 100% {
+        transform: translateX(-50%) scaleY(1);
+        border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+    25% {
+        transform: translateX(-50%) scaleY(1.02);
+        border-radius: 45% 55% 0 0 / 95% 105% 0 0;
+    }
+    50% {
+        transform: translateX(-50%) scaleY(1);
+        border-radius: 55% 45% 0 0 / 105% 95% 0 0;
+    }
+    75% {
+        transform: translateX(-50%) scaleY(0.98);
+        border-radius: 48% 52% 0 0 / 98% 102% 0 0;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .dune {
+        animation: none;
+    }
+}
 
 /* Hide old elements */
 .tree-section,
@@ -1722,9 +1735,32 @@ footer span {
         order: -1;
     }
 
-    .desert-sun {
+    .abstract-dunes {
         width: 280px;
         height: 280px;
+    }
+
+    .dune-back {
+        width: 270px;
+        height: 95px;
+    }
+
+    .dune-mid {
+        width: 220px;
+        height: 125px;
+        bottom: 15px;
+    }
+
+    .dune-front {
+        width: 160px;
+        height: 160px;
+        bottom: 30px;
+    }
+
+    .dune-sun {
+        width: 50px;
+        height: 50px;
+        top: 15px;
     }
 
     .about-content,
@@ -1780,20 +1816,37 @@ footer span {
         grid-template-columns: 1fr;
     }
 
-    .desert-sun {
+    .abstract-dunes {
         width: 220px;
         height: 220px;
     }
 
-    .sun-arch:nth-child(1) { width: 210px; height: 105px; }
-    .sun-arch:nth-child(2) { width: 170px; height: 85px; }
-    .sun-arch:nth-child(3) { width: 130px; height: 65px; }
-    .sun-arch:nth-child(4) { width: 90px; height: 45px; }
-    .sun-arch:nth-child(5) { width: 50px; height: 25px; }
+    .dune-back {
+        width: 210px;
+        height: 75px;
+    }
 
-    .sun-circle {
-        width: 50px;
-        height: 50px;
+    .dune-mid {
+        width: 170px;
+        height: 100px;
+        bottom: 12px;
+    }
+
+    .dune-front {
+        width: 125px;
+        height: 125px;
+        bottom: 24px;
+    }
+
+    .dune-sun {
+        width: 40px;
+        height: 40px;
+        top: 10px;
+    }
+
+    /* Reduce animation intensity on mobile */
+    .dune {
+        animation-duration: 12s;
     }
 
     .scroll-indicator {
@@ -1817,5 +1870,33 @@ footer span {
 
     .stat-number {
         font-size: 2.5rem;
+    }
+
+    .abstract-dunes {
+        width: 180px;
+        height: 180px;
+    }
+
+    .dune-back {
+        width: 170px;
+        height: 60px;
+    }
+
+    .dune-mid {
+        width: 140px;
+        height: 80px;
+        bottom: 10px;
+    }
+
+    .dune-front {
+        width: 100px;
+        height: 100px;
+        bottom: 20px;
+    }
+
+    .dune-sun {
+        width: 30px;
+        height: 30px;
+        top: 8px;
     }
 }

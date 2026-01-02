@@ -55,23 +55,12 @@
 				</div>
 			</div>
 			<div class="hero-visual">
-				<!-- Maximalist Desert Sun -->
-				<div class="desert-sun">
-					<div class="sun-arch"></div>
-					<div class="sun-arch"></div>
-					<div class="sun-arch"></div>
-					<div class="sun-arch"></div>
-					<div class="sun-arch"></div>
-					<div class="sun-circle"></div>
-					<div class="sun-rays">
-						<div class="ray"></div>
-						<div class="ray"></div>
-						<div class="ray"></div>
-						<div class="ray"></div>
-						<div class="ray"></div>
-						<div class="ray"></div>
-						<div class="ray"></div>
-					</div>
+				<!-- Abstract Dunes Landscape -->
+				<div class="abstract-dunes">
+					<div class="dune dune-back"></div>
+					<div class="dune dune-mid"></div>
+					<div class="dune dune-front"></div>
+					<div class="dune-sun"></div>
 				</div>
 			</div>
 		</div>
