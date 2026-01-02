@@ -898,7 +898,7 @@ nav .container {
     transform: translateY(100px);
     opacity: 0;
     animation: wormEmerge 8s ease-in-out infinite;
-    animation-delay: 180s; /* 3 minutes before first appearance */
+    animation-delay: 10s; /* 10 seconds before first appearance */
 }
 
 .worm-segment {
