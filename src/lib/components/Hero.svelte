@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+	import { base } from '$app/paths';
 
 	let scrolled = 0;
 
@@ -56,7 +57,7 @@
 			</div>
 			<div class="hero-visual">
 				<!-- Golden Gate Bridge SVG -->
-				<img src="/images/golden-gate.svg" alt="Golden Gate Bridge illustration" class="golden-gate-svg" />
+				<img src="{base}/images/golden-gate.svg" alt="Golden Gate Bridge illustration" class="golden-gate-svg" />
 			</div>
 		</div>
 	</div>
