@@ -55,19 +55,23 @@
 				</div>
 			</div>
 			<div class="hero-visual">
-				<!-- Abstract Dunes Landscape -->
-				<div class="abstract-dunes">
-					<div class="dune dune-back"></div>
-					<div class="dune dune-mid"></div>
-					<div class="dune dune-front"></div>
-					<div class="dune-sun"></div>
-					<div class="dune-cactus"></div>
-					<div class="sandworm">
-						<div class="worm-segment"></div>
-						<div class="worm-segment"></div>
-						<div class="worm-segment"></div>
-						<div class="worm-head"></div>
+				<!-- Golden Gate Bridge -->
+				<div class="golden-gate">
+					<div class="gate-sun"></div>
+					<div class="gate-tower gate-tower-left">
+						<div class="tower-top"></div>
+						<div class="tower-body"></div>
+						<div class="tower-base"></div>
 					</div>
+					<div class="gate-tower gate-tower-right">
+						<div class="tower-top"></div>
+						<div class="tower-body"></div>
+						<div class="tower-base"></div>
+					</div>
+					<div class="gate-cable gate-cable-left"></div>
+					<div class="gate-cable gate-cable-right"></div>
+					<div class="gate-deck"></div>
+					<div class="gate-water"></div>
 				</div>
 			</div>
 		</div>

@@ -730,7 +730,7 @@ nav .container {
     flex-wrap: wrap;
 }
 
-/* Abstract Dunes Visual */
+/* Golden Gate Bridge Visual */
 .hero-visual {
     display: flex;
     align-items: center;
@@ -738,240 +738,211 @@ nav .container {
     position: relative;
 }
 
-.abstract-dunes {
+.golden-gate {
     position: relative;
     width: 350px;
-    height: 350px;
+    height: 280px;
     overflow: visible;
 }
 
-/* Base dune styling */
-.dune {
+/* Decorative sun behind bridge */
+.gate-sun {
     position: absolute;
-    bottom: 0;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-}
-
-/* Back dune - terracotta, widest */
-.dune-back {
-    width: 340px;
-    height: 120px;
-    background: linear-gradient(
-        180deg,
-        var(--terracotta) 0%,
-        rgba(199, 93, 58, 0.8) 100%
-    );
-    z-index: 1;
-    animation: duneWave 8s ease-in-out infinite;
-    animation-delay: 0s;
-}
-
-/* Middle dune - ochre */
-.dune-mid {
-    width: 280px;
-    height: 160px;
-    background: linear-gradient(
-        180deg,
-        var(--ochre) 0%,
-        rgba(233, 180, 76, 0.85) 100%
-    );
-    z-index: 2;
-    bottom: 20px;
-    animation: duneWave 8s ease-in-out infinite;
-    animation-delay: -2s;
-}
-
-/* Front dune - sand/cream, tallest */
-.dune-front {
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(
-        180deg,
-        var(--sand) 0%,
-        var(--cream) 60%,
-        rgba(232, 220, 196, 0.9) 100%
-    );
-    z-index: 3;
-    bottom: 40px;
-    animation: duneWave 8s ease-in-out infinite;
-    animation-delay: -4s;
-}
-
-/* Decorative sun element */
-.dune-sun {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     background: linear-gradient(
         135deg,
         var(--ochre) 0%,
-        var(--terracotta) 100%
+        var(--amber) 100%
     );
     border-radius: 50%;
     z-index: 0;
     box-shadow:
-        0 0 0 6px var(--cream),
-        0 0 0 10px rgba(233, 180, 76, 0.3),
-        0 0 30px rgba(233, 180, 76, 0.4);
+        0 0 0 8px var(--cream),
+        0 0 0 14px rgba(233, 180, 76, 0.2),
+        0 0 60px rgba(233, 180, 76, 0.5);
 }
 
-/* Subtle wave animation */
-@keyframes duneWave {
-    0%, 100% {
-        transform: translateX(-50%) scaleY(1);
-        border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-    }
-    25% {
-        transform: translateX(-50%) scaleY(1.02);
-        border-radius: 45% 55% 0 0 / 95% 105% 0 0;
-    }
-    50% {
-        transform: translateX(-50%) scaleY(1);
-        border-radius: 55% 45% 0 0 / 105% 95% 0 0;
-    }
-    75% {
-        transform: translateX(-50%) scaleY(0.98);
-        border-radius: 48% 52% 0 0 / 98% 102% 0 0;
-    }
-}
-
-/* Reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-    .dune,
-    .sandworm {
-        animation: none;
-    }
-}
-
-/* Small Saguaro Cactus */
-.dune-cactus {
+/* Bridge towers */
+.gate-tower {
     position: absolute;
-    bottom: 85px;
-    right: 60px;
-    width: 8px;
-    height: 35px;
-    background: var(--sage);
-    border-radius: 4px 4px 0 0;
-    z-index: 4;
+    bottom: 50px;
+    width: 28px;
+    height: 180px;
+    z-index: 3;
 }
 
-.dune-cactus::before,
-.dune-cactus::after {
-    content: '';
-    position: absolute;
-    background: var(--sage);
-    border-radius: 4px;
+.gate-tower-left {
+    left: 70px;
 }
 
-/* Left arm */
-.dune-cactus::before {
-    width: 6px;
-    height: 15px;
-    bottom: 12px;
-    left: -10px;
-    border-radius: 4px 4px 0 4px;
+.gate-tower-right {
+    right: 70px;
 }
 
-/* Right arm */
-.dune-cactus::after {
-    width: 6px;
+.tower-top {
+    width: 100%;
     height: 20px;
-    bottom: 8px;
-    right: -10px;
-    border-radius: 4px 4px 4px 0;
-}
-
-/* Dune Sandworm (Shai-Hulud) */
-.sandworm {
-    position: absolute;
-    bottom: 30px;
-    left: 15%;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transform: translateY(100px);
-    opacity: 0;
-    animation: wormEmerge 8s ease-in-out infinite;
-    animation-delay: 10s; /* 10 seconds before first appearance */
-}
-
-.worm-segment {
-    width: 18px;
-    height: 12px;
-    background: linear-gradient(
-        90deg,
-        var(--rust) 0%,
-        var(--terracotta) 50%,
-        var(--rust) 100%
-    );
-    border-radius: 50%;
-    margin-top: -4px;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.worm-segment:first-child {
-    margin-top: 0;
-}
-
-.worm-head {
-    width: 22px;
-    height: 16px;
-    background: linear-gradient(
-        180deg,
-        var(--terracotta) 0%,
-        var(--rust) 100%
-    );
-    border-radius: 50% 50% 30% 30%;
-    margin-top: -5px;
+    background: var(--terracotta);
+    border-radius: 3px 3px 0 0;
     position: relative;
 }
 
-/* Mouth rings */
-.worm-head::before {
+.tower-top::before {
     content: '';
     position: absolute;
-    top: 2px;
+    top: -8px;
     left: 50%;
     transform: translateX(-50%);
-    width: 14px;
-    height: 10px;
-    border: 2px solid rgba(61, 43, 31, 0.6);
-    border-radius: 50%;
-    background: radial-gradient(
-        circle,
-        rgba(61, 43, 31, 0.8) 0%,
-        transparent 70%
-    );
+    width: 12px;
+    height: 8px;
+    background: var(--terracotta);
+    border-radius: 2px 2px 0 0;
 }
 
-/* Sandworm emergence animation */
-@keyframes wormEmerge {
-    0%, 85%, 100% {
-        transform: translateY(100px);
-        opacity: 0;
-    }
-    90% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    92% {
-        transform: translateY(-10px) rotate(-5deg);
-        opacity: 1;
-    }
-    95% {
-        transform: translateY(0) rotate(5deg);
-        opacity: 1;
-    }
-    97% {
-        transform: translateY(20px);
-        opacity: 0.8;
-    }
+.tower-body {
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(
+        90deg,
+        var(--rust) 0%,
+        var(--terracotta) 30%,
+        var(--terracotta) 70%,
+        var(--rust) 100%
+    );
+    position: relative;
+}
+
+/* Tower cross-bracing */
+.tower-body::before,
+.tower-body::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 4px;
+    background: var(--rust);
+}
+
+.tower-body::before {
+    top: 30px;
+}
+
+.tower-body::after {
+    top: 80px;
+}
+
+.tower-base {
+    width: 100%;
+    height: 20px;
+    background: var(--rust);
+    border-radius: 0 0 2px 2px;
+}
+
+/* Suspension cables */
+.gate-cable {
+    position: absolute;
+    top: 32px;
+    width: 120px;
+    height: 80px;
+    border: 4px solid var(--terracotta);
+    border-radius: 0 0 50% 50%;
+    border-top: none;
+    z-index: 2;
+}
+
+.gate-cable-left {
+    left: 20px;
+}
+
+.gate-cable-right {
+    right: 20px;
+}
+
+/* Vertical suspender cables */
+.gate-cable::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 18px,
+        var(--terracotta) 18px,
+        var(--terracotta) 20px
+    );
+    opacity: 0.6;
+}
+
+/* Bridge deck */
+.gate-deck {
+    position: absolute;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 12px;
+    background: linear-gradient(
+        180deg,
+        var(--chocolate) 0%,
+        var(--espresso) 100%
+    );
+    border-radius: 2px;
+    z-index: 4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Deck railing */
+.gate-deck::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--terracotta);
+    border-radius: 2px 2px 0 0;
+}
+
+/* Water/Bay */
+.gate-water {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 350px;
+    height: 45px;
+    background: linear-gradient(
+        180deg,
+        var(--sage) 0%,
+        var(--olive) 100%
+    );
+    border-radius: 0 0 8px 8px;
+    opacity: 0.7;
+}
+
+/* Water ripple effect */
+.gate-water::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: repeating-linear-gradient(
+        180deg,
+        transparent,
+        transparent 8px,
+        rgba(255, 255, 255, 0.1) 8px,
+        rgba(255, 255, 255, 0.1) 10px
+    );
 }
 
 /* Hide old elements */
@@ -1862,53 +1833,66 @@ footer span {
         order: -1;
     }
 
-    .abstract-dunes {
+    .golden-gate {
         width: 280px;
-        height: 280px;
+        height: 220px;
     }
 
-    .dune-back {
-        width: 270px;
-        height: 95px;
+    .gate-sun {
+        width: 60px;
+        height: 60px;
+        top: 5px;
     }
 
-    .dune-mid {
-        width: 220px;
-        height: 125px;
-        bottom: 15px;
+    .gate-tower {
+        width: 22px;
+        height: 140px;
+        bottom: 40px;
     }
 
-    .dune-front {
-        width: 160px;
-        height: 160px;
-        bottom: 30px;
+    .gate-tower-left {
+        left: 55px;
     }
 
-    .dune-sun {
-        width: 50px;
-        height: 50px;
-        top: 15px;
+    .gate-tower-right {
+        right: 55px;
     }
 
-    .dune-cactus {
-        bottom: 70px;
-        right: 45px;
-        width: 6px;
-        height: 28px;
-    }
-
-    .dune-cactus::before {
-        width: 5px;
-        height: 12px;
-        bottom: 10px;
-        left: -8px;
-    }
-
-    .dune-cactus::after {
-        width: 5px;
+    .tower-top {
         height: 16px;
-        bottom: 6px;
-        right: -8px;
+    }
+
+    .tower-body {
+        height: 108px;
+    }
+
+    .tower-base {
+        height: 16px;
+    }
+
+    .gate-cable {
+        top: 25px;
+        width: 95px;
+        height: 60px;
+    }
+
+    .gate-cable-left {
+        left: 15px;
+    }
+
+    .gate-cable-right {
+        right: 15px;
+    }
+
+    .gate-deck {
+        width: 250px;
+        height: 10px;
+        bottom: 35px;
+    }
+
+    .gate-water {
+        width: 280px;
+        height: 35px;
     }
 
     .about-content,
@@ -1964,63 +1948,67 @@ footer span {
         grid-template-columns: 1fr;
     }
 
-    .abstract-dunes {
+    .golden-gate {
         width: 220px;
-        height: 220px;
+        height: 180px;
     }
 
-    .dune-back {
-        width: 210px;
-        height: 75px;
+    .gate-sun {
+        width: 50px;
+        height: 50px;
+        top: 0;
     }
 
-    .dune-mid {
-        width: 170px;
-        height: 100px;
-        bottom: 12px;
+    .gate-tower {
+        width: 18px;
+        height: 110px;
+        bottom: 32px;
     }
 
-    .dune-front {
-        width: 125px;
-        height: 125px;
-        bottom: 24px;
+    .gate-tower-left {
+        left: 42px;
     }
 
-    .dune-sun {
-        width: 40px;
-        height: 40px;
-        top: 10px;
+    .gate-tower-right {
+        right: 42px;
     }
 
-    .dune-cactus {
-        bottom: 55px;
-        right: 35px;
-        width: 5px;
-        height: 22px;
+    .tower-top {
+        height: 12px;
     }
 
-    .dune-cactus::before {
-        width: 4px;
-        height: 10px;
-        bottom: 8px;
-        left: -6px;
+    .tower-body {
+        height: 86px;
     }
 
-    .dune-cactus::after {
-        width: 4px;
-        height: 13px;
-        bottom: 5px;
-        right: -6px;
+    .tower-base {
+        height: 12px;
     }
 
-    /* Hide sandworm on mobile for performance */
-    .sandworm {
-        display: none;
+    .gate-cable {
+        top: 18px;
+        width: 75px;
+        height: 48px;
+        border-width: 3px;
     }
 
-    /* Reduce animation intensity on mobile */
-    .dune {
-        animation-duration: 12s;
+    .gate-cable-left {
+        left: 10px;
+    }
+
+    .gate-cable-right {
+        right: 10px;
+    }
+
+    .gate-deck {
+        width: 200px;
+        height: 8px;
+        bottom: 28px;
+    }
+
+    .gate-water {
+        width: 220px;
+        height: 28px;
     }
 
     .scroll-indicator {
@@ -2046,52 +2034,66 @@ footer span {
         font-size: 2.5rem;
     }
 
-    .abstract-dunes {
+    .golden-gate {
         width: 180px;
-        height: 180px;
+        height: 150px;
     }
 
-    .dune-back {
-        width: 170px;
-        height: 60px;
+    .gate-sun {
+        width: 40px;
+        height: 40px;
+        top: 0;
     }
 
-    .dune-mid {
-        width: 140px;
-        height: 80px;
-        bottom: 10px;
+    .gate-tower {
+        width: 14px;
+        height: 90px;
+        bottom: 26px;
     }
 
-    .dune-front {
-        width: 100px;
-        height: 100px;
-        bottom: 20px;
+    .gate-tower-left {
+        left: 35px;
     }
 
-    .dune-sun {
-        width: 30px;
-        height: 30px;
-        top: 8px;
+    .gate-tower-right {
+        right: 35px;
     }
 
-    .dune-cactus {
-        bottom: 45px;
-        right: 25px;
-        width: 4px;
-        height: 18px;
-    }
-
-    .dune-cactus::before {
-        width: 3px;
-        height: 8px;
-        bottom: 6px;
-        left: -5px;
-    }
-
-    .dune-cactus::after {
-        width: 3px;
+    .tower-top {
         height: 10px;
-        bottom: 4px;
-        right: -5px;
+    }
+
+    .tower-body {
+        height: 70px;
+    }
+
+    .tower-base {
+        height: 10px;
+    }
+
+    .gate-cable {
+        top: 15px;
+        width: 60px;
+        height: 40px;
+        border-width: 2px;
+    }
+
+    .gate-cable-left {
+        left: 8px;
+    }
+
+    .gate-cable-right {
+        right: 8px;
+    }
+
+    .gate-deck {
+        width: 165px;
+        height: 6px;
+        bottom: 22px;
+    }
+
+    .gate-water {
+        width: 180px;
+        height: 22px;
     }
 }
