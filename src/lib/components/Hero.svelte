@@ -55,46 +55,8 @@
 				</div>
 			</div>
 			<div class="hero-visual">
-				<!-- Golden Gate Bridge -->
-				<div class="golden-gate">
-					<!-- Left tower -->
-					<div class="tower tower-left">
-						<div class="tower-top">
-							<div class="tower-cap"></div>
-							<div class="tower-tier tier-1"></div>
-							<div class="tower-tier tier-2"></div>
-							<div class="tower-tier tier-3"></div>
-						</div>
-						<div class="tower-base">
-							<div class="tower-x-brace"></div>
-						</div>
-					</div>
-					<!-- Right tower -->
-					<div class="tower tower-right">
-						<div class="tower-top">
-							<div class="tower-cap"></div>
-							<div class="tower-tier tier-1"></div>
-							<div class="tower-tier tier-2"></div>
-							<div class="tower-tier tier-3"></div>
-						</div>
-						<div class="tower-base">
-							<div class="tower-x-brace"></div>
-						</div>
-					</div>
-					<!-- Main cables -->
-					<svg class="main-cables" viewBox="0 0 320 200" preserveAspectRatio="none">
-						<path class="cable-outer-left" d="M 0 40 Q 40 20, 60 60" fill="none" stroke="var(--terracotta)" stroke-width="2"/>
-						<path class="cable-main" d="M 60 60 Q 160 160, 260 60" fill="none" stroke="var(--terracotta)" stroke-width="3"/>
-						<path class="cable-outer-right" d="M 260 60 Q 280 20, 320 40" fill="none" stroke="var(--terracotta)" stroke-width="2"/>
-					</svg>
-					<!-- Suspender cables -->
-					<div class="suspenders"></div>
-					<!-- Deck -->
-					<div class="deck">
-						<div class="deck-road"></div>
-						<div class="deck-truss"></div>
-					</div>
-				</div>
+				<!-- Golden Gate Bridge SVG -->
+				<img src="/images/golden-gate.svg" alt="Golden Gate Bridge illustration" class="golden-gate-svg" />
 			</div>
 		</div>
 	</div>
