@@ -54,18 +54,6 @@
 					<a href="#contact" class="btn btn-secondary" on:click={(e) => handleScrollClick(e, '#contact')}>Contact</a>
 				</div>
 			</div>
-			<div class="hero-visual">
-				<!-- Golden Gate Bridge -->
-				<div class="golden-gate">
-					<div class="gate-sun"></div>
-					<div class="gate-tower gate-tower-left"></div>
-					<div class="gate-tower gate-tower-right"></div>
-					<div class="gate-cable"></div>
-					<div class="gate-suspenders"></div>
-					<div class="gate-deck"></div>
-					<div class="gate-water"></div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<div class="scroll-indicator">
