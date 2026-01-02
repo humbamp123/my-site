@@ -769,18 +769,18 @@ nav .container {
 /* Bridge towers */
 .gate-tower {
     position: absolute;
-    bottom: 50px;
+    bottom: 20px;
     width: 28px;
-    height: 180px;
+    height: 200px;
     z-index: 3;
 }
 
 .gate-tower-left {
-    left: 70px;
+    left: 80px;
 }
 
 .gate-tower-right {
-    right: 70px;
+    right: 80px;
 }
 
 .tower-top {
@@ -843,59 +843,41 @@ nav .container {
     border-radius: 0 0 2px 2px;
 }
 
-/* Suspension cables */
+/* Main suspension cable - parabolic curve */
 .gate-cable {
     position: absolute;
-    top: 32px;
-    width: 120px;
-    height: 80px;
+    top: 22px;
+    width: 140px;
+    height: 100px;
     border: 4px solid var(--terracotta);
-    border-radius: 0 0 50% 50%;
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
     border-top: none;
     z-index: 2;
 }
 
 .gate-cable-left {
-    left: 20px;
+    left: 10px;
 }
 
 .gate-cable-right {
-    right: 20px;
-}
-
-/* Vertical suspender cables */
-.gate-cable::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 10%;
-    width: 80%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 18px,
-        var(--terracotta) 18px,
-        var(--terracotta) 20px
-    );
-    opacity: 0.6;
+    right: 10px;
 }
 
 /* Bridge deck */
 .gate-deck {
     position: absolute;
-    bottom: 45px;
+    bottom: 65px;
     left: 50%;
     transform: translateX(-50%);
-    width: 320px;
-    height: 12px;
+    width: 280px;
+    height: 10px;
     background: linear-gradient(
         180deg,
         var(--chocolate) 0%,
         var(--espresso) 100%
     );
     border-radius: 2px;
-    z-index: 4;
+    z-index: 2;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -903,10 +885,10 @@ nav .container {
 .gate-deck::before {
     content: '';
     position: absolute;
-    top: -4px;
+    top: -3px;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 3px;
     background: var(--terracotta);
     border-radius: 2px 2px 0 0;
 }
