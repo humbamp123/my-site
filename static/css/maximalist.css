@@ -738,172 +738,261 @@ nav .container {
     position: relative;
 }
 
+/* ─────────────────────────────────────────────
+   GOLDEN GATE BRIDGE - Art Deco Style
+   ───────────────────────────────────────────── */
+
 .golden-gate {
     position: relative;
     width: 320px;
-    height: 220px;
+    height: 240px;
     overflow: visible;
 }
 
-/* Decorative sun behind bridge */
-.gate-sun {
+/* Tower structure */
+.tower {
+    position: absolute;
+    bottom: 0;
+    width: 36px;
+    height: 200px;
+    z-index: 10;
+}
+
+.tower-left {
+    left: 50px;
+}
+
+.tower-right {
+    right: 50px;
+}
+
+/* Tower top section (above deck) */
+.tower-top {
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(
-        135deg,
-        var(--ochre) 0%,
-        var(--amber) 100%
-    );
-    border-radius: 50%;
-    z-index: 0;
-    box-shadow:
-        0 0 0 6px var(--cream),
-        0 0 0 10px rgba(233, 180, 76, 0.2),
-        0 0 40px rgba(233, 180, 76, 0.4);
+    left: 0;
+    right: 0;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Bridge towers - frame style like reference */
-.gate-tower {
-    position: absolute;
-    bottom: 30px;
-    width: 24px;
-    height: 160px;
-    z-index: 4;
-    background: transparent;
-    border: 4px solid var(--terracotta);
-    border-radius: 2px;
+/* Small cap/finial at top */
+.tower-cap {
+    width: 8px;
+    height: 8px;
+    background: var(--terracotta);
+    margin-bottom: 2px;
 }
 
-/* Tower peaked cap */
-.gate-tower::before {
+.tower-cap::before {
     content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 10px solid var(--terracotta);
-}
-
-/* Tower cross-brace */
-.gate-tower::after {
-    content: '';
-    position: absolute;
-    top: 45%;
-    left: -4px;
-    width: calc(100% + 8px);
+    display: block;
+    width: 4px;
     height: 4px;
+    background: var(--terracotta);
+    margin: 0 auto -2px;
+}
+
+/* Tower tiers - Art Deco stepped design */
+.tower-tier {
+    background: var(--terracotta);
+    position: relative;
+}
+
+.tower-tier::before,
+.tower-tier::after {
+    content: '';
+    position: absolute;
+    background: var(--cream);
+}
+
+/* Top tier - narrowest */
+.tier-1 {
+    width: 20px;
+    height: 35px;
+    margin-bottom: 2px;
+}
+
+.tier-1::before {
+    top: 8px;
+    left: 4px;
+    right: 4px;
+    height: 10px;
+}
+
+.tier-1::after {
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+    height: 8px;
+}
+
+/* Middle tier */
+.tier-2 {
+    width: 26px;
+    height: 40px;
+    margin-bottom: 2px;
+}
+
+.tier-2::before {
+    top: 6px;
+    left: 5px;
+    right: 5px;
+    height: 12px;
+}
+
+.tier-2::after {
+    bottom: 6px;
+    left: 5px;
+    right: 5px;
+    height: 10px;
+}
+
+/* Bottom tier of top section */
+.tier-3 {
+    width: 32px;
+    height: 38px;
+}
+
+.tier-3::before {
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    height: 10px;
+}
+
+.tier-3::after {
+    bottom: 6px;
+    left: 6px;
+    right: 6px;
+    height: 10px;
+}
+
+/* Tower base (below deck) */
+.tower-base {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 70px;
     background: var(--terracotta);
 }
 
-.gate-tower-left {
-    left: 65px;
-}
-
-.gate-tower-right {
-    right: 65px;
-}
-
-/* Main suspension cable - smooth catenary */
-.gate-cable {
+/* X-brace in tower base */
+.tower-x-brace {
     position: absolute;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 260px;
-    height: 90px;
-    border: 3px solid var(--terracotta);
-    border-radius: 0 0 50% 50% / 0 0 100% 100%;
-    border-top: none;
-    z-index: 3;
+    top: 8px;
+    left: 4px;
+    right: 4px;
+    bottom: 8px;
+    background: var(--cream);
 }
 
-/* Vertical suspender cables */
-.gate-suspenders {
+.tower-x-brace::before,
+.tower-x-brace::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 140%;
+    background: var(--terracotta);
+    top: 50%;
+    left: 50%;
+}
+
+.tower-x-brace::before {
+    transform: translate(-50%, -50%) rotate(35deg);
+}
+
+.tower-x-brace::after {
+    transform: translate(-50%, -50%) rotate(-35deg);
+}
+
+/* Main cables - SVG */
+.main-cables {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    height: 160px;
+    z-index: 5;
+}
+
+/* Suspender cables */
+.suspenders {
     position: absolute;
     top: 70px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 60px;
+    left: 86px;
+    width: 148px;
+    height: 75px;
     background: repeating-linear-gradient(
         90deg,
         var(--terracotta) 0px,
         var(--terracotta) 1px,
         transparent 1px,
-        transparent 12px
+        transparent 8px
     );
-    z-index: 2;
-    opacity: 0.7;
+    z-index: 4;
+    opacity: 0.8;
+    clip-path: polygon(
+        0% 100%,
+        0% 85%,
+        50% 0%,
+        100% 85%,
+        100% 100%
+    );
 }
 
 /* Bridge deck */
-.gate-deck {
+.deck {
     position: absolute;
-    bottom: 55px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    height: 12px;
-    background: linear-gradient(
-        180deg,
-        #6b7280 0%,
-        #4b5563 100%
-    );
-    border-radius: 1px;
-    z-index: 5;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Deck railing */
-.gate-deck::before {
-    content: '';
-    position: absolute;
-    top: -2px;
+    bottom: 65px;
     left: 0;
     right: 0;
-    height: 2px;
+    height: 20px;
+    z-index: 8;
+}
+
+/* Road surface */
+.deck-road {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(
+        180deg,
+        #9ca3af 0%,
+        #6b7280 100%
+    );
+}
+
+/* Deck truss */
+.deck-truss {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    right: 0;
+    height: 12px;
     background: var(--terracotta);
 }
 
-/* Water/Bay */
-.gate-water {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 320px;
-    height: 55px;
-    background: linear-gradient(
-        180deg,
-        var(--sage) 0%,
-        var(--olive) 100%
-    );
-    border-radius: 0 0 8px 8px;
-    opacity: 0.7;
-}
-
-/* Water ripple effect */
-.gate-water::before {
+/* Truss lattice pattern */
+.deck-truss::before {
     content: '';
     position: absolute;
-    top: 10px;
-    left: 0;
-    right: 0;
-    height: 100%;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
     background: repeating-linear-gradient(
-        180deg,
-        transparent,
-        transparent 8px,
-        rgba(255, 255, 255, 0.1) 8px,
-        rgba(255, 255, 255, 0.1) 10px
+        90deg,
+        var(--cream) 0px,
+        var(--cream) 6px,
+        var(--terracotta) 6px,
+        var(--terracotta) 8px
     );
 }
 
@@ -1797,57 +1886,65 @@ footer span {
 
     .golden-gate {
         width: 280px;
-        height: 220px;
+        height: 200px;
     }
 
-    .gate-sun {
-        width: 60px;
-        height: 60px;
-        top: 5px;
+    .tower {
+        height: 170px;
+        width: 30px;
     }
 
-    .gate-tower {
+    .tower-left {
+        left: 45px;
+    }
+
+    .tower-right {
+        right: 45px;
+    }
+
+    .tower-top {
+        height: 110px;
+    }
+
+    .tier-1 {
+        width: 16px;
+        height: 28px;
+    }
+
+    .tier-2 {
         width: 22px;
-        height: 140px;
-        bottom: 40px;
+        height: 34px;
     }
 
-    .gate-tower-left {
-        left: 55px;
+    .tier-3 {
+        width: 28px;
+        height: 32px;
     }
 
-    .gate-tower-right {
-        right: 55px;
+    .tower-base {
+        height: 55px;
+        width: 30px;
     }
 
-    .gate-tower::before {
-        top: -8px;
-        border-left: 7px solid transparent;
-        border-right: 7px solid transparent;
-        border-bottom: 8px solid var(--terracotta);
+    .suspenders {
+        top: 55px;
+        left: 75px;
+        width: 130px;
+        height: 65px;
     }
 
-    .gate-cable {
-        top: 25px;
-        width: 220px;
-        height: 75px;
+    .deck {
+        bottom: 55px;
+        height: 16px;
     }
 
-    .gate-suspenders {
-        top: 60px;
-        width: 170px;
-        height: 50px;
+    .deck-road {
+        height: 6px;
     }
 
-    .gate-deck {
-        width: 250px;
+    .deck-truss {
+        top: 6px;
         height: 10px;
-        bottom: 45px;
-    }
-
-    .gate-water {
-        width: 280px;
-        height: 45px;
     }
 
     .about-content,
@@ -1905,58 +2002,65 @@ footer span {
 
     .golden-gate {
         width: 220px;
-        height: 180px;
+        height: 160px;
     }
 
-    .gate-sun {
-        width: 50px;
-        height: 50px;
-        top: 0;
+    .tower {
+        height: 135px;
+        width: 24px;
     }
 
-    .gate-tower {
+    .tower-left {
+        left: 35px;
+    }
+
+    .tower-right {
+        right: 35px;
+    }
+
+    .tower-top {
+        height: 88px;
+    }
+
+    .tier-1 {
+        width: 13px;
+        height: 22px;
+    }
+
+    .tier-2 {
         width: 18px;
-        height: 110px;
-        bottom: 32px;
+        height: 28px;
     }
 
-    .gate-tower-left {
-        left: 42px;
+    .tier-3 {
+        width: 22px;
+        height: 26px;
     }
 
-    .gate-tower-right {
-        right: 42px;
+    .tower-base {
+        height: 44px;
+        width: 24px;
     }
 
-    .gate-tower::before {
-        top: -7px;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        border-bottom: 7px solid var(--terracotta);
+    .suspenders {
+        top: 44px;
+        left: 59px;
+        width: 102px;
+        height: 52px;
     }
 
-    .gate-cable {
-        top: 20px;
-        width: 180px;
-        height: 60px;
-        border-width: 2px;
+    .deck {
+        bottom: 44px;
+        height: 14px;
     }
 
-    .gate-suspenders {
-        top: 50px;
-        width: 130px;
-        height: 40px;
+    .deck-road {
+        height: 5px;
     }
 
-    .gate-deck {
-        width: 200px;
-        height: 8px;
-        bottom: 36px;
-    }
-
-    .gate-water {
-        width: 220px;
-        height: 36px;
+    .deck-truss {
+        top: 5px;
+        height: 9px;
     }
 
     .scroll-indicator {
@@ -1984,57 +2088,64 @@ footer span {
 
     .golden-gate {
         width: 180px;
-        height: 150px;
+        height: 130px;
     }
 
-    .gate-sun {
-        width: 40px;
-        height: 40px;
-        top: 0;
+    .tower {
+        height: 110px;
+        width: 20px;
     }
 
-    .gate-tower {
+    .tower-left {
+        left: 28px;
+    }
+
+    .tower-right {
+        right: 28px;
+    }
+
+    .tower-top {
+        height: 72px;
+    }
+
+    .tier-1 {
+        width: 10px;
+        height: 18px;
+    }
+
+    .tier-2 {
         width: 14px;
-        height: 90px;
-        bottom: 26px;
-    }
-
-    .gate-tower-left {
-        left: 35px;
-    }
-
-    .gate-tower-right {
-        right: 35px;
-    }
-
-    .gate-tower::before {
-        top: -6px;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-bottom: 6px solid var(--terracotta);
-    }
-
-    .gate-cable {
-        top: 16px;
-        width: 150px;
-        height: 50px;
-        border-width: 2px;
-    }
-
-    .gate-suspenders {
-        top: 40px;
-        width: 100px;
-        height: 35px;
-    }
-
-    .gate-deck {
-        width: 165px;
-        height: 6px;
-        bottom: 22px;
-    }
-
-    .gate-water {
-        width: 180px;
         height: 22px;
+    }
+
+    .tier-3 {
+        width: 18px;
+        height: 20px;
+    }
+
+    .tower-base {
+        height: 36px;
+        width: 20px;
+    }
+
+    .suspenders {
+        top: 36px;
+        left: 48px;
+        width: 84px;
+        height: 42px;
+    }
+
+    .deck {
+        bottom: 36px;
+        height: 12px;
+    }
+
+    .deck-road {
+        height: 4px;
+    }
+
+    .deck-truss {
+        top: 4px;
+        height: 8px;
     }
 }
