@@ -61,6 +61,13 @@
 					<div class="dune dune-mid"></div>
 					<div class="dune dune-front"></div>
 					<div class="dune-sun"></div>
+					<div class="dune-cactus"></div>
+					<div class="sandworm">
+						<div class="worm-segment"></div>
+						<div class="worm-segment"></div>
+						<div class="worm-segment"></div>
+						<div class="worm-head"></div>
+					</div>
 				</div>
 			</div>
 		</div>

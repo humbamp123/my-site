@@ -842,8 +842,135 @@ nav .container {
 
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-    .dune {
+    .dune,
+    .sandworm {
         animation: none;
+    }
+}
+
+/* Small Saguaro Cactus */
+.dune-cactus {
+    position: absolute;
+    bottom: 85px;
+    right: 60px;
+    width: 8px;
+    height: 35px;
+    background: var(--sage);
+    border-radius: 4px 4px 0 0;
+    z-index: 4;
+}
+
+.dune-cactus::before,
+.dune-cactus::after {
+    content: '';
+    position: absolute;
+    background: var(--sage);
+    border-radius: 4px;
+}
+
+/* Left arm */
+.dune-cactus::before {
+    width: 6px;
+    height: 15px;
+    bottom: 12px;
+    left: -10px;
+    border-radius: 4px 4px 0 4px;
+}
+
+/* Right arm */
+.dune-cactus::after {
+    width: 6px;
+    height: 20px;
+    bottom: 8px;
+    right: -10px;
+    border-radius: 4px 4px 4px 0;
+}
+
+/* Dune Sandworm (Shai-Hulud) */
+.sandworm {
+    position: absolute;
+    bottom: 30px;
+    left: 15%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(100px);
+    opacity: 0;
+    animation: wormEmerge 8s ease-in-out infinite;
+    animation-delay: 180s; /* 3 minutes before first appearance */
+}
+
+.worm-segment {
+    width: 18px;
+    height: 12px;
+    background: linear-gradient(
+        90deg,
+        var(--rust) 0%,
+        var(--terracotta) 50%,
+        var(--rust) 100%
+    );
+    border-radius: 50%;
+    margin-top: -4px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.worm-segment:first-child {
+    margin-top: 0;
+}
+
+.worm-head {
+    width: 22px;
+    height: 16px;
+    background: linear-gradient(
+        180deg,
+        var(--terracotta) 0%,
+        var(--rust) 100%
+    );
+    border-radius: 50% 50% 30% 30%;
+    margin-top: -5px;
+    position: relative;
+}
+
+/* Mouth rings */
+.worm-head::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 10px;
+    border: 2px solid rgba(61, 43, 31, 0.6);
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(61, 43, 31, 0.8) 0%,
+        transparent 70%
+    );
+}
+
+/* Sandworm emergence animation */
+@keyframes wormEmerge {
+    0%, 85%, 100% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    90% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    92% {
+        transform: translateY(-10px) rotate(-5deg);
+        opacity: 1;
+    }
+    95% {
+        transform: translateY(0) rotate(5deg);
+        opacity: 1;
+    }
+    97% {
+        transform: translateY(20px);
+        opacity: 0.8;
     }
 }
 
@@ -1763,6 +1890,27 @@ footer span {
         top: 15px;
     }
 
+    .dune-cactus {
+        bottom: 70px;
+        right: 45px;
+        width: 6px;
+        height: 28px;
+    }
+
+    .dune-cactus::before {
+        width: 5px;
+        height: 12px;
+        bottom: 10px;
+        left: -8px;
+    }
+
+    .dune-cactus::after {
+        width: 5px;
+        height: 16px;
+        bottom: 6px;
+        right: -8px;
+    }
+
     .about-content,
     .about-grid,
     .contact-content {
@@ -1844,6 +1992,32 @@ footer span {
         top: 10px;
     }
 
+    .dune-cactus {
+        bottom: 55px;
+        right: 35px;
+        width: 5px;
+        height: 22px;
+    }
+
+    .dune-cactus::before {
+        width: 4px;
+        height: 10px;
+        bottom: 8px;
+        left: -6px;
+    }
+
+    .dune-cactus::after {
+        width: 4px;
+        height: 13px;
+        bottom: 5px;
+        right: -6px;
+    }
+
+    /* Hide sandworm on mobile for performance */
+    .sandworm {
+        display: none;
+    }
+
     /* Reduce animation intensity on mobile */
     .dune {
         animation-duration: 12s;
@@ -1898,5 +2072,26 @@ footer span {
         width: 30px;
         height: 30px;
         top: 8px;
+    }
+
+    .dune-cactus {
+        bottom: 45px;
+        right: 25px;
+        width: 4px;
+        height: 18px;
+    }
+
+    .dune-cactus::before {
+        width: 3px;
+        height: 8px;
+        bottom: 6px;
+        left: -5px;
+    }
+
+    .dune-cactus::after {
+        width: 3px;
+        height: 10px;
+        bottom: 4px;
+        right: -5px;
     }
 }
