@@ -39,6 +39,7 @@
 		<!-- Desktop Nav Links -->
 		<ul class="nav-links">
 			<li><a href="#about" on:click={(e) => handleNavClick(e, '#about')}>About</a></li>
+			<li><a href="#work" on:click={(e) => handleNavClick(e, '#work')}>Work</a></li>
 			<li><a href="#projects" on:click={(e) => handleNavClick(e, '#projects')}>Projects</a></li>
 			<li><a href="#quick-tools" on:click={(e) => handleNavClick(e, '#quick-tools')}>Quick Tools</a></li>
 			<li><a href="#contact" on:click={(e) => handleNavClick(e, '#contact')}>Contact</a></li>
@@ -49,6 +50,7 @@
 		<div class="mobile-menu" class:open={menuOpen}>
 			<ul class="mobile-nav-links">
 				<li><a href="#about" on:click={(e) => handleNavClick(e, '#about')}>About</a></li>
+				<li><a href="#work" on:click={(e) => handleNavClick(e, '#work')}>Work</a></li>
 				<li><a href="#projects" on:click={(e) => handleNavClick(e, '#projects')}>Projects</a></li>
 				<li><a href="#quick-tools" on:click={(e) => handleNavClick(e, '#quick-tools')}>Quick Tools</a></li>
 				<li><a href="#contact" on:click={(e) => handleNavClick(e, '#contact')}>Contact</a></li>

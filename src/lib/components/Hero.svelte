@@ -55,24 +55,8 @@
 				</div>
 			</div>
 			<div class="hero-visual">
-				<!-- Maximalist Desert Sun -->
-				<div class="desert-sun">
-					<div class="sun-arch"></div>
-					<div class="sun-arch"></div>
-					<div class="sun-arch"></div>
-					<div class="sun-arch"></div>
-					<div class="sun-arch"></div>
-					<div class="sun-circle"></div>
-					<div class="sun-rays">
-						<div class="ray"></div>
-						<div class="ray"></div>
-						<div class="ray"></div>
-						<div class="ray"></div>
-						<div class="ray"></div>
-						<div class="ray"></div>
-						<div class="ray"></div>
-					</div>
-				</div>
+				<!-- Golden Gate Bridge SVG -->
+				<img src="/images/golden-gate.svg" alt="Golden Gate Bridge illustration" class="golden-gate-svg" />
 			</div>
 		</div>
 	</div>

@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220" fill="none">
+  <!-- Golden Gate Bridge SVG - Desert Bazaar Theme -->
+  <defs>
+    <linearGradient id="towerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C75D3A"/>
+      <stop offset="50%" stop-color="#A44A3F"/>
+      <stop offset="100%" stop-color="#8B3D35"/>
+    </linearGradient>
+    <linearGradient id="deckGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#C75D3A"/>
+      <stop offset="100%" stop-color="#A44A3F"/>
+    </linearGradient>
+    <linearGradient id="sunGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E9B44C"/>
+      <stop offset="100%" stop-color="#D4A03D"/>
+    </linearGradient>
+    <linearGradient id="waterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#87A878"/>
+      <stop offset="100%" stop-color="#5C6B4A"/>
+    </linearGradient>
+    <linearGradient id="rockGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8B7355"/>
+      <stop offset="50%" stop-color="#6B5344"/>
+      <stop offset="100%" stop-color="#5C4333"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sun (behind everything) -->
+  <circle cx="200" cy="35" r="28" fill="url(#sunGradient)" opacity="0.9"/>
+  <circle cx="200" cy="35" r="35" fill="none" stroke="#E9B44C" stroke-width="2" opacity="0.3"/>
+
+  <!-- Water/Bay (at bottom) -->
+  <rect x="0" y="175" width="400" height="45" fill="url(#waterGradient)" opacity="0.7"/>
+  <!-- Water ripples -->
+  <g stroke="#E8DCC4" stroke-width="0.5" opacity="0.2">
+    <path d="M 0 185 Q 50 182, 100 185 T 200 185 T 300 185 T 400 185" fill="none"/>
+    <path d="M 0 195 Q 50 192, 100 195 T 200 195 T 300 195 T 400 195" fill="none"/>
+    <path d="M 0 205 Q 50 202, 100 205 T 200 205 T 300 205 T 400 205" fill="none"/>
+  </g>
+
+  <!-- Left Tower Rocky Base -->
+  <g id="rock-left">
+    <path d="M 45 175 L 50 160 L 58 168 L 65 155 L 75 162 L 85 155 L 95 165 L 102 158 L 110 170 L 115 175 Z" fill="url(#rockGradient)"/>
+    <path d="M 50 175 L 55 168 L 62 172 L 70 165 L 78 170 L 85 163 L 95 172 L 105 175 Z" fill="#5C4333" opacity="0.5"/>
+  </g>
+
+  <!-- Right Tower Rocky Base -->
+  <g id="rock-right">
+    <path d="M 285 175 L 290 160 L 298 168 L 305 155 L 315 162 L 325 155 L 335 165 L 342 158 L 350 170 L 355 175 Z" fill="url(#rockGradient)"/>
+    <path d="M 290 175 L 295 168 L 302 172 L 310 165 L 318 170 L 325 163 L 335 172 L 345 175 Z" fill="#5C4333" opacity="0.5"/>
+  </g>
+
+  <!-- Left Tower -->
+  <g id="tower-left">
+    <!-- Tower base/foundation on rock -->
+    <rect x="62" y="155" width="36" height="12" fill="url(#towerGradient)"/>
+    <rect x="65" y="145" width="30" height="10" fill="url(#towerGradient)"/>
+
+    <!-- Tower lower section (below deck) with X-brace -->
+    <rect x="68" y="115" width="24" height="30" fill="url(#towerGradient)"/>
+    <line x1="70" y1="118" x2="90" y2="143" stroke="#E8DCC4" stroke-width="1.5"/>
+    <line x1="90" y1="118" x2="70" y2="143" stroke="#E8DCC4" stroke-width="1.5"/>
+
+    <!-- Tower upper sections with windows -->
+    <!-- Section 1 (bottom) -->
+    <rect x="68" y="85" width="24" height="28" fill="url(#towerGradient)"/>
+    <rect x="73" y="90" width="14" height="8" fill="#E8DCC4" opacity="0.9"/>
+    <rect x="73" y="102" width="14" height="8" fill="#E8DCC4" opacity="0.9"/>
+
+    <!-- Section 2 (middle) -->
+    <rect x="70" y="55" width="20" height="28" fill="url(#towerGradient)"/>
+    <rect x="74" y="60" width="12" height="8" fill="#E8DCC4" opacity="0.9"/>
+    <rect x="74" y="72" width="12" height="8" fill="#E8DCC4" opacity="0.9"/>
+
+    <!-- Section 3 (top) -->
+    <rect x="72" y="30" width="16" height="23" fill="url(#towerGradient)"/>
+    <rect x="75" y="35" width="10" height="6" fill="#E8DCC4" opacity="0.9"/>
+    <rect x="75" y="44" width="10" height="6" fill="#E8DCC4" opacity="0.9"/>
+
+    <!-- Tower cap/finial -->
+    <rect x="76" y="22" width="8" height="8" fill="url(#towerGradient)"/>
+    <rect x="78" y="18" width="4" height="4" fill="url(#towerGradient)"/>
+  </g>
+
+  <!-- Right Tower -->
+  <g id="tower-right">
+    <!-- Tower base/foundation on rock -->
+    <rect x="302" y="155" width="36" height="12" fill="url(#towerGradient)"/>
+    <rect x="305" y="145" width="30" height="10" fill="url(#towerGradient)"/>
+
+    <!-- Tower lower section (below deck) with X-brace -->
+    <rect x="308" y="115" width="24" height="30" fill="url(#towerGradient)"/>
+    <line x1="310" y1="118" x2="330" y2="143" stroke="#E8DCC4" stroke-width="1.5"/>
+    <line x1="330" y1="118" x2="310" y2="143" stroke="#E8DCC4" stroke-width="1.5"/>
+
+    <!-- Tower upper sections with windows -->
+    <!-- Section 1 (bottom) -->
+    <rect x="308" y="85" width="24" height="28" fill="url(#towerGradient)"/>
+    <rect x="313" y="90" width="14" height="8" fill="#E8DCC4" opacity="0.9"/>
+    <rect x="313" y="102" width="14" height="8" fill="#E8DCC4" opacity="0.9"/>
+
+    <!-- Section 2 (middle) -->
+    <rect x="310" y="55" width="20" height="28" fill="url(#towerGradient)"/>
+    <rect x="314" y="60" width="12" height="8" fill="#E8DCC4" opacity="0.9"/>
+    <rect x="314" y="72" width="12" height="8" fill="#E8DCC4" opacity="0.9"/>
+
+    <!-- Section 3 (top) -->
+    <rect x="312" y="30" width="16" height="23" fill="url(#towerGradient)"/>
+    <rect x="315" y="35" width="10" height="6" fill="#E8DCC4" opacity="0.9"/>
+    <rect x="315" y="44" width="10" height="6" fill="#E8DCC4" opacity="0.9"/>
+
+    <!-- Tower cap/finial -->
+    <rect x="316" y="22" width="8" height="8" fill="url(#towerGradient)"/>
+    <rect x="318" y="18" width="4" height="4" fill="url(#towerGradient)"/>
+  </g>
+
+  <!-- Main Suspension Cables -->
+  <!-- Left outer cable (left of left tower) - rises to tower top -->
+  <path d="M 0 50 Q 40 36, 80 22" stroke="#C75D3A" stroke-width="2.5" fill="none"/>
+  <!-- Center cable between towers - sags from tower tops -->
+  <path d="M 80 22 Q 200 140, 320 22" stroke="#C75D3A" stroke-width="2.5" fill="none"/>
+  <!-- Right outer cable (right of right tower) - falls from tower top -->
+  <path d="M 320 22 Q 360 36, 400 50" stroke="#C75D3A" stroke-width="2.5" fill="none"/>
+
+  <!-- Suspender Cables (vertical lines from main cable to deck) -->
+  <g stroke="#C75D3A" stroke-width="1" opacity="0.8">
+    <!-- Left section suspenders -->
+    <line x1="20" y1="43" x2="20" y2="113"/>
+    <line x1="35" y1="38" x2="35" y2="113"/>
+    <line x1="50" y1="33" x2="50" y2="113"/>
+    <line x1="65" y1="27" x2="65" y2="85"/>
+
+    <!-- Center section suspenders -->
+    <line x1="100" y1="40" x2="100" y2="113"/>
+    <line x1="115" y1="52" x2="115" y2="113"/>
+    <line x1="130" y1="61" x2="130" y2="113"/>
+    <line x1="145" y1="69" x2="145" y2="113"/>
+    <line x1="160" y1="74" x2="160" y2="113"/>
+    <line x1="175" y1="78" x2="175" y2="113"/>
+    <line x1="190" y1="80" x2="190" y2="113"/>
+    <line x1="200" y1="81" x2="200" y2="113"/>
+    <line x1="210" y1="80" x2="210" y2="113"/>
+    <line x1="225" y1="78" x2="225" y2="113"/>
+    <line x1="240" y1="74" x2="240" y2="113"/>
+    <line x1="255" y1="69" x2="255" y2="113"/>
+    <line x1="270" y1="61" x2="270" y2="113"/>
+    <line x1="285" y1="52" x2="285" y2="113"/>
+    <line x1="300" y1="40" x2="300" y2="113"/>
+
+    <!-- Right section suspenders -->
+    <line x1="335" y1="27" x2="335" y2="85"/>
+    <line x1="350" y1="33" x2="350" y2="113"/>
+    <line x1="365" y1="38" x2="365" y2="113"/>
+    <line x1="380" y1="43" x2="380" y2="113"/>
+  </g>
+
+  <!-- Bridge Deck -->
+  <rect x="0" y="113" width="400" height="5" fill="url(#deckGradient)"/>
+
+  <!-- Deck Truss Pattern -->
+  <g stroke="#E8DCC4" stroke-width="0.8" opacity="0.6">
+    <line x1="10" y1="118" x2="10" y2="125"/>
+    <line x1="25" y1="118" x2="25" y2="125"/>
+    <line x1="40" y1="118" x2="40" y2="125"/>
+    <line x1="55" y1="118" x2="55" y2="125"/>
+    <line x1="100" y1="118" x2="100" y2="125"/>
+    <line x1="115" y1="118" x2="115" y2="125"/>
+    <line x1="130" y1="118" x2="130" y2="125"/>
+    <line x1="145" y1="118" x2="145" y2="125"/>
+    <line x1="160" y1="118" x2="160" y2="125"/>
+    <line x1="175" y1="118" x2="175" y2="125"/>
+    <line x1="190" y1="118" x2="190" y2="125"/>
+    <line x1="205" y1="118" x2="205" y2="125"/>
+    <line x1="220" y1="118" x2="220" y2="125"/>
+    <line x1="235" y1="118" x2="235" y2="125"/>
+    <line x1="250" y1="118" x2="250" y2="125"/>
+    <line x1="265" y1="118" x2="265" y2="125"/>
+    <line x1="280" y1="118" x2="280" y2="125"/>
+    <line x1="295" y1="118" x2="295" y2="125"/>
+    <line x1="345" y1="118" x2="345" y2="125"/>
+    <line x1="360" y1="118" x2="360" y2="125"/>
+    <line x1="375" y1="118" x2="375" y2="125"/>
+    <line x1="390" y1="118" x2="390" y2="125"/>
+  </g>
+
+  <!-- Deck bottom rail -->
+  <rect x="0" y="118" width="400" height="2" fill="#A44A3F"/>
+</svg>

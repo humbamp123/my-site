@@ -730,7 +730,7 @@ nav .container {
     flex-wrap: wrap;
 }
 
-/* Desert Sun Visual */
+/* Golden Gate Bridge Visual */
 .hero-visual {
     display: flex;
     align-items: center;
@@ -738,101 +738,16 @@ nav .container {
     position: relative;
 }
 
-.desert-sun {
-    position: relative;
-    width: 350px;
-    height: 350px;
-}
+/* ─────────────────────────────────────────────
+   GOLDEN GATE BRIDGE - SVG Image
+   ───────────────────────────────────────────── */
 
-/* Concentric arches */
-.sun-arch {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    border: 4px solid;
-    border-bottom: none;
-    border-radius: 50% 50% 0 0;
+.golden-gate-svg {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
 }
-
-.sun-arch:nth-child(1) {
-    width: 340px;
-    height: 170px;
-    border-color: var(--terracotta);
-    background: linear-gradient(180deg, rgba(199, 93, 58, 0.1) 0%, transparent 100%);
-}
-
-.sun-arch:nth-child(2) {
-    width: 280px;
-    height: 140px;
-    border-color: var(--ochre);
-    background: linear-gradient(180deg, rgba(233, 180, 76, 0.15) 0%, transparent 100%);
-}
-
-.sun-arch:nth-child(3) {
-    width: 220px;
-    height: 110px;
-    border-color: var(--burnt-sienna);
-    background: linear-gradient(180deg, rgba(224, 122, 95, 0.2) 0%, transparent 100%);
-}
-
-.sun-arch:nth-child(4) {
-    width: 160px;
-    height: 80px;
-    border-color: var(--sage);
-    background: linear-gradient(180deg, rgba(135, 168, 120, 0.15) 0%, transparent 100%);
-}
-
-.sun-arch:nth-child(5) {
-    width: 100px;
-    height: 50px;
-    border-color: var(--terracotta);
-    background: var(--terracotta);
-}
-
-/* Sun circle */
-.sun-circle {
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--ochre) 0%, var(--terracotta) 100%);
-    border-radius: 50%;
-    box-shadow:
-        0 0 0 8px var(--cream),
-        0 0 0 12px var(--ochre),
-        0 0 40px rgba(233, 180, 76, 0.4);
-}
-
-/* Decorative rays */
-.sun-rays {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 100px;
-}
-
-.ray {
-    position: absolute;
-    width: 4px;
-    height: 30px;
-    background: var(--ochre);
-    bottom: 0;
-    left: 50%;
-    transform-origin: bottom center;
-}
-
-.ray:nth-child(1) { transform: translateX(-50%) rotate(-60deg); }
-.ray:nth-child(2) { transform: translateX(-50%) rotate(-40deg); }
-.ray:nth-child(3) { transform: translateX(-50%) rotate(-20deg); }
-.ray:nth-child(4) { transform: translateX(-50%) rotate(0deg); }
-.ray:nth-child(5) { transform: translateX(-50%) rotate(20deg); }
-.ray:nth-child(6) { transform: translateX(-50%) rotate(40deg); }
-.ray:nth-child(7) { transform: translateX(-50%) rotate(60deg); }
 
 /* Hide old elements */
 .tree-section,
@@ -1153,7 +1068,8 @@ nav .container {
    PROJECTS SECTION
    ───────────────────────────────────────────── */
 
-#projects {
+#projects,
+#work {
     background: var(--sand);
 }
 
@@ -1722,9 +1638,8 @@ footer span {
         order: -1;
     }
 
-    .desert-sun {
-        width: 280px;
-        height: 280px;
+    .golden-gate-svg {
+        max-width: 320px;
     }
 
     .about-content,
@@ -1780,20 +1695,8 @@ footer span {
         grid-template-columns: 1fr;
     }
 
-    .desert-sun {
-        width: 220px;
-        height: 220px;
-    }
-
-    .sun-arch:nth-child(1) { width: 210px; height: 105px; }
-    .sun-arch:nth-child(2) { width: 170px; height: 85px; }
-    .sun-arch:nth-child(3) { width: 130px; height: 65px; }
-    .sun-arch:nth-child(4) { width: 90px; height: 45px; }
-    .sun-arch:nth-child(5) { width: 50px; height: 25px; }
-
-    .sun-circle {
-        width: 50px;
-        height: 50px;
+    .golden-gate-svg {
+        max-width: 260px;
     }
 
     .scroll-indicator {
@@ -1817,5 +1720,9 @@ footer span {
 
     .stat-number {
         font-size: 2.5rem;
+    }
+
+    .golden-gate-svg {
+        max-width: 200px;
     }
 }
