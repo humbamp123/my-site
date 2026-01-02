@@ -25,54 +25,48 @@
 
 <section id="quick-tools">
 	<div class="container">
-		<div class="projects-header fade-in" class:visible>
-			<div>
-				<div class="section-label">Tools</div>
-				<h2 class="section-title">Quick Tools</h2>
-			</div>
+		<div class="section-header fade-in" class:visible>
+			<div class="section-label">Tools</div>
+			<h2 class="section-title">Quick Tools</h2>
 		</div>
 
-		<div class="featured-projects">
-			<div class="project-card featured fade-in" class:visible>
-				<div class="project-info">
-					<div class="project-number">Tool 01</div>
-					<h3 class="project-title">Wire Nut Calculator</h3>
-					<p class="project-desc">Interactive tool for electricians to find the right wire connector size. Select wire gauges and quantities to get recommendations from major brands.</p>
-					<div class="project-tech">
-						<span>HTML</span>
-						<span>CSS</span>
-						<span>JavaScript</span>
-					</div>
-					<a href="{base}/wire-nuts/index.html" class="project-link">
-						Try It Live
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M7 17L17 7" />
-							<path d="M7 7h10v10" />
-						</svg>
-					</a>
+		<div class="tools-grid">
+			<div class="tool-card tool-1 fade-in" class:visible>
+				<div class="tool-icon">⚡</div>
+				<div class="tool-number">Tool 01</div>
+				<h3 class="tool-title">Wire Nut Calculator</h3>
+				<p class="tool-desc">Interactive tool for electricians to find the right wire connector size. Select wire gauges and quantities to get recommendations from major brands.</p>
+				<div class="tool-tech">
+					<span>HTML</span>
+					<span>CSS</span>
+					<span>JavaScript</span>
 				</div>
-				<div class="project-visual"></div>
+				<a href="{base}/wire-nuts/index.html" class="tool-link">
+					Try It Live
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M7 17L17 7" />
+						<path d="M7 7h10v10" />
+					</svg>
+				</a>
 			</div>
 
-			<div class="project-card featured fade-in" class:visible>
-				<div class="project-info">
-					<div class="project-number">Tool 02</div>
-					<h3 class="project-title">Calorie Counter</h3>
-					<p class="project-desc">Track your daily calorie intake with this simple and intuitive calorie counting tool. Monitor your nutrition and maintain a healthy lifestyle.</p>
-					<div class="project-tech">
-						<span>HTML</span>
-						<span>CSS</span>
-						<span>JavaScript</span>
-					</div>
-					<a href="{base}/calorie-counter/index.html" class="project-link">
-						Try It Live
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M7 17L17 7" />
-							<path d="M7 7h10v10" />
-						</svg>
-					</a>
+			<div class="tool-card tool-2 fade-in" class:visible>
+				<div class="tool-icon">🍎</div>
+				<div class="tool-number">Tool 02</div>
+				<h3 class="tool-title">Calorie Counter</h3>
+				<p class="tool-desc">Track your daily calorie intake with this simple and intuitive calorie counting tool. Monitor your nutrition and maintain a healthy lifestyle.</p>
+				<div class="tool-tech">
+					<span>HTML</span>
+					<span>CSS</span>
+					<span>JavaScript</span>
 				</div>
-				<div class="project-visual"></div>
+				<a href="{base}/calorie-counter/index.html" class="tool-link">
+					Try It Live
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M7 17L17 7" />
+						<path d="M7 7h10v10" />
+					</svg>
+				</a>
 			</div>
 		</div>
 	</div>

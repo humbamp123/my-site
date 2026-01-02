@@ -45,61 +45,32 @@
 				</p>
 				<div class="hero-cta">
 					<a href="#projects" class="btn btn-primary" on:click={(e) => handleScrollClick(e, '#projects')}>
-						Explore Work
-						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<span>View Work</span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
 							<path d="M5 12h14" />
 							<path d="m12 5 7 7-7 7" />
 						</svg>
 					</a>
-					<a href="#contact" class="btn btn-secondary" on:click={(e) => handleScrollClick(e, '#contact')}>Get in Touch</a>
+					<a href="#contact" class="btn btn-secondary" on:click={(e) => handleScrollClick(e, '#contact')}>Contact</a>
 				</div>
 			</div>
 			<div class="hero-visual">
-				<!-- Redwoods Theme Hero -->
-				<div class="tree-illustration" style:transform="translateY({browser && scrolled < window.innerHeight ? scrolled * 0.15 : 0}px)">
-					<div class="canopy">
-						<div class="branch"></div>
-						<div class="branch"></div>
-						<div class="branch"></div>
-					</div>
-					<div class="tree-trunk"></div>
-					<div class="tree-rings">
-						<div class="ring"></div>
-						<div class="ring"></div>
-						<div class="ring"></div>
-						<div class="ring"></div>
-					</div>
-				</div>
-				<!-- Industrial Theme Hero -->
-				<div class="hero-graphic-industrial" style:transform="translateY({browser && scrolled < window.innerHeight ? scrolled * 0.2 : 0}px)">
-					<div class="orbit">
-						<div class="orbit-dot"></div>
-					</div>
-					<div class="orbit">
-						<div class="orbit-dot"></div>
-					</div>
-					<div class="orbit">
-						<div class="orbit-dot"></div>
-					</div>
-					<div class="center-element">
-						&lt; /&gt;
-					</div>
-				</div>
-				<!-- Fantasy Theme Hero -->
-				<div class="castle-illustration" style:transform="translateY({browser && scrolled < window.innerHeight ? scrolled * 0.12 : 0}px)">
-					<div class="castle-tower-left">
-						<div class="castle-battlement"></div>
-					</div>
-					<div class="castle-tower-main">
-						<div class="castle-battlement"></div>
-						<div class="castle-window"></div>
-						<div class="castle-flag">
-							<div class="flag-pole"></div>
-							<div class="flag-banner"></div>
-						</div>
-					</div>
-					<div class="castle-tower-right">
-						<div class="castle-battlement"></div>
+				<!-- Maximalist Desert Sun -->
+				<div class="desert-sun">
+					<div class="sun-arch"></div>
+					<div class="sun-arch"></div>
+					<div class="sun-arch"></div>
+					<div class="sun-arch"></div>
+					<div class="sun-arch"></div>
+					<div class="sun-circle"></div>
+					<div class="sun-rays">
+						<div class="ray"></div>
+						<div class="ray"></div>
+						<div class="ray"></div>
+						<div class="ray"></div>
+						<div class="ray"></div>
+						<div class="ray"></div>
+						<div class="ray"></div>
 					</div>
 				</div>
 			</div>
@@ -107,7 +78,7 @@
 	</div>
 	<div class="scroll-indicator">
 		<span>Scroll</span>
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
 			<path d="M12 5v14" />
 			<path d="m19 12-7 7-7-7" />
 		</svg>
