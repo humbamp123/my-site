@@ -58,18 +58,10 @@
 				<!-- Golden Gate Bridge -->
 				<div class="golden-gate">
 					<div class="gate-sun"></div>
-					<div class="gate-tower gate-tower-left">
-						<div class="tower-top"></div>
-						<div class="tower-body"></div>
-						<div class="tower-base"></div>
-					</div>
-					<div class="gate-tower gate-tower-right">
-						<div class="tower-top"></div>
-						<div class="tower-body"></div>
-						<div class="tower-base"></div>
-					</div>
-					<div class="gate-cable gate-cable-left"></div>
-					<div class="gate-cable gate-cable-right"></div>
+					<div class="gate-tower gate-tower-left"></div>
+					<div class="gate-tower gate-tower-right"></div>
+					<div class="gate-cable"></div>
+					<div class="gate-suspenders"></div>
 					<div class="gate-deck"></div>
 					<div class="gate-water"></div>
 				</div>
