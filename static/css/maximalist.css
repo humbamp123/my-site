@@ -1068,7 +1068,8 @@ nav .container {
    PROJECTS SECTION
    ───────────────────────────────────────────── */
 
-#projects {
+#projects,
+#work {
     background: var(--sand);
 }
 
