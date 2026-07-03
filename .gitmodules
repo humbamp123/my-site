@@ -4,3 +4,6 @@
 [submodule "static/wire-nuts"]
 	path = static/wire-nuts
 	url = https://github.com/humbamp123/wire-nuts.git
+[submodule "static/bike-rack"]
+	path = static/bike-rack
+	url = https://github.com/humbamp123/bike-rack.git
