@@ -1,5 +1,7 @@
 <script>
 	import { base } from '$app/paths';
+
+	let { children } = $props();
 </script>
 
 <svelte:head>
@@ -48,4 +50,4 @@
 	<div class="grain"></div>
 </div>
 
-<slot />
+{@render children()}

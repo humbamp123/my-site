@@ -1,7 +1,15 @@
 <script>
 	import { base } from '$app/paths';
 
-	let menuOpen = false;
+	const sections = [
+		{ href: '#about', label: 'About' },
+		{ href: '#work', label: 'Work' },
+		{ href: '#projects', label: 'Projects' },
+		{ href: '#quick-tools', label: 'Quick Tools' },
+		{ href: '#contact', label: 'Contact' }
+	];
+
+	let menuOpen = $state(false);
 
 	function handleNavClick(e, href) {
 		e.preventDefault();
@@ -20,6 +28,13 @@
 	}
 </script>
 
+{#snippet navItems()}
+	{#each sections as { href, label }}
+		<li><a {href} onclick={(e) => handleNavClick(e, href)}>{label}</a></li>
+	{/each}
+	<li><a href="https://github.com/humbamp123" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+{/snippet}
+
 <nav>
 	<div class="container">
 		<a href="{base}/" class="logo">
@@ -30,7 +45,13 @@
 		</a>
 
 		<!-- Hamburger Button (mobile only) -->
-		<button class="hamburger" class:active={menuOpen} on:click={toggleMenu} aria-label="Toggle menu">
+		<button
+			class="hamburger"
+			class:active={menuOpen}
+			onclick={toggleMenu}
+			aria-label="Toggle menu"
+			aria-expanded={menuOpen}
+		>
 			<span class="hamburger-line"></span>
 			<span class="hamburger-line"></span>
 			<span class="hamburger-line"></span>
@@ -38,23 +59,13 @@
 
 		<!-- Desktop Nav Links -->
 		<ul class="nav-links">
-			<li><a href="#about" on:click={(e) => handleNavClick(e, '#about')}>About</a></li>
-			<li><a href="#work" on:click={(e) => handleNavClick(e, '#work')}>Work</a></li>
-			<li><a href="#projects" on:click={(e) => handleNavClick(e, '#projects')}>Projects</a></li>
-			<li><a href="#quick-tools" on:click={(e) => handleNavClick(e, '#quick-tools')}>Quick Tools</a></li>
-			<li><a href="#contact" on:click={(e) => handleNavClick(e, '#contact')}>Contact</a></li>
-			<li><a href="https://github.com/humbamp123" target="_blank">GitHub</a></li>
+			{@render navItems()}
 		</ul>
 
 		<!-- Mobile Menu Overlay -->
 		<div class="mobile-menu" class:open={menuOpen}>
 			<ul class="mobile-nav-links">
-				<li><a href="#about" on:click={(e) => handleNavClick(e, '#about')}>About</a></li>
-				<li><a href="#work" on:click={(e) => handleNavClick(e, '#work')}>Work</a></li>
-				<li><a href="#projects" on:click={(e) => handleNavClick(e, '#projects')}>Projects</a></li>
-				<li><a href="#quick-tools" on:click={(e) => handleNavClick(e, '#quick-tools')}>Quick Tools</a></li>
-				<li><a href="#contact" on:click={(e) => handleNavClick(e, '#contact')}>Contact</a></li>
-				<li><a href="https://github.com/humbamp123" target="_blank">GitHub</a></li>
+				{@render navItems()}
 			</ul>
 		</div>
 	</div>

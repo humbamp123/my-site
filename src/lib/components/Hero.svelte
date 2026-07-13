@@ -1,18 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
-	import { browser } from '$app/environment';
 	import { base } from '$app/paths';
-
-	let scrolled = 0;
-
-	onMount(() => {
-		if (!browser) return;
-		const handleScroll = () => {
-			scrolled = window.pageYOffset;
-		};
-		window.addEventListener('scroll', handleScroll);
-		return () => window.removeEventListener('scroll', handleScroll);
-	});
 
 	function handleScrollClick(e, href) {
 		e.preventDefault();
@@ -45,14 +32,14 @@
 					building sustainable software solutions. Where the redwoods meet the code.
 				</p>
 				<div class="hero-cta">
-					<a href="#projects" class="btn btn-primary" on:click={(e) => handleScrollClick(e, '#projects')}>
+					<a href="#projects" class="btn btn-primary" onclick={(e) => handleScrollClick(e, '#projects')}>
 						<span>View Work</span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
 							<path d="M5 12h14" />
 							<path d="m12 5 7 7-7 7" />
 						</svg>
 					</a>
-					<a href="#contact" class="btn btn-secondary" on:click={(e) => handleScrollClick(e, '#contact')}>Contact</a>
+					<a href="#contact" class="btn btn-secondary" onclick={(e) => handleScrollClick(e, '#contact')}>Contact</a>
 				</div>
 			</div>
 			<div class="hero-visual">

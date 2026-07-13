@@ -1,31 +1,11 @@
 <script>
-	import { onMount } from 'svelte';
-
-	let visible = false;
-
-	onMount(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						visible = true;
-					}
-				});
-			},
-			{ threshold: 0.1 }
-		);
-
-		const element = document.querySelector('#about');
-		if (element) observer.observe(element);
-
-		return () => observer.disconnect();
-	});
+	import { reveal } from '$lib/actions/revealOnScroll.js';
 </script>
 
-<section id="about">
+<section id="about" use:reveal>
 	<div class="container">
 		<div class="about-grid">
-			<div class="about-left fade-in" class:visible>
+			<div class="about-left fade-in">
 				<div class="section-label">About</div>
 				<h2 class="section-title">Rooted in engineering,<br>growing through code.</h2>
 				<div class="stats-grid">
@@ -47,7 +27,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="about-right fade-in" class:visible>
+			<div class="about-right fade-in">
 				<div class="about-text">
 					<p>I'm a Software Engineer with an unconventional path&mdash;bridging <span class="about-highlight">Environmental Resources Engineering</span> with modern software development.</p>
 					<p>My time at Humboldt State, surrounded by ancient redwoods and wild rivers, taught me to think in systems. Whether it's water flow dynamics or data pipelines, the principles remain: understand the whole, optimize for sustainability, build for resilience.</p>

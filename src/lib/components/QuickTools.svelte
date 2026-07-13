@@ -1,37 +1,17 @@
 <script>
-	import { onMount } from 'svelte';
 	import { base } from '$app/paths';
-
-	let visible = false;
-
-	onMount(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						visible = true;
-					}
-				});
-			},
-			{ threshold: 0.1 }
-		);
-
-		const element = document.querySelector('#quick-tools');
-		if (element) observer.observe(element);
-
-		return () => observer.disconnect();
-	});
+	import { reveal } from '$lib/actions/revealOnScroll.js';
 </script>
 
-<section id="quick-tools">
+<section id="quick-tools" use:reveal>
 	<div class="container">
-		<div class="section-header fade-in" class:visible>
+		<div class="section-header fade-in">
 			<div class="section-label">Tools</div>
 			<h2 class="section-title">Quick Tools</h2>
 		</div>
 
 		<div class="tools-grid">
-			<div class="tool-card tool-1 fade-in" class:visible>
+			<div class="tool-card tool-1 fade-in">
 				<div class="tool-icon">⚡</div>
 				<div class="tool-number">Tool 01</div>
 				<h3 class="tool-title">Wire Nut Calculator</h3>
@@ -50,7 +30,7 @@
 				</a>
 			</div>
 
-			<div class="tool-card tool-2 fade-in" class:visible>
+			<div class="tool-card tool-2 fade-in">
 				<div class="tool-icon">🍎</div>
 				<div class="tool-number">Tool 02</div>
 				<h3 class="tool-title">Calorie Counter</h3>
@@ -69,7 +49,7 @@
 				</a>
 			</div>
 
-			<div class="tool-card tool-3 fade-in" class:visible>
+			<div class="tool-card tool-3 fade-in">
 				<div class="tool-icon">🚲</div>
 				<div class="tool-number">Tool 03</div>
 				<h3 class="tool-title">Bike Rack Calculator</h3>

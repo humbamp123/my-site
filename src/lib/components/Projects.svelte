@@ -1,30 +1,10 @@
 <script>
-	import { onMount } from 'svelte';
-
-	let visible = false;
-
-	onMount(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						visible = true;
-					}
-				});
-			},
-			{ threshold: 0.1 }
-		);
-
-		const element = document.querySelector('#projects');
-		if (element) observer.observe(element);
-
-		return () => observer.disconnect();
-	});
+	import { reveal } from '$lib/actions/revealOnScroll.js';
 </script>
 
-<section id="projects">
+<section id="projects" use:reveal>
 	<div class="container">
-		<div class="projects-header fade-in" class:visible>
+		<div class="projects-header fade-in">
 			<div>
 				<div class="section-label">Projects</div>
 				<h2 class="section-title">Personal Projects</h2>
@@ -32,7 +12,7 @@
 		</div>
 
 		<div class="featured-projects">
-			<div class="project-card fade-in" class:visible>
+			<div class="project-card fade-in">
 				<div class="project-info">
 					<div class="project-number">Project 01</div>
 					<h3 class="project-title">Custom Vibe</h3>
