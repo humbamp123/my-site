@@ -32,7 +32,7 @@
 					building sustainable software solutions. Where the redwoods meet the code.
 				</p>
 				<div class="hero-cta">
-					<a href="#projects" class="btn btn-primary" onclick={(e) => handleScrollClick(e, '#projects')}>
+					<a href="#work" class="btn btn-primary" onclick={(e) => handleScrollClick(e, '#work')}>
 						<span>View Work</span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
 							<path d="M5 12h14" />

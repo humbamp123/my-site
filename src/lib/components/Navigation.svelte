@@ -4,7 +4,6 @@
 	const sections = [
 		{ href: '#about', label: 'About' },
 		{ href: '#work', label: 'Work' },
-		{ href: '#projects', label: 'Projects' },
 		{ href: '#quick-tools', label: 'Quick Tools' },
 		{ href: '#contact', label: 'Contact' }
 	];
