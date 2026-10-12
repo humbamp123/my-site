@@ -55,6 +55,18 @@
     --tool2-light: #F5B8A8;
     --tool2-bg: #FDF0ED;
 
+    /* Tool 3 - Sage Green (Bike Rack) */
+    --tool3-primary: #87A878;
+    --tool3-dark: #5C7A50;
+    --tool3-light: #A8C49A;
+    --tool3-bg: #EEF3EA;
+
+    /* Tool 4 - Safety Amber (Breaker Panel) */
+    --tool4-primary: #D98E04;
+    --tool4-dark: #8C5A00;
+    --tool4-light: #E9B44C;
+    --tool4-bg: #FBF3DF;
+
     /* Typography */
     --font-display: 'Fraunces', Georgia, serif;
     --font-secondary: 'Outfit', sans-serif;
@@ -1444,6 +1456,96 @@ nav .container {
     color: var(--warm-white);
     transform: translateX(4px);
     box-shadow: 4px 4px 0 var(--tool2-dark);
+}
+
+/* ─────────────────────────────────────────────
+   TOOL 3 - SAGE GREEN (Bike Rack)
+   ───────────────────────────────────────────── */
+
+.tool-3 {
+    border: 4px solid var(--tool3-primary);
+    box-shadow: 8px 8px 0 var(--tool3-dark);
+    transform: rotate(-1deg);
+}
+
+.tool-3::before {
+    background: var(--tool3-light);
+}
+
+.tool-3:hover {
+    transform: rotate(0deg) translateY(-6px);
+    box-shadow: 12px 12px 0 var(--tool3-dark);
+}
+
+.tool-3 .tool-icon {
+    background: var(--tool3-bg);
+    border-color: var(--tool3-primary);
+    color: var(--tool3-dark);
+}
+
+.tool-3 .tool-number {
+    color: var(--tool3-primary);
+}
+
+.tool-3 .tool-tech span {
+    background: var(--tool3-primary);
+}
+
+.tool-3 .tool-link {
+    color: var(--tool3-primary);
+    border-color: var(--tool3-primary);
+}
+
+.tool-3 .tool-link:hover {
+    background: var(--tool3-primary);
+    color: var(--warm-white);
+    transform: translateX(4px);
+    box-shadow: 4px 4px 0 var(--tool3-dark);
+}
+
+/* ─────────────────────────────────────────────
+   TOOL 4 - SAFETY AMBER (Breaker Panel)
+   ───────────────────────────────────────────── */
+
+.tool-4 {
+    border: 4px solid var(--tool4-primary);
+    box-shadow: 8px 8px 0 var(--tool4-dark);
+    transform: rotate(1deg);
+}
+
+.tool-4::before {
+    background: var(--tool4-light);
+}
+
+.tool-4:hover {
+    transform: rotate(0deg) translateY(-6px);
+    box-shadow: 12px 12px 0 var(--tool4-dark);
+}
+
+.tool-4 .tool-icon {
+    background: var(--tool4-bg);
+    border-color: var(--tool4-primary);
+    color: var(--tool4-dark);
+}
+
+.tool-4 .tool-number {
+    color: var(--tool4-primary);
+}
+
+.tool-4 .tool-tech span {
+    background: var(--tool4-primary);
+}
+
+.tool-4 .tool-link {
+    color: var(--tool4-primary);
+    border-color: var(--tool4-primary);
+}
+
+.tool-4 .tool-link:hover {
+    background: var(--tool4-primary);
+    color: var(--warm-white);
+    transform: translateX(4px);
+    box-shadow: 4px 4px 0 var(--tool4-dark);
 }
 
 /* ─────────────────────────────────────────────

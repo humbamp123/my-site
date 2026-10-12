@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breaker Panel Load Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900&family=Outfit:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="../" class="back-link">&larr; Back to Portfolio</a>
+            <div class="header-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
+                </svg>
+            </div>
+            <div class="header-text">
+                <h1>Breaker Panel Calculator</h1>
+                <p class="subtitle">Residential Service Load &amp; Panel Capacity Reference</p>
+            </div>
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span>Online</span>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="tab-bar" role="tablist" aria-label="Calculator mode">
+                <button class="tab-btn active" role="tab" aria-selected="true" id="tab-service-load" aria-controls="panel-service-load" data-tab="service-load">Service Load (NEC 220.82)</button>
+                <button class="tab-btn" role="tab" aria-selected="false" id="tab-circuit-tally" aria-controls="panel-circuit-tally" data-tab="circuit-tally">Circuit Tally</button>
+            </div>
+
+            <!-- ============ MODE A: NEC 220.82 SERVICE LOAD ============ -->
+            <section class="tab-panel active" id="panel-service-load" role="tabpanel" aria-labelledby="tab-service-load">
+                <div class="error-message" id="errorMessageA"></div>
+
+                <div class="section-label">Dwelling</div>
+                <div class="dwelling-grid">
+                    <div class="input-group">
+                        <label for="sqft">Living Area (sq ft)</label>
+                        <input type="number" id="sqft" min="100" step="10" placeholder="e.g. 2000">
+                        <span class="helper-text">General lighting load: 3 VA per sq ft</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="smallApplianceCircuits">Small-Appliance Circuits</label>
+                        <input type="number" id="smallApplianceCircuits" min="2" max="10" value="2">
+                        <span class="helper-text">NEC minimum: 2 &mdash; 1,500 VA each</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="laundryCircuits">Laundry Circuits</label>
+                        <input type="number" id="laundryCircuits" min="1" max="4" value="1">
+                        <span class="helper-text">NEC minimum: 1 &mdash; 1,500 VA each</span>
+                    </div>
+                </div>
+
+                <div class="section-label">Fixed Appliances</div>
+                <div class="appliance-rows" id="applianceRows"></div>
+                <div class="button-row">
+                    <button class="add-row-btn" id="addApplianceBtn" type="button">
+                        <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                        Add Appliance
+                    </button>
+                </div>
+
+                <div class="section-label">Heating &amp; Cooling</div>
+                <p class="section-note">Enter what the dwelling has &mdash; the largest load applies per NEC 220.82(C). Leave the rest blank.</p>
+                <div class="hvac-grid">
+                    <div class="input-group">
+                        <label for="acVA">Air Conditioning (VA)</label>
+                        <input type="number" id="acVA" min="0" step="100" placeholder="e.g. 5000">
+                    </div>
+                    <div class="input-group">
+                        <label for="heatPumpVA">Heat Pump (VA)</label>
+                        <input type="number" id="heatPumpVA" min="0" step="100" placeholder="e.g. 4800">
+                    </div>
+                    <div class="input-group">
+                        <label for="supplementalHeatVA">Supplemental Heat (VA)</label>
+                        <input type="number" id="supplementalHeatVA" min="0" step="100" placeholder="e.g. 5000">
+                    </div>
+                    <div class="input-group">
+                        <label for="electricHeatVA">Electric Space Heating (VA)</label>
+                        <input type="number" id="electricHeatVA" min="0" step="100" placeholder="e.g. 10000">
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button class="calculate-btn" id="calcServiceBtn" type="button">Calculate Service Load</button>
+                </div>
+
+                <div class="results" id="resultsA"></div>
+            </section>
+
+            <!-- ============ MODE B: CIRCUIT TALLY ============ -->
+            <section class="tab-panel" id="panel-circuit-tally" role="tabpanel" aria-labelledby="tab-circuit-tally">
+                <div class="error-message" id="errorMessageB"></div>
+
+                <div class="section-label">Panel</div>
+                <div class="dwelling-grid">
+                    <div class="input-group">
+                        <label for="mainBreaker">Main Breaker Rating</label>
+                        <select id="mainBreaker">
+                            <option value="60">60 A</option>
+                            <option value="100" selected>100 A</option>
+                            <option value="125">125 A</option>
+                            <option value="150">150 A</option>
+                            <option value="200">200 A</option>
+                            <option value="225">225 A</option>
+                            <option value="400">400 A</option>
+                        </select>
+                        <span class="helper-text">240 V split-phase service assumed</span>
+                    </div>
+                </div>
+
+                <div class="section-label">Circuits</div>
+                <div class="circuit-rows" id="circuitRows"></div>
+                <div class="button-row">
+                    <button class="add-row-btn" id="addCircuitBtn" type="button">
+                        <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                        Add Circuit
+                    </button>
+                    <button class="calculate-btn" id="calcTallyBtn" type="button">Check Panel</button>
+                </div>
+
+                <div class="results" id="resultsB"></div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="footer-brand">Breaker Panel Calculator v1.0</div>
+            <div class="footer-disclaimer">Reference tool only. Not a substitute for a load calculation by a licensed electrician or the NEC edition adopted in your jurisdiction.</div>
+            <div class="footer-indicators">
+                <div class="indicator">
+                    <span class="indicator-light"></span>
+                    <span>System Ready</span>
+                </div>
+                <div class="indicator">
+                    <span class="indicator-light amber"></span>
+                    <span>NEC 220.82</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <template id="applianceRowTemplate">
+        <div class="appliance-row">
+            <div class="input-group">
+                <label>Appliance</label>
+                <select class="appliance-preset"></select>
+            </div>
+            <div class="input-group">
+                <label>Name</label>
+                <input type="text" class="appliance-name" placeholder="e.g. Dishwasher">
+            </div>
+            <div class="input-group">
+                <label>Load (VA)</label>
+                <input type="number" class="appliance-va" min="0" step="100" placeholder="VA">
+            </div>
+            <button class="remove-btn" type="button">Remove</button>
+        </div>
+    </template>
+
+    <template id="circuitRowTemplate">
+        <div class="circuit-row">
+            <div class="input-group">
+                <label>Description</label>
+                <input type="text" class="circuit-desc" placeholder="e.g. Kitchen counters">
+            </div>
+            <div class="input-group">
+                <label>Breaker</label>
+                <select class="circuit-amps"></select>
+            </div>
+            <div class="input-group">
+                <label>Poles</label>
+                <select class="circuit-poles">
+                    <option value="1">1-pole</option>
+                    <option value="2">2-pole</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Load Type</label>
+                <select class="circuit-load-type"></select>
+            </div>
+            <div class="input-group">
+                <label>Est. Load (VA)</label>
+                <input type="number" class="circuit-va" min="0" step="100" placeholder="VA">
+            </div>
+            <button class="remove-btn" type="button">Remove</button>
+        </div>
+    </template>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

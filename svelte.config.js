@@ -18,7 +18,7 @@ const config = {
 		prerender: {
 			handleHttpError: ({ path, referrer, message }) => {
 				// Ignore errors for submodules and other static files
-				if (path.includes('/wire-nuts/') || path.includes('/calorie-counter/') || path.includes('/bike-rack/') || path.endsWith('.png') || path.endsWith('.ico')) {
+				if (path.includes('/wire-nuts/') || path.includes('/calorie-counter/') || path.includes('/bike-rack/') || path.includes('/breaker-panel/') || path.endsWith('.png') || path.endsWith('.ico')) {
 					return;
 				}
 				throw new Error(message);

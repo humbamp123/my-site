@@ -67,6 +67,25 @@
 					</svg>
 				</a>
 			</div>
+
+			<div class="tool-card tool-4 fade-in">
+				<div class="tool-icon">🔌</div>
+				<div class="tool-number">Tool 04</div>
+				<h3 class="tool-title">Breaker Panel Calculator</h3>
+				<p class="tool-desc">Size a residential electrical service with the NEC 220.82 optional method, or tally your panel's circuits to see how loaded it really is. Two calculators, one panel.</p>
+				<div class="tool-tech">
+					<span>HTML</span>
+					<span>CSS</span>
+					<span>JavaScript</span>
+				</div>
+				<a href="{base}/breaker-panel/index.html" class="tool-link">
+					Try It Live
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M7 17L17 7" />
+						<path d="M7 7h10v10" />
+					</svg>
+				</a>
+			</div>
 		</div>
 	</div>
 </section>
