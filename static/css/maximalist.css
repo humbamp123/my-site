@@ -67,6 +67,12 @@
     --tool4-light: #E9B44C;
     --tool4-bg: #FBF3DF;
 
+    /* Tool 5 - Workshop Teal (Work Table) */
+    --tool5-primary: #2F7F7B;
+    --tool5-dark: #1F5653;
+    --tool5-light: #7DBDB7;
+    --tool5-bg: #E4F1EF;
+
     /* Typography */
     --font-display: 'Fraunces', Georgia, serif;
     --font-secondary: 'Outfit', sans-serif;
@@ -1275,6 +1281,13 @@ nav .container {
     z-index: 1;
 }
 
+/* An odd last card is centred across both columns instead of orphaned left */
+.tools-grid > .tool-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 1.25rem);
+}
+
 /* Base Tool Card */
 .tool-card {
     padding: 2.5rem;
@@ -1549,6 +1562,51 @@ nav .container {
 }
 
 /* ─────────────────────────────────────────────
+   TOOL 5 - WORKSHOP TEAL (Work Table)
+   ───────────────────────────────────────────── */
+
+.tool-5 {
+    border: 4px solid var(--tool5-primary);
+    box-shadow: 8px 8px 0 var(--tool5-dark);
+    transform: rotate(-1deg);
+}
+
+.tool-5::before {
+    background: var(--tool5-light);
+}
+
+.tool-5:hover {
+    transform: rotate(0deg) translateY(-6px);
+    box-shadow: 12px 12px 0 var(--tool5-dark);
+}
+
+.tool-5 .tool-icon {
+    background: var(--tool5-bg);
+    border-color: var(--tool5-primary);
+    color: var(--tool5-dark);
+}
+
+.tool-5 .tool-number {
+    color: var(--tool5-primary);
+}
+
+.tool-5 .tool-tech span {
+    background: var(--tool5-primary);
+}
+
+.tool-5 .tool-link {
+    color: var(--tool5-primary);
+    border-color: var(--tool5-primary);
+}
+
+.tool-5 .tool-link:hover {
+    background: var(--tool5-primary);
+    color: var(--warm-white);
+    transform: translateX(4px);
+    box-shadow: 4px 4px 0 var(--tool5-dark);
+}
+
+/* ─────────────────────────────────────────────
    CONTACT SECTION
    ───────────────────────────────────────────── */
 
@@ -1795,6 +1853,11 @@ footer span {
 
     .tools-grid {
         grid-template-columns: 1fr;
+    }
+
+    .tools-grid > .tool-card:last-child:nth-child(odd) {
+        width: auto;
+        justify-self: stretch;
     }
 
     .golden-gate-svg {

@@ -86,6 +86,25 @@
 					</svg>
 				</a>
 			</div>
+
+			<div class="tool-card tool-5 fade-in">
+				<div class="tool-icon">🪚</div>
+				<div class="tool-number">Tool 05</div>
+				<h3 class="tool-title">Work Table Plans</h3>
+				<p class="tool-desc">Build plans for a sturdy, rolling 5 ft × 10 ft work table. Pick how you'll use it and the height you want, and get the cut list, boards to buy, to-scale drawings, and step-by-step build instructions.</p>
+				<div class="tool-tech">
+					<span>HTML</span>
+					<span>CSS</span>
+					<span>JavaScript</span>
+				</div>
+				<a href="{base}/work-table/index.html" class="tool-link">
+					Try It Live
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M7 17L17 7" />
+						<path d="M7 7h10v10" />
+					</svg>
+				</a>
+			</div>
 		</div>
 	</div>
 </section>

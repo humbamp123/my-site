@@ -7,3 +7,6 @@
 [submodule "static/bike-rack"]
 	path = static/bike-rack
 	url = https://github.com/humbamp123/bike-rack.git
+[submodule "static/work-table"]
+	path = static/work-table
+	url = https://github.com/humbamp123/work-table.git
