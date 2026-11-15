@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Only this page's own files and Google's sign-in / Gmail endpoints may load or be contacted. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://accounts.google.com/gsi/client; style-src 'self' https://fonts.googleapis.com https://accounts.google.com/gsi/style; font-src https://fonts.gstatic.com; connect-src https://gmail.googleapis.com https://accounts.google.com/gsi/ https://oauth2.googleapis.com; frame-src https://accounts.google.com/gsi/; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+    <title>Gmail Cleanup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900&family=Outfit:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="../" class="back-link">&larr; Back to Portfolio</a>
+            <div class="header-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="header-text">
+                <h1>Gmail Cleanup</h1>
+                <p class="subtitle">Bulk-clear old mail without handing your inbox to anyone</p>
+            </div>
+            <div class="status-indicator" id="status" data-state="off">
+                <span class="status-dot"></span>
+                <span id="statusText">Not connected</span>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="error-message" id="errorBox" role="alert" hidden></div>
+
+            <ul class="promises" aria-label="How this tool protects your mail">
+                <li><strong>Stays in your browser.</strong> Your mail goes between this tab and Google. There is no server behind this page.</li>
+                <li><strong>Nothing is deleted for good.</strong> Mail is moved to Trash or archived, and every run can be undone.</li>
+                <li><strong>Never reads message bodies.</strong> Only sender, subject and date are fetched, for the review step.</li>
+                <li><strong>Nothing is remembered.</strong> Access lasts about an hour, lives in this tab only, and is revoked when you disconnect.</li>
+            </ul>
+
+            <!-- ============ STEP 1: CONNECT ============ -->
+            <section aria-labelledby="connectLabel">
+                <div class="section-label" id="connectLabel">Step 1 &middot; Connect</div>
+
+                <div id="setupPanel">
+                    <details class="setup-help">
+                        <summary>First time? Create your own Google client ID (5 minutes, free)</summary>
+                        <ol>
+                            <li>Open the Google Cloud console, create a project, and enable the <strong>Gmail API</strong> for it.</li>
+                            <li>Set up the OAuth consent screen as <strong>External</strong>, leave it in <strong>Testing</strong>, and add your own Gmail address as a test user.</li>
+                            <li>Create an OAuth client ID of type <strong>Web application</strong>. Under <em>Authorized JavaScript origins</em> add exactly: <code id="originText"></code></li>
+                            <li>Copy the client ID (it ends in <code>.apps.googleusercontent.com</code>) into the box below. You do not need the client secret; never paste it here.</li>
+                        </ol>
+                        <p class="helper-text">Using your own client ID means only you can sign in through it, and Google shows you exactly what is being requested.</p>
+                    </details>
+                    <div class="input-group">
+                        <label for="clientId">Google OAuth client ID</label>
+                        <input type="text" id="clientId" autocomplete="off" spellcheck="false" placeholder="1234567890-abc123.apps.googleusercontent.com">
+                        <span class="helper-text">A public identifier, not a password. Saved in this browser only.</span>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button type="button" class="primary-btn" id="connectBtn">Connect Gmail</button>
+                    <button type="button" class="ghost-btn" id="disconnectBtn" hidden>Disconnect &amp; revoke access</button>
+                    <span class="account" id="accountText"></span>
+                </div>
+            </section>
+
+            <!-- ============ STEP 2: CHOOSE ============ -->
+            <section aria-labelledby="filterLabel">
+                <div class="section-label" id="filterLabel">Step 2 &middot; Choose what to clean</div>
+
+                <fieldset id="filters" disabled>
+                    <legend class="visually-hidden">Filters</legend>
+
+                    <div class="preset-row" role="group" aria-label="Quick presets">
+                        <button type="button" class="chip-btn" data-preset="promotions">Promotions over 6 months</button>
+                        <button type="button" class="chip-btn" data-preset="social">Social over 3 months</button>
+                        <button type="button" class="chip-btn" data-preset="large">Bigger than 10 MB</button>
+                        <button type="button" class="chip-btn" data-preset="unread">Unread over 1 year</button>
+                        <button type="button" class="chip-btn" data-preset="clear">Clear filters</button>
+                    </div>
+
+                    <div class="filter-grid">
+                        <div class="input-group">
+                            <label for="category">Category</label>
+                            <select id="category">
+                                <option value="">Any</option>
+                                <option value="promotions">Promotions</option>
+                                <option value="social">Social</option>
+                                <option value="updates">Updates</option>
+                                <option value="forums">Forums</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="olderThan">Older than</label>
+                            <div class="paired">
+                                <input type="number" id="olderThan" min="1" step="1" inputmode="numeric" placeholder="e.g. 6">
+                                <select id="olderUnit" aria-label="Age unit">
+                                    <option value="d">days</option>
+                                    <option value="m" selected>months</option>
+                                    <option value="y">years</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="largerThanMb">Larger than (MB)</label>
+                            <input type="number" id="largerThanMb" min="1" step="1" inputmode="numeric" placeholder="e.g. 10">
+                        </div>
+                        <div class="input-group wide">
+                            <label for="from">From (addresses or domains)</label>
+                            <input type="text" id="from" autocomplete="off" spellcheck="false" placeholder="news@shop.example, deals.example">
+                        </div>
+                        <div class="input-group wide">
+                            <label for="raw">Custom Gmail search (optional)</label>
+                            <input type="text" id="raw" autocomplete="off" spellcheck="false" placeholder="subject:(receipt OR invoice)">
+                            <span class="helper-text">Same syntax as the Gmail search box. The protections below still apply.</span>
+                        </div>
+                    </div>
+
+                    <div class="check-grid">
+                        <label class="check"><input type="checkbox" id="unreadOnly"> Unread only</label>
+                        <label class="check"><input type="checkbox" id="hasAttachment"> Has an attachment</label>
+                    </div>
+
+                    <div class="section-label minor">Always keep</div>
+                    <div class="check-grid">
+                        <label class="check"><input type="checkbox" id="protectStarred" checked> Starred mail</label>
+                        <label class="check"><input type="checkbox" id="protectImportant" checked> Mail marked important</label>
+                        <label class="check"><input type="checkbox" id="protectSent" checked> Mail I sent, and drafts</label>
+                        <label class="check"><input type="checkbox" id="protectLabelled"> Anything I've labelled</label>
+                    </div>
+                    <div class="keep-list" id="keepList" hidden>
+                        <span class="keep-title">Keeping mail from:</span>
+                        <span id="keepChips"></span>
+                    </div>
+
+                    <div class="query-preview">
+                        <span class="query-title">Search that will run</span>
+                        <code id="queryText">&mdash;</code>
+                        <span class="helper-text" id="queryNote"></span>
+                    </div>
+
+                    <div class="button-row">
+                        <div class="input-group compact">
+                            <label for="cap">Most messages per run</label>
+                            <select id="cap">
+                                <option value="1000">1,000</option>
+                                <option value="5000" selected>5,000</option>
+                                <option value="20000">20,000</option>
+                            </select>
+                        </div>
+                        <button type="button" class="primary-btn" id="scanBtn" disabled>Find matching mail</button>
+                    </div>
+                </fieldset>
+
+                <div class="progress-row" id="progressRow" hidden>
+                    <progress id="progressBar"></progress>
+                    <span id="progressText" role="status" aria-live="polite"></span>
+                    <button type="button" class="ghost-btn" id="cancelBtn" hidden>Stop</button>
+                </div>
+            </section>
+
+            <!-- ============ STEP 3: REVIEW ============ -->
+            <section id="reviewSection" aria-labelledby="reviewLabel" hidden>
+                <div class="section-label" id="reviewLabel">Step 3 &middot; Review, then clean</div>
+
+                <div class="summary" id="summary"></div>
+
+                <div id="reviewBody">
+                    <div class="senders" id="sendersBox">
+                        <div class="sub-title">Most common senders in the sample</div>
+                        <ul id="senderList"></ul>
+                    </div>
+
+                    <div class="sub-title" id="sampleTitle"></div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr><th scope="col">From</th><th scope="col">Subject</th><th scope="col">Date</th></tr>
+                            </thead>
+                            <tbody id="sampleRows"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="confirm-box">
+                        <div class="input-group compact">
+                            <label for="action">What to do with them</label>
+                            <select id="action">
+                                <option value="trash" selected>Move to Trash (Gmail empties it after 30 days)</option>
+                                <option value="archive">Archive (remove from Inbox, keep in All Mail)</option>
+                            </select>
+                        </div>
+                        <label class="check"><input type="checkbox" id="confirmCheck"> <span id="confirmText"></span></label>
+                        <button type="button" class="danger-btn" id="runBtn" disabled></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ HISTORY / UNDO ============ -->
+            <section id="historySection" aria-labelledby="historyLabel" hidden>
+                <div class="section-label" id="historyLabel">This session</div>
+                <p class="section-note">Undo is available until you close or reload this tab. After that, trashed mail is still in Gmail's Trash for 30 days.</p>
+                <ul class="history" id="historyList"></ul>
+            </section>
+
+            <noscript><p class="section-note">This tool needs JavaScript to talk to Gmail from your browser.</p></noscript>
+        </div>
+    </div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

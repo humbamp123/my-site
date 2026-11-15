@@ -73,6 +73,12 @@
     --tool5-light: #7DBDB7;
     --tool5-bg: #E4F1EF;
 
+    /* Tool 6 - Postal Indigo (Gmail Cleanup) */
+    --tool6-primary: #4A5A9A;
+    --tool6-dark: #2F3A6B;
+    --tool6-light: #A3AEDB;
+    --tool6-bg: #E9ECF7;
+
     /* Typography */
     --font-display: 'Fraunces', Georgia, serif;
     --font-secondary: 'Outfit', sans-serif;
@@ -1604,6 +1610,51 @@ nav .container {
     color: var(--warm-white);
     transform: translateX(4px);
     box-shadow: 4px 4px 0 var(--tool5-dark);
+}
+
+/* ─────────────────────────────────────────────
+   TOOL 6 - POSTAL INDIGO (Gmail Cleanup)
+   ───────────────────────────────────────────── */
+
+.tool-6 {
+    border: 4px solid var(--tool6-primary);
+    box-shadow: 8px 8px 0 var(--tool6-dark);
+    transform: rotate(1deg);
+}
+
+.tool-6::before {
+    background: var(--tool6-light);
+}
+
+.tool-6:hover {
+    transform: rotate(0deg) translateY(-6px);
+    box-shadow: 12px 12px 0 var(--tool6-dark);
+}
+
+.tool-6 .tool-icon {
+    background: var(--tool6-bg);
+    border-color: var(--tool6-primary);
+    color: var(--tool6-dark);
+}
+
+.tool-6 .tool-number {
+    color: var(--tool6-primary);
+}
+
+.tool-6 .tool-tech span {
+    background: var(--tool6-primary);
+}
+
+.tool-6 .tool-link {
+    color: var(--tool6-primary);
+    border-color: var(--tool6-primary);
+}
+
+.tool-6 .tool-link:hover {
+    background: var(--tool6-primary);
+    color: var(--warm-white);
+    transform: translateX(4px);
+    box-shadow: 4px 4px 0 var(--tool6-dark);
 }
 
 /* ─────────────────────────────────────────────
