@@ -121,3 +121,81 @@ export function spread(items, count) {
 	const step = (items.length - 1) / (count - 1);
 	return Array.from({ length: count }, (_, index) => items[Math.round(index * step)]);
 }
+
+/** Splits a query into top-level terms, keeping bracketed groups and quoted phrases whole. */
+function tokenize(text) {
+	const tokens = [];
+	let current = '';
+	let depth = 0;
+	let inQuote = false;
+	for (const char of text) {
+		if (char === '"') inQuote = !inQuote;
+		else if (!inQuote && (char === '(' || char === '{')) depth++;
+		else if (!inQuote && (char === ')' || char === '}')) depth--;
+		if (/\s/.test(char) && depth === 0 && !inQuote) {
+			if (current) tokens.push(current);
+			current = '';
+		} else {
+			current += char;
+		}
+	}
+	if (current) tokens.push(current);
+	return tokens;
+}
+
+/** True when one pair of round brackets encloses the entire text. */
+function isWrapped(text) {
+	if (!text.startsWith('(') || !text.endsWith(')')) return false;
+	return isBalanced(text.slice(1, -1));
+}
+
+/**
+ * Turns a search copied from "Search that will run" back into filter values,
+ * so buildQuery(parseQuery(q)).query === q for any search this tool produced.
+ * Anything it does not recognise is returned as the custom search.
+ * Protections are only ever switched on by a pasted search, never off.
+ * Returns null when the text is not a well-formed single-line search.
+ */
+export function parseQuery(text) {
+	const input = String(text ?? '').trim();
+	if (!input || /[\r\n]/.test(input) || !isBalanced(input)) return null;
+
+	const filters = {
+		category: '', olderThan: '', olderUnit: 'm', largerThanMb: '', from: '', raw: '',
+		unreadOnly: false, hasAttachment: false, protectLabelled: false, keepSenders: []
+	};
+	const senders = [];
+	const rest = [];
+	let match;
+
+	for (const token of tokenize(input)) {
+		if (!filters.category && (match = token.match(/^category:([a-z]+)$/)) && CATEGORIES.includes(match[1])) {
+			filters.category = match[1];
+		} else if (!filters.olderThan && (match = token.match(/^older_than:([1-9]\d*)([dmy])$/))) {
+			[, filters.olderThan, filters.olderUnit] = match;
+		} else if (!filters.largerThanMb && (match = token.match(/^larger:([1-9]\d*)M$/))) {
+			filters.largerThanMb = match[1];
+		} else if (!senders.length && (match = token.match(/^from:\((.+)\)$/)) &&
+			match[1].split(' OR ').every((part) => SENDER_PATTERN.test(part))) {
+			senders.push(...match[1].split(' OR '));
+		} else if (!senders.length && (match = token.match(/^from:(.+)$/)) && SENDER_PATTERN.test(match[1])) {
+			senders.push(match[1]);
+		} else if ((match = token.match(/^-from:(.+)$/)) && SENDER_PATTERN.test(match[1])) {
+			filters.keepSenders.push(match[1].toLowerCase());
+		} else if (token === 'is:unread') {
+			filters.unreadOnly = true;
+		} else if (token === 'has:attachment') {
+			filters.hasAttachment = true;
+		} else if (token === 'has:nouserlabels') {
+			filters.protectLabelled = true;
+		} else if (!['-is:starred', '-is:important', '-in:sent', '-in:drafts'].includes(token)) {
+			rest.push(token);
+		}
+	}
+
+	filters.from = senders.join(', ');
+	filters.keepSenders = [...new Set(filters.keepSenders)];
+	// buildQuery wraps the custom search in brackets, so take one layer off here.
+	filters.raw = rest.length === 1 && isWrapped(rest[0]) ? rest[0].slice(1, -1) : rest.join(' ');
+	return filters;
+}

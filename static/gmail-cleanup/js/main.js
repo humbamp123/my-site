@@ -1,5 +1,5 @@
 import { CLIENT_ID } from './config.js';
-import { buildQuery, senderAddress, spread, topSenders } from './query.js';
+import { buildQuery, parseQuery, senderAddress, spread, topSenders } from './query.js';
 import { ACTIONS, GmailError, SCOPE, createClient } from './gmail.js';
 
 const CLIENT_ID_PATTERN = /^[0-9]+-[a-z0-9]+\.apps\.googleusercontent\.com$/;
@@ -81,6 +81,8 @@ function refresh() {
 	$('queryText').textContent = built.narrowing ? built.query : '—';
 	$('queryNote').textContent = built.errors.join(' ');
 	$('scanBtn').disabled = !connected || state.busy || built.errors.length > 0;
+	$('cap').disabled = !connected || state.busy;
+	$('copyBtn').disabled = !built.narrowing || built.errors.length > 0;
 
 	$('runBtn').disabled = !connected || state.busy || !state.scan?.ids.length || !$('confirmCheck').checked;
 	for (const button of document.querySelectorAll('.undo-btn')) button.disabled = !connected || state.busy;
@@ -215,6 +217,32 @@ function applyPreset(name) {
 	renderKeepList();
 	clearScan();
 	refresh();
+}
+
+/** Fills the form from a search copied out of "Search that will run". Never unticks a protection. */
+function restoreSearch(text) {
+	const parsed = parseQuery(text);
+	if (!parsed) return false;
+	for (const id of ['category', 'olderThan', 'olderUnit', 'largerThanMb', 'from', 'raw']) $(id).value = parsed[id];
+	$('unreadOnly').checked = parsed.unreadOnly;
+	$('hasAttachment').checked = parsed.hasAttachment;
+	if (parsed.protectLabelled) $('protectLabelled').checked = true;
+	state.keepSenders = parsed.keepSenders;
+	renderKeepList();
+	clearScan();
+	refresh();
+	return true;
+}
+
+async function copySearch() {
+	const { query, errors, narrowing } = buildQuery(readFilters());
+	if (!narrowing || errors.length) return;
+	try {
+		await navigator.clipboard.writeText(query);
+		$('copyNote').textContent = 'Copied. Paste it into the custom search box to restore these filters later.';
+	} catch {
+		$('copyNote').textContent = 'Could not copy automatically. Select the text above and copy it.';
+	}
 }
 
 function renderKeepList() {
@@ -523,9 +551,17 @@ function init() {
 	for (const button of document.querySelectorAll('[data-preset]')) {
 		button.addEventListener('click', () => applyPreset(button.dataset.preset));
 	}
+	$('copyBtn').addEventListener('click', copySearch);
+	// A whole search pasted into the custom box is unpacked back into the filters above it.
+	$('raw').addEventListener('paste', (event) => {
+		const pasted = event.clipboardData?.getData('text') ?? '';
+		const field = event.target;
+		const replacesAll = field.selectionStart === 0 && field.selectionEnd === field.value.length;
+		if (replacesAll && restoreSearch(pasted)) event.preventDefault();
+	});
 	// Any filter change invalidates what was reviewed.
-	$('filters').addEventListener('input', (event) => {
-		if (event.target.id === 'cap') return;
+	$('filters').addEventListener('input', () => {
+		$('copyNote').textContent = '';
 		clearScan();
 		refresh();
 	});

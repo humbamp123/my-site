@@ -717,3 +717,15 @@ td.date {
 .sender-actions + .helper-text {
     margin: 0 0 24px;
 }
+
+/* Search preview: copy control */
+.query-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.query-preview code {
+    user-select: all;
+}
