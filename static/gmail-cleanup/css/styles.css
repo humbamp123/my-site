@@ -684,3 +684,21 @@ td.date {
         scroll-behavior: auto !important;
     }
 }
+
+/* Sender checklist */
+.senders .helper-text {
+    margin-top: 6px;
+}
+
+.senders li .check {
+    flex: 1;
+    min-width: 0;
+}
+
+.senders ul {
+    margin-bottom: 14px;
+}
+
+#keepBtn {
+    margin-bottom: 24px;
+}

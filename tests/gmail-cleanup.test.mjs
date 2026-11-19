@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildQuery, isBalanced, senderAddress, topSenders } from '../static/gmail-cleanup/js/query.js';
+import { buildQuery, isBalanced, senderAddress, spread, topSenders } from '../static/gmail-cleanup/js/query.js';
 import { ACTIONS, GmailError, createClient } from '../static/gmail-cleanup/js/gmail.js';
 
 const PROTECTIONS = '-is:starred -is:important -in:sent -in:drafts';
@@ -145,4 +145,14 @@ test('no action can delete permanently', () => {
 		const labels = [...(action.apply.add ?? []), ...(action.apply.remove ?? [])];
 		assert.ok(labels.every((label) => ['TRASH', 'INBOX'].includes(label)));
 	}
+});
+
+test('spread samples evenly across the whole list', () => {
+	const items = Array.from({ length: 5000 }, (_, i) => i);
+	const picked = spread(items, 300);
+	assert.equal(picked.length, 300);
+	assert.equal(new Set(picked).size, 300);
+	assert.equal(picked[0], 0);
+	assert.equal(picked.at(-1), 4999);
+	assert.deepEqual(spread([1, 2, 3], 10), [1, 2, 3]);
 });
