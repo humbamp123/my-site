@@ -176,7 +176,12 @@
                         <div class="sub-title" id="sendersTitle">Most common senders</div>
                         <p class="helper-text">Tick every sender whose mail you want to keep, then search again once.</p>
                         <ul id="senderList"></ul>
-                        <button type="button" class="ghost-btn" id="keepBtn" disabled>Keep ticked senders</button>
+                        <div class="sender-actions">
+                            <button type="button" class="ghost-btn" id="keepBtn" disabled>Keep ticked senders</button>
+                            <button type="button" class="chip-btn" id="showAllBtn" hidden></button>
+                            <button type="button" class="chip-btn" id="countAllBtn" hidden></button>
+                        </div>
+                        <p class="helper-text" id="countNote">Finding every sender reads the sender and subject of each message, so it takes a minute or two for thousands.</p>
                     </div>
 
                     <div class="sub-title" id="sampleTitle"></div>
