@@ -265,8 +265,8 @@ async function scan() {
 			signal,
 			onProgress: (done) => setProgress('Loading a sample to review…', done, sampleIds.length)
 		});
-		state.scan = { ids, query: built.query, truncated };
-		renderReview(sample);
+		state.scan = { ids, query: built.query, truncated, sample, ticked: new Set(), showAll: false };
+		renderReview();
 	} catch (error) {
 		showError(describe(error));
 		if (error instanceof GmailError && error.status === 401) dropToken();
@@ -282,8 +282,8 @@ function cell(text, className) {
 	return td;
 }
 
-function renderReview(sample) {
-	const { ids, truncated, query } = state.scan;
+function renderReview() {
+	const { ids, truncated, query, sample } = state.scan;
 	const count = number.format(ids.length);
 	$('reviewSection').hidden = false;
 	$('reviewBody').hidden = ids.length === 0;
@@ -296,21 +296,7 @@ function renderReview(sample) {
 		? `${count} messages selected, which is the per-run limit. More match this search: run it again afterwards for the rest.`
 		: `${count} ${ids.length === 1 ? 'message matches' : 'messages match'}.`;
 
-	$('senderList').replaceChildren(...topSenders(sample, SENDER_ROWS).map(({ address, count: seen }) => {
-		const item = document.createElement('li');
-		const label = document.createElement('label');
-		label.className = 'check';
-		const box = document.createElement('input');
-		box.type = 'checkbox';
-		box.value = address;
-		box.addEventListener('change', renderKeepButton);
-		const text = document.createElement('span');
-		text.textContent = `${address} \u2014 ${seen} of ${sample.length} sampled`;
-		label.append(box, text);
-		item.append(label);
-		return item;
-	}));
-	renderKeepButton();
+	renderSenders();
 
 	const shown = spread(sample, TABLE_ROWS);
 	$('sampleTitle').textContent = ids.length > shown.length
@@ -330,8 +316,82 @@ function renderReview(sample) {
 	renderConfirm();
 }
 
+function renderSenders() {
+	const { ids, sample, ticked, showAll } = state.scan;
+	const complete = sample.length === ids.length;
+	const senders = topSenders(sample, Infinity);
+	const visible = showAll ? senders : senders.slice(0, SENDER_ROWS);
+
+	$('sendersTitle').textContent = complete
+		? `${number.format(senders.length)} ${senders.length === 1 ? 'sender' : 'senders'} across all ${number.format(ids.length)} messages`
+		: `Most common senders in a sample of ${number.format(sample.length)}`;
+
+	$('senderList').replaceChildren(...visible.map(({ address, count: seen }) => {
+		const item = document.createElement('li');
+		const label = document.createElement('label');
+		label.className = 'check';
+		const box = document.createElement('input');
+		box.type = 'checkbox';
+		box.value = address;
+		box.checked = ticked.has(address);
+		box.addEventListener('change', () => {
+			if (box.checked) ticked.add(address);
+			else ticked.delete(address);
+			renderKeepButton();
+		});
+		const text = document.createElement('span');
+		text.textContent = complete
+			? `${address} \u2014 ${number.format(seen)}`
+			: `${address} \u2014 ${seen} of ${sample.length} sampled`;
+		label.append(box, text);
+		item.append(label);
+		return item;
+	}));
+	$('senderList').classList.toggle('expanded', showAll);
+
+	$('showAllBtn').hidden = senders.length <= SENDER_ROWS;
+	$('showAllBtn').textContent = showAll ? 'Show fewer' : `Show all ${number.format(senders.length)} senders`;
+	$('countAllBtn').hidden = complete;
+	$('countNote').hidden = complete;
+	$('countAllBtn').textContent = `Find every sender in all ${number.format(ids.length)} messages`;
+	$('countAllBtn').disabled = state.busy;
+	renderKeepButton();
+}
+
+/** Reads the headers of every selected message, not just the sample, so no sender is missed. */
+async function countAllSenders() {
+	const scanned = state.scan;
+	if (!scanned || state.busy) return;
+	showError(null);
+	const have = new Map(scanned.sample.map((message) => [message.id, message]));
+	const missing = scanned.ids.filter((id) => !have.has(id));
+	state.abort = new AbortController();
+	setBusy(true);
+	renderSenders();
+	$('progressRow').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+	try {
+		const rest = await client.sample(missing, {
+			concurrency: 8,
+			signal: state.abort.signal,
+			onProgress: (done) => setProgress(
+				`Reading senders: ${number.format(done)} of ${number.format(missing.length)}`, done, missing.length)
+		});
+		for (const message of rest) have.set(message.id, message);
+		if (state.scan === scanned) {
+			scanned.sample = scanned.ids.map((id) => have.get(id));
+			scanned.showAll = true;
+		}
+	} catch (error) {
+		showError(describe(error));
+		if (error instanceof GmailError && error.status === 401) dropToken();
+	}
+	setProgress(null);
+	setBusy(false);
+	if (state.scan === scanned) renderSenders();
+}
+
 function tickedSenders() {
-	return [...document.querySelectorAll('#senderList input:checked')].map((box) => box.value);
+	return [...(state.scan?.ticked ?? [])];
 }
 
 function renderKeepButton() {
@@ -448,6 +508,11 @@ function init() {
 	$('cancelBtn').addEventListener('click', () => state.abort?.abort());
 	$('runBtn').addEventListener('click', run);
 	$('keepBtn').addEventListener('click', keepTicked);
+	$('countAllBtn').addEventListener('click', countAllSenders);
+	$('showAllBtn').addEventListener('click', () => {
+		state.scan.showAll = !state.scan.showAll;
+		renderSenders();
+	});
 	$('confirmCheck').addEventListener('change', refresh);
 	$('action').addEventListener('change', () => {
 		$('confirmCheck').checked = false;

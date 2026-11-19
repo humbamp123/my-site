@@ -699,6 +699,21 @@ td.date {
     margin-bottom: 14px;
 }
 
-#keepBtn {
-    margin-bottom: 24px;
+.senders ul.expanded {
+    max-height: 420px;
+    overflow: auto;
+    border: 3px solid var(--sand-dark);
+    padding: 0 12px;
+}
+
+.sender-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.sender-actions + .helper-text {
+    margin: 0 0 24px;
 }
