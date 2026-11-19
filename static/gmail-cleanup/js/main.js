@@ -6,6 +6,7 @@ const CLIENT_ID_PATTERN = /^[0-9]+-[a-z0-9]+\.apps\.googleusercontent\.com$/;
 const CLIENT_ID_KEY = 'gmail-cleanup.client-id';
 const SAMPLE_SIZE = 150;
 const TABLE_ROWS = 40;
+const SENDER_ROWS = 12;
 
 const $ = (id) => document.getElementById(id);
 const number = new Intl.NumberFormat();
@@ -294,23 +295,21 @@ function renderReview(sample) {
 		? `${count} messages selected, which is the per-run limit. More match this search: run it again afterwards for the rest.`
 		: `${count} ${ids.length === 1 ? 'message matches' : 'messages match'}.`;
 
-	$('senderList').replaceChildren(...topSenders(sample).map(({ address, count: seen }) => {
+	$('senderList').replaceChildren(...topSenders(sample, SENDER_ROWS).map(({ address, count: seen }) => {
 		const item = document.createElement('li');
-		const label = document.createElement('span');
-		label.textContent = `${address} — ${seen} of ${sample.length}`;
-		const keep = document.createElement('button');
-		keep.type = 'button';
-		keep.className = 'mini-btn';
-		keep.textContent = 'Keep these';
-		keep.setAttribute('aria-label', `Keep mail from ${address} and search again`);
-		keep.addEventListener('click', () => {
-			if (!state.keepSenders.includes(address)) state.keepSenders.push(address);
-			renderKeepList();
-			scan();
-		});
-		item.append(label, keep);
+		const label = document.createElement('label');
+		label.className = 'check';
+		const box = document.createElement('input');
+		box.type = 'checkbox';
+		box.value = address;
+		box.addEventListener('change', renderKeepButton);
+		const text = document.createElement('span');
+		text.textContent = `${address} \u2014 ${seen} of ${sample.length}`;
+		label.append(box, text);
+		item.append(label);
 		return item;
 	}));
+	renderKeepButton();
 
 	const shown = sample.slice(0, TABLE_ROWS);
 	$('sampleTitle').textContent = ids.length > shown.length
@@ -328,6 +327,26 @@ function renderReview(sample) {
 
 	$('queryText').textContent = query;
 	renderConfirm();
+}
+
+function tickedSenders() {
+	return [...document.querySelectorAll('#senderList input:checked')].map((box) => box.value);
+}
+
+function renderKeepButton() {
+	const ticked = tickedSenders().length;
+	$('keepBtn').textContent = ticked
+		? `Keep ${ticked} ${ticked === 1 ? 'sender' : 'senders'} & search again`
+		: 'Keep ticked senders';
+	$('keepBtn').disabled = ticked === 0 || state.busy;
+}
+
+function keepTicked() {
+	const ticked = tickedSenders();
+	if (!ticked.length) return;
+	state.keepSenders = [...new Set([...state.keepSenders, ...ticked])];
+	renderKeepList();
+	scan();
 }
 
 function renderConfirm() {
@@ -427,6 +446,7 @@ function init() {
 	$('scanBtn').addEventListener('click', scan);
 	$('cancelBtn').addEventListener('click', () => state.abort?.abort());
 	$('runBtn').addEventListener('click', run);
+	$('keepBtn').addEventListener('click', keepTicked);
 	$('confirmCheck').addEventListener('change', refresh);
 	$('action').addEventListener('change', () => {
 		$('confirmCheck').checked = false;
