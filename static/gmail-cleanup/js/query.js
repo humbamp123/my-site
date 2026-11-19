@@ -62,7 +62,8 @@ export function buildQuery(filters = {}) {
 		else errors.push('"Larger than" must be a whole number of megabytes above zero.');
 	}
 
-	const { senders, invalid } = parseSenders(filters.from);
+	// The typed From box and the saved remove list both limit the search to those senders.
+	const { senders, invalid } = parseSenders([filters.from ?? '', ...(filters.removeSenders ?? [])].join(' '));
 	if (invalid.length) errors.push(`Not a valid address or domain: ${invalid.join(', ')}`);
 	if (senders.length === 1) terms.push(`from:${senders[0]}`);
 	else if (senders.length > 1) terms.push(`from:(${senders.join(' OR ')})`);
@@ -162,7 +163,7 @@ export function parseQuery(text) {
 
 	const filters = {
 		category: '', olderThan: '', olderUnit: 'm', largerThanMb: '', from: '', raw: '',
-		unreadOnly: false, hasAttachment: false, protectLabelled: false, keepSenders: []
+		unreadOnly: false, hasAttachment: false, protectLabelled: false, keepSenders: [], removeSenders: []
 	};
 	const senders = [];
 	const rest = [];
@@ -193,7 +194,7 @@ export function parseQuery(text) {
 		}
 	}
 
-	filters.from = senders.join(', ');
+	filters.removeSenders = [...new Set(senders.map((sender) => sender.toLowerCase()))];
 	filters.keepSenders = [...new Set(filters.keepSenders)];
 	// buildQuery wraps the custom search in brackets, so take one layer off here.
 	filters.raw = rest.length === 1 && isWrapped(rest[0]) ? rest[0].slice(1, -1) : rest.join(' ');

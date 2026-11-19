@@ -18,6 +18,7 @@ const state = {
 	expiryTimer: null,
 	email: null,
 	keepSenders: [],
+	removeSenders: [],
 	scan: null, // { ids, query, truncated }
 	history: [], // { action, ids, query, undone }
 	busy: false,
@@ -194,7 +195,8 @@ function readFilters() {
 		protectImportant: $('protectImportant').checked,
 		protectSent: $('protectSent').checked,
 		protectLabelled: $('protectLabelled').checked,
-		keepSenders: state.keepSenders
+		keepSenders: state.keepSenders,
+		removeSenders: state.removeSenders
 	};
 }
 
@@ -213,7 +215,11 @@ function applyPreset(name) {
 	$('olderUnit').value = preset.olderUnit ?? 'm';
 	$('unreadOnly').checked = Boolean(preset.unreadOnly);
 	$('hasAttachment').checked = false;
-	state.keepSenders = [];
+	// The keep and remove lists outlive a change of search; only "Clear filters" empties them.
+	if (name === 'clear') {
+		state.keepSenders = [];
+		state.removeSenders = [];
+	}
 	renderKeepList();
 	clearScan();
 	refresh();
@@ -228,6 +234,7 @@ function restoreSearch(text) {
 	$('hasAttachment').checked = parsed.hasAttachment;
 	if (parsed.protectLabelled) $('protectLabelled').checked = true;
 	state.keepSenders = parsed.keepSenders;
+	state.removeSenders = parsed.removeSenders;
 	renderKeepList();
 	clearScan();
 	refresh();
@@ -245,23 +252,28 @@ async function copySearch() {
 	}
 }
 
-function renderKeepList() {
-	$('keepList').hidden = state.keepSenders.length === 0;
-	const chips = $('keepChips');
-	chips.replaceChildren(...state.keepSenders.map((address) => {
+function renderChips(listId, chipsId, key, verb) {
+	$(listId).hidden = state[key].length === 0;
+	$(chipsId).replaceChildren(...state[key].map((address) => {
 		const chip = document.createElement('button');
 		chip.type = 'button';
 		chip.className = 'keep-chip';
-		chip.textContent = `${address} ×`;
-		chip.setAttribute('aria-label', `Stop keeping mail from ${address}`);
+		chip.textContent = `${address} \u00d7`;
+		chip.setAttribute('aria-label', `Stop ${verb} mail from ${address}`);
 		chip.addEventListener('click', () => {
-			state.keepSenders = state.keepSenders.filter((entry) => entry !== address);
+			state[key] = state[key].filter((entry) => entry !== address);
 			renderKeepList();
 			clearScan();
 			refresh();
 		});
 		return chip;
 	}));
+}
+
+/** Draws both saved sender lists: the ones to keep and the ones to remove. */
+function renderKeepList() {
+	renderChips('keepList', 'keepChips', 'keepSenders', 'keeping');
+	renderChips('removeList', 'removeChips', 'removeSenders', 'removing');
 }
 
 /* ───────────── scan & review ───────────── */
@@ -424,16 +436,19 @@ function tickedSenders() {
 
 function renderKeepButton() {
 	const ticked = tickedSenders().length;
-	$('keepBtn').textContent = ticked
-		? `Keep ${ticked} ${ticked === 1 ? 'sender' : 'senders'} & search again`
-		: 'Keep ticked senders';
-	$('keepBtn').disabled = ticked === 0 || state.busy;
+	const noun = ticked === 1 ? 'sender' : 'senders';
+	$('keepBtn').textContent = ticked ? `Keep ${ticked} ${noun} & search again` : 'Keep ticked senders';
+	$('removeBtn').textContent = ticked ? `Remove only ${ticked} ${noun} & search again` : 'Remove only ticked senders';
+	$('keepBtn').disabled = $('removeBtn').disabled = ticked === 0 || state.busy;
 }
 
-function keepTicked() {
+/** Moves the ticked senders onto one saved list (and off the other), then searches again. */
+function saveTicked(key) {
 	const ticked = tickedSenders();
 	if (!ticked.length) return;
-	state.keepSenders = [...new Set([...state.keepSenders, ...ticked])];
+	const other = key === 'keepSenders' ? 'removeSenders' : 'keepSenders';
+	state[key] = [...new Set([...state[key], ...ticked])];
+	state[other] = state[other].filter((address) => !ticked.includes(address));
 	renderKeepList();
 	scan();
 }
@@ -535,7 +550,8 @@ function init() {
 	$('scanBtn').addEventListener('click', scan);
 	$('cancelBtn').addEventListener('click', () => state.abort?.abort());
 	$('runBtn').addEventListener('click', run);
-	$('keepBtn').addEventListener('click', keepTicked);
+	$('keepBtn').addEventListener('click', () => saveTicked('keepSenders'));
+	$('removeBtn').addEventListener('click', () => saveTicked('removeSenders'));
 	$('countAllBtn').addEventListener('click', countAllSenders);
 	$('showAllBtn').addEventListener('click', () => {
 		state.scan.showAll = !state.scan.showAll;

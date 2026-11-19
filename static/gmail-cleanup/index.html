@@ -138,6 +138,10 @@
                         <span class="keep-title">Keeping mail from:</span>
                         <span id="keepChips"></span>
                     </div>
+                    <div class="keep-list" id="removeList" hidden>
+                        <span class="keep-title">Remove list &middot; only cleaning mail from:</span>
+                        <span id="removeChips"></span>
+                    </div>
 
                 </fieldset>
 
@@ -179,10 +183,11 @@
                 <div id="reviewBody">
                     <div class="senders" id="sendersBox">
                         <div class="sub-title" id="sendersTitle">Most common senders</div>
-                        <p class="helper-text">Tick every sender whose mail you want to keep, then search again once.</p>
+                        <p class="helper-text">Tick senders, then either keep their mail, or add them to your remove list so only their mail is cleaned. Both lists stay put when you change the search.</p>
                         <ul id="senderList"></ul>
                         <div class="sender-actions">
                             <button type="button" class="ghost-btn" id="keepBtn" disabled>Keep ticked senders</button>
+                            <button type="button" class="ghost-btn" id="removeBtn" disabled>Remove only ticked senders</button>
                             <button type="button" class="chip-btn" id="showAllBtn" hidden></button>
                             <button type="button" class="chip-btn" id="countAllBtn" hidden></button>
                         </div>

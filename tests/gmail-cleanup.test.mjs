@@ -189,3 +189,14 @@ test('a pasted search can never switch protections off', () => {
 	for (const key of ['protectStarred', 'protectImportant', 'protectSent']) assert.equal(key in parsed, false);
 	assert.match(buildQuery(parsed).query, /-is:starred -is:important -in:sent -in:drafts$/);
 });
+
+test('the remove list limits the search to those senders and survives a round trip', () => {
+	const { query, errors, narrowing } = buildQuery({ removeSenders: ['a@x.example', 'b@y.example'], from: 'c.example' });
+	assert.deepEqual(errors, []);
+	assert.equal(narrowing, true);
+	assert.match(query, /^from:\(c\.example OR a@x\.example OR b@y\.example\) /);
+	const parsed = parseQuery(query);
+	assert.deepEqual(parsed.removeSenders, ['c.example', 'a@x.example', 'b@y.example']);
+	assert.equal(parsed.from, '');
+	assert.equal(buildQuery(parsed).query, query);
+});
