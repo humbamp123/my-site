@@ -1,10 +1,10 @@
 import { CLIENT_ID } from './config.js';
-import { buildQuery, senderAddress, topSenders } from './query.js';
+import { buildQuery, senderAddress, spread, topSenders } from './query.js';
 import { ACTIONS, GmailError, SCOPE, createClient } from './gmail.js';
 
 const CLIENT_ID_PATTERN = /^[0-9]+-[a-z0-9]+\.apps\.googleusercontent\.com$/;
 const CLIENT_ID_KEY = 'gmail-cleanup.client-id';
-const SAMPLE_SIZE = 150;
+const SAMPLE_SIZE = 300;
 const TABLE_ROWS = 40;
 const SENDER_ROWS = 12;
 
@@ -259,7 +259,8 @@ async function scan() {
 			signal,
 			onProgress: (count) => setProgress(`Found ${number.format(count)} so far…`)
 		});
-		const sampleIds = ids.slice(0, SAMPLE_SIZE);
+		// Spread across the whole match, newest to oldest, so the review reflects all of it.
+		const sampleIds = spread(ids, SAMPLE_SIZE);
 		const sample = await client.sample(sampleIds, {
 			signal,
 			onProgress: (done) => setProgress('Loading a sample to review…', done, sampleIds.length)
@@ -304,16 +305,16 @@ function renderReview(sample) {
 		box.value = address;
 		box.addEventListener('change', renderKeepButton);
 		const text = document.createElement('span');
-		text.textContent = `${address} \u2014 ${seen} of ${sample.length}`;
+		text.textContent = `${address} \u2014 ${seen} of ${sample.length} sampled`;
 		label.append(box, text);
 		item.append(label);
 		return item;
 	}));
 	renderKeepButton();
 
-	const shown = sample.slice(0, TABLE_ROWS);
+	const shown = spread(sample, TABLE_ROWS);
 	$('sampleTitle').textContent = ids.length > shown.length
-		? `Newest ${shown.length} of ${count}`
+		? `${shown.length} of ${count}, spread from newest to oldest`
 		: `All ${count}`;
 	$('sampleRows').replaceChildren(...shown.map((message) => {
 		const row = document.createElement('tr');

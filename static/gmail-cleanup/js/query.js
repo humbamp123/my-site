@@ -113,3 +113,11 @@ export function topSenders(messages, limit = 8) {
 		.slice(0, limit)
 		.map(([address, count]) => ({ address, count }));
 }
+
+/** Picks up to `count` items evenly spaced across a list, always including the first and last. */
+export function spread(items, count) {
+	if (items.length <= count) return [...items];
+	if (count <= 1) return items.slice(0, Math.max(0, count));
+	const step = (items.length - 1) / (count - 1);
+	return Array.from({ length: count }, (_, index) => items[Math.round(index * step)]);
+}
