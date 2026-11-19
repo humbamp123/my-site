@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildQuery, isBalanced, senderAddress, spread, topSenders } from '../static/gmail-cleanup/js/query.js';
+import { buildQuery, isBalanced, parseQuery, senderAddress, spread, topSenders } from '../static/gmail-cleanup/js/query.js';
 import { ACTIONS, GmailError, createClient } from '../static/gmail-cleanup/js/gmail.js';
 
 const PROTECTIONS = '-is:starred -is:important -in:sent -in:drafts';
@@ -155,4 +155,48 @@ test('spread samples evenly across the whole list', () => {
 	assert.equal(picked[0], 0);
 	assert.equal(picked.at(-1), 4999);
 	assert.deepEqual(spread([1, 2, 3], 10), [1, 2, 3]);
+});
+
+test('a copied search round-trips through parseQuery', () => {
+	const cases = [
+		{ category: 'promotions', olderThan: '6', olderUnit: 'm' },
+		{ olderThan: '2', olderUnit: 'y', unreadOnly: true, hasAttachment: true, largerThanMb: '10' },
+		{ from: 'a@x.example', keepSenders: ['boss@y.example', 'venmo@venmo.com'] },
+		{ from: 'a@x.example, y.example', protectLabelled: true },
+		{ raw: 'subject:(receipt OR invoice)' },
+		{ raw: 'subject:"a ) b" label:old', category: 'updates' },
+		{ raw: '(is:unread OR is:starred)', keepSenders: ['k@z.example'] }
+	];
+	for (const filters of cases) {
+		const { query, errors } = buildQuery(filters);
+		assert.deepEqual(errors, []);
+		assert.equal(buildQuery(parseQuery(query)).query, query);
+	}
+});
+
+test('parseQuery fills fields and leaves the rest as the custom search', () => {
+	const parsed = parseQuery('category:social older_than:3m label:news -from:keep@x.example -is:starred');
+	assert.equal(parsed.category, 'social');
+	assert.equal(parsed.olderThan, '3');
+	assert.equal(parsed.raw, 'label:news');
+	assert.deepEqual(parsed.keepSenders, ['keep@x.example']);
+	assert.equal(parseQuery('subject:"unclosed'), null);
+	assert.equal(parseQuery('a) OR (b'), null);
+});
+
+test('a pasted search can never switch protections off', () => {
+	const parsed = parseQuery('category:promotions');
+	for (const key of ['protectStarred', 'protectImportant', 'protectSent']) assert.equal(key in parsed, false);
+	assert.match(buildQuery(parsed).query, /-is:starred -is:important -in:sent -in:drafts$/);
+});
+
+test('the remove list limits the search to those senders and survives a round trip', () => {
+	const { query, errors, narrowing } = buildQuery({ removeSenders: ['a@x.example', 'b@y.example'], from: 'c.example' });
+	assert.deepEqual(errors, []);
+	assert.equal(narrowing, true);
+	assert.match(query, /^from:\(c\.example OR a@x\.example OR b@y\.example\) /);
+	const parsed = parseQuery(query);
+	assert.deepEqual(parsed.removeSenders, ['c.example', 'a@x.example', 'b@y.example']);
+	assert.equal(parsed.from, '');
+	assert.equal(buildQuery(parsed).query, query);
 });

@@ -118,7 +118,7 @@
                         <div class="input-group wide">
                             <label for="raw">Custom Gmail search (optional)</label>
                             <input type="text" id="raw" autocomplete="off" spellcheck="false" placeholder="subject:(receipt OR invoice)">
-                            <span class="helper-text">Same syntax as the Gmail search box. The protections below still apply.</span>
+                            <span class="helper-text">Same syntax as the Gmail search box. The protections below still apply. Paste a search copied from &ldquo;Search that will run&rdquo; here to restore all of its filters.</span>
                         </div>
                     </div>
 
@@ -138,25 +138,34 @@
                         <span class="keep-title">Keeping mail from:</span>
                         <span id="keepChips"></span>
                     </div>
-
-                    <div class="query-preview">
-                        <span class="query-title">Search that will run</span>
-                        <code id="queryText">&mdash;</code>
-                        <span class="helper-text" id="queryNote"></span>
+                    <div class="keep-list" id="removeList" hidden>
+                        <span class="keep-title">Remove list &middot; only cleaning mail from:</span>
+                        <span id="removeChips"></span>
                     </div>
 
-                    <div class="button-row">
-                        <div class="input-group compact">
-                            <label for="cap">Most messages per run</label>
-                            <select id="cap">
-                                <option value="1000">1,000</option>
-                                <option value="5000" selected>5,000</option>
-                                <option value="20000">20,000</option>
-                            </select>
-                        </div>
-                        <button type="button" class="primary-btn" id="scanBtn" disabled>Find matching mail</button>
-                    </div>
                 </fieldset>
+
+                <div class="query-preview">
+                    <div class="query-head">
+                        <span class="query-title">Search that will run</span>
+                        <button type="button" class="chip-btn" id="copyBtn" disabled>Copy</button>
+                    </div>
+                    <code id="queryText">&mdash;</code>
+                    <span class="helper-text" id="queryNote"></span>
+                    <span class="helper-text" id="copyNote" role="status" aria-live="polite"></span>
+                </div>
+
+                <div class="button-row">
+                    <div class="input-group compact">
+                        <label for="cap">Most messages per run</label>
+                        <select id="cap">
+                            <option value="1000">1,000</option>
+                            <option value="5000" selected>5,000</option>
+                            <option value="20000">20,000</option>
+                        </select>
+                    </div>
+                    <button type="button" class="primary-btn" id="scanBtn" disabled>Find matching mail</button>
+                </div>
 
                 <div class="progress-row" id="progressRow" hidden>
                     <progress id="progressBar"></progress>
@@ -174,10 +183,11 @@
                 <div id="reviewBody">
                     <div class="senders" id="sendersBox">
                         <div class="sub-title" id="sendersTitle">Most common senders</div>
-                        <p class="helper-text">Tick every sender whose mail you want to keep, then search again once.</p>
+                        <p class="helper-text">Tick senders, then either keep their mail, or add them to your remove list so only their mail is cleaned. Both lists stay put when you change the search.</p>
                         <ul id="senderList"></ul>
                         <div class="sender-actions">
                             <button type="button" class="ghost-btn" id="keepBtn" disabled>Keep ticked senders</button>
+                            <button type="button" class="ghost-btn" id="removeBtn" disabled>Remove only ticked senders</button>
                             <button type="button" class="chip-btn" id="showAllBtn" hidden></button>
                             <button type="button" class="chip-btn" id="countAllBtn" hidden></button>
                         </div>
